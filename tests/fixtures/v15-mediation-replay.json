@@ -1,0 +1,32 @@
+[
+  {
+    "playerId": "lumen",
+    "commands": ["maintain", "maintain", "maintain", "stance:goal-conflict-marin-nord-3:neutral", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain"],
+    "expectedSha256": "1f768c5a3bb840aa95d22c42c3780adf04a88bc2ea74cb3a741678f0ebd0f8a1"
+  },
+  {
+    "playerId": "nord",
+    "commands": ["maintain", "maintain", "maintain", "stance:goal-conflict-cera-lumen-3:neutral", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain"],
+    "expectedSha256": "e30e90d668a6698b058d0723573865d4108cb875b22eabae1d7ebd2933e79e9a"
+  },
+  {
+    "playerId": "cera",
+    "commands": ["maintain", "maintain", "maintain", "stance:goal-conflict-marin-nord-3:neutral", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain"],
+    "expectedSha256": "3fe5f20cd76439c8c7cd7f23771897f46c96ecfbf97b291e05b55f51482956d1"
+  },
+  {
+    "playerId": "altia",
+    "commands": ["maintain", "maintain", "maintain", "stance:goal-conflict-cera-lumen-3:neutral", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain"],
+    "expectedSha256": "31871ae166c1a812773f10cac31af209b1358f8e223f8ede096158d0d9bdb4f0"
+  },
+  {
+    "playerId": "marin",
+    "commands": ["maintain", "maintain", "maintain", "stance:goal-conflict-cera-lumen-3:neutral", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain"],
+    "expectedSha256": "a1747405df2e25d65612103491a8e2f8e40fe1de05363b590cc055ef3adacd8e"
+  },
+  {
+    "playerId": "solis",
+    "commands": ["maintain", "maintain", "maintain", "stance:goal-conflict-cera-lumen-3:neutral", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain", "maintain"],
+    "expectedSha256": "35751cf07bfa1b91d4f818e78425326b09995bf55f147764b733039b9b354330"
+  }
+]

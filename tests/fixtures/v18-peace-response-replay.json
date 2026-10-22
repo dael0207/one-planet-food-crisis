@@ -1,0 +1,150 @@
+[
+  {
+    "playerId": "lumen",
+    "scenario": "honored-accepted-incoming-relief",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "peace-reply:peace-offer-goal-conflict-marin-nord-3-4:accept",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "317966e707a2e43e93bd4bb7426bf675612f948c80f404735488f90a388c4c14",
+    "expectedTurn": 12,
+    "expectedAccords": [
+      {"id": "peace-accord-marin-nord-3-5", "status": "completed", "revisionOf": null, "responseKind": null}
+    ]
+  },
+  {
+    "playerId": "nord",
+    "scenario": "violated-peace-renewed-after-counter",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "mediate:goal-conflict-cera-lumen-21:relief:mutual:0:0",
+      "maintain",
+      "peace-compliance:peace-accord-cera-lumen-21-22:renegotiate:peace:mutual:0:0",
+      "mediate-accept:mediation-goal-conflict-cera-lumen-1000024-24",
+      "maintain"
+    ],
+    "expectedSha256": "25e6512bdf9fda7c9297771da1759b0f83fde348c78113d0ac40a01fde3dc8a3",
+    "expectedTurn": 26,
+    "expectedAccords": [
+      {"id": "peace-accord-cera-lumen-21-22", "status": "replaced", "revisionOf": null, "responseKind": "renegotiate"},
+      {"id": "peace-accord-cera-lumen-1000024-25", "status": "monitoring", "revisionOf": "peace-accord-cera-lumen-21-22", "responseKind": null}
+    ]
+  },
+  {
+    "playerId": "cera",
+    "scenario": "honored-player-counter",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "peace-counter:peace-offer-goal-conflict-marin-nord-3-4:relief:mutual:0:0",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "cdac59618ed7d9863f24067cc2537e1864f5244ade07b764284e116bde93a38b",
+    "expectedTurn": 12,
+    "expectedAccords": [
+      {"id": "peace-accord-marin-nord-3-5", "status": "completed", "revisionOf": null, "responseKind": null}
+    ]
+  },
+  {
+    "playerId": "altia",
+    "scenario": "counter-with-foreign-followup",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "peace-counter:peace-offer-goal-conflict-cera-lumen-3-4:relief:mutual:0:0",
+      "mediate-accept:mediation-goal-conflict-cera-lumen-3-5",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "d03f010aebc958af68560eb6fb22c3ea32e2a3dc59c19fba22a3faa0c46c3b97",
+    "expectedTurn": 12,
+    "expectedAccords": []
+  },
+  {
+    "playerId": "marin",
+    "scenario": "violated-peace-explicit-sanction-expired",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "peace-reply:peace-offer-goal-conflict-cera-lumen-3-4:accept",
+      "maintain",
+      "peace-compliance:peace-accord-cera-lumen-3-5:sanction",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "ca70df4a4dfb02d1d0c4b1b4d165a67efbc39c768e5fb931223613022889cddb",
+    "expectedTurn": 11,
+    "expectedAccords": [
+      {"id": "peace-accord-cera-lumen-3-5", "status": "completed", "revisionOf": null, "responseKind": "sanction"}
+    ]
+  },
+  {
+    "playerId": "solis",
+    "scenario": "declined-incoming-relief",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "peace-reply:peace-offer-goal-conflict-cera-lumen-3-4:decline",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "9c717ad21c0954721190080a721014ef922c9e3e57305eb896446f5c36bd95aa",
+    "expectedTurn": 12,
+    "expectedAccords": []
+  }
+]

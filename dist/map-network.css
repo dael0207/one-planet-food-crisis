@@ -1,0 +1,56 @@
+.map-network-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s3);padding:var(--s3) var(--s8);border-top:1px solid var(--map-grid);border-bottom:1px solid var(--map-grid);background:var(--map-card)}
+.map-control-group{display:flex;flex-wrap:wrap;gap:var(--s1)}
+.map-control-group button{min-height:44px;padding:var(--s2) var(--s4);border:1px solid var(--map-track);border-radius:var(--r1);background:transparent;color:var(--map-safe-text);font:inherit;font-size:var(--t-sm);cursor:pointer}
+.map-control-group button[aria-pressed=true]{border-color:var(--map-focus);background:var(--map-focus);color:var(--ink);font-weight:650}
+.map-control-group button:focus-visible{outline:3px solid var(--map-focus);outline-offset:2px}
+.world-map[data-map-mode=network]{width:min(100%,813px);margin-inline:auto}
+.world-map[data-map-mode=network] #map-domestic-terrain,.world-map[data-map-mode=network] #map-live-foreground,.world-map[data-map-mode=network] .map-terrain-detail,.world-map[data-map-mode=network] .map-land-food,.world-map[data-map-mode=network] .map-food-track,.world-map[data-map-mode=network] .map-food-bar,.world-map[data-map-mode=network] .map-facility-pill,.world-map[data-map-mode=network] .map-facility-label,.world-map[data-map-mode=network] .map-request-badge{display:none}
+.map-network-link{color:var(--map-water);opacity:.78;transition:opacity .16s ease,filter .16s ease}
+.world-map[data-map-mode=network]:has(.land.is-focused) .map-network-link:not(.is-connected){opacity:.72}
+.map-network-link.is-connected{opacity:1;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--map-focus) 72%,transparent))}
+.map-network-path{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round}
+.map-network-link.is-alliance{color:var(--gold)}
+.map-network-link.is-alliance .map-network-path{stroke-dasharray:10 8}
+.map-network-link.is-broken,.map-network-link.is-cancelled{color:var(--alert);opacity:.82}
+.map-network-link.is-broken .map-network-path,.map-network-link.is-cancelled .map-network-path{stroke-dasharray:13 11}
+.map-network-link.is-completed{color:var(--map-safe-text);opacity:.46}
+.map-network-link.is-completed .map-network-path{stroke-width:3;stroke-dasharray:3 7}
+.map-network-state path{stroke:var(--alert);stroke-width:4;stroke-linecap:round}
+.map-network-state rect{fill:var(--map-card);stroke:currentColor;stroke-width:1.5}
+.map-network-state text{fill:var(--map-safe-text);font-size:var(--t-base);font-weight:700}
+.map-network-link.is-new{animation:map-network-new .65s ease-out 1}
+@keyframes map-network-new{from{opacity:.28}to{opacity:1}}
+.map-network-legend{flex:1 0 100%;display:flex;flex-wrap:wrap;gap:var(--s4);font-size:var(--t-xs);color:var(--map-safe-text)}
+.map-network-legend span{display:flex;align-items:center;gap:var(--s2)}
+.map-network-legend i{width:34px;border-top:3px solid var(--map-water)}
+.map-network-legend .is-alliance i{border-top-color:var(--gold);border-top-style:dashed}
+.map-network-legend .is-closed i{position:relative;border-top-color:var(--alert);border-top-style:dashed}
+.map-network-legend .is-closed i::after{content:'×';position:absolute;left:13px;top:-16px;color:var(--alert);font-size:18px;font-style:normal;font-weight:800}
+.map-network-summary{padding:var(--s5) var(--s8) var(--s6);background:var(--ocean);color:var(--map-safe-text)}
+.network-summary-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s5);margin-bottom:var(--s4)}
+.network-summary-heading h3{font-size:var(--t-xl);font-weight:550;margin-top:var(--s1)}
+.network-summary-heading p{max-width:520px;font-size:var(--t-sm);line-height:1.7;opacity:.76}
+.network-country-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s1);margin-bottom:var(--s4)}
+.network-country-counts>div{display:flex;justify-content:space-between;gap:var(--s2);padding:var(--s2);border-left:2px solid var(--map-track);background:var(--map-card);font-size:var(--t-xs)}
+.network-country-counts>div.is-focused{border-left-color:var(--map-focus)}
+.network-country-counts span{opacity:.72;font-variant-numeric:tabular-nums}
+.network-key-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2);list-style:none;margin:0;padding:0}
+.network-key-item{min-width:0;padding:var(--s3);border:1px solid var(--map-track);border-radius:var(--r2);background:var(--map-card)}
+.network-key-main{display:flex;align-items:center;gap:var(--s2);font-size:var(--t-sm)}
+.network-key-main strong{min-width:0;overflow-wrap:anywhere}
+.network-line-sample{flex:0 0 28px;border-top:3px solid var(--map-water)}
+.network-key-item.is-alliance .network-line-sample{border-top-color:var(--gold);border-top-style:dashed}
+.network-key-item.is-broken,.network-key-item.is-cancelled{border-color:var(--alert)}
+.network-key-item.is-broken .network-line-sample,.network-key-item.is-cancelled .network-line-sample{border-top-color:var(--alert);border-top-style:dashed}
+.network-key-item.is-completed{opacity:.68}
+.network-status{margin-left:auto;padding:var(--s1) var(--s2);border-radius:var(--r1);background:var(--map-track);font-size:var(--t-xs);white-space:nowrap}
+.network-key-item.is-new .network-status{background:var(--map-focus);color:var(--ink)}
+.network-key-item.is-broken .network-status,.network-key-item.is-cancelled .network-status{background:var(--alert);color:var(--surface)}
+.network-key-meta{display:flex;justify-content:space-between;gap:var(--s2);margin-top:var(--s2);font-size:var(--t-xs);line-height:1.6;opacity:.76}
+.network-key-meta span:last-child{text-align:right}
+.network-changes{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--map-track)}
+.network-changes h3{font-size:var(--t-md);margin-bottom:var(--s3)}
+.network-empty{padding:var(--s5);border:1px dashed var(--map-track);border-radius:var(--r2);text-align:center;font-size:var(--t-sm);opacity:.75}
+@media(max-width:768px){.map-network-controls{align-items:flex-start;padding:var(--s3) var(--s4)}.network-summary-heading{display:block}.network-summary-heading p{margin-top:var(--s2)}.map-network-summary{padding:var(--s4)}.network-key-list{grid-template-columns:1fr}.network-country-counts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.map-network-controls{display:block}.map-filter-group{margin-top:var(--s2)}.map-control-group{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.map-control-group:first-child{grid-template-columns:repeat(2,minmax(0,1fr))}.map-control-group button{padding:var(--s2)}.network-country-counts{grid-template-columns:1fr}.network-key-main{flex-wrap:wrap}.network-status{margin-left:0}.network-key-meta{display:block}.network-key-meta span{display:block;text-align:left!important;margin-top:var(--s1)}}
+@media(prefers-reduced-motion:reduce){.map-network-link{transition:none}.map-network-link.is-new{animation:none}}

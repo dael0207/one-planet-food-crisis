@@ -1,0 +1,116 @@
+[
+  {
+    "playerId": "lumen",
+    "scenario": "accepted-relief-and-stance-during-pause",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "mediate:goal-conflict-marin-nord-3:relief:mutual:8:0",
+      "stance:goal-conflict-marin-nord-3:neutral",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "79bb315f05fbbced5fe8c1e48a59336e7db8fcdf44a7d120e6a2324b30cda8ad"
+  },
+  {
+    "playerId": "nord",
+    "scenario": "accepted-peace",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "mediate:goal-conflict-cera-lumen-3:peace:mutual:8:6",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "03ca113f458d473fcbdfcbb7be099b267e03d39e3b13bf912f50d14f8f354ef8"
+  },
+  {
+    "playerId": "cera",
+    "scenario": "counter-and-accept",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "mediate:goal-conflict-marin-nord-3:peace:mutual:0:0",
+      "mediate-accept:mediation-goal-conflict-marin-nord-3-4",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "9884c81b083170fa45cc064420a8a4316f1351b0ae1e45b939baff1e5b53d29d"
+  },
+  {
+    "playerId": "altia",
+    "scenario": "accepted-relief-and-stance-after-resumption",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "mediate:goal-conflict-cera-lumen-3:relief:target:8:6",
+      "maintain",
+      "stance:goal-conflict-cera-lumen-3:response",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "9c1cf9be614181e2321ffde925fdf45d8a37d99c89900ec12bc15e369e3412a8"
+  },
+  {
+    "playerId": "marin",
+    "scenario": "hardline-escalation",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "mediate:goal-conflict-cera-lumen-3:peace:target:0:0",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "a037ca7dbc2c5d6e296df2d2e72abe3a7d6c6fdf6fbccd4482eb641f22bba044"
+  },
+  {
+    "playerId": "solis",
+    "scenario": "rejection-and-hardline-stance",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "mediate:goal-conflict-cera-lumen-3:peace:mutual:0:0",
+      "stance:goal-conflict-cera-lumen-3:sanction",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "7820806eecde8573ffeec9250bc46b5542c8bb5dbe10d32ae8cad51d3cfcf393"
+  }
+]

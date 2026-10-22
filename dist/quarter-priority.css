@@ -1,0 +1,16 @@
+.quarter-priority{
+ display:grid;
+ grid-template-columns:minmax(0,1fr);
+ gap:var(--s1);
+ padding:var(--s2) var(--s3);
+ border-block:1px solid var(--stroke-default);
+ background:var(--surface-inset);
+}
+.quarter-priority-kicker{
+ color:var(--intent-accent);
+ font:600 var(--t-xs)/1.3 var(--font-mono);
+ letter-spacing:.04em;
+}
+.quarter-priority strong{display:block;color:var(--content-raise);font-size:var(--t-base);line-height:1.35}
+.quarter-priority p{margin:var(--s1) 0 0;color:var(--content-secondary);font-size:var(--t-xs);line-height:1.45}
+.quarter-priority .secondary-button{inline-size:100%;min-block-size:44px;margin-block-start:var(--s1);white-space:normal}

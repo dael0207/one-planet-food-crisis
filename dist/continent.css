@@ -1,0 +1,49 @@
+.room-game .atlas-stage .world-map { background: var(--surface-inset); }
+.continent-coast { pointer-events:none; }
+.continent-shelf { fill:var(--surface-hover);stroke:color-mix(in oklch,var(--intent-info) 22%,var(--surface-inset));stroke-width:4;stroke-linejoin:round;vector-effect:non-scaling-stroke; }
+.continent-outline { fill:var(--surface-hover);stroke:var(--content-secondary);stroke-width:1;stroke-linejoin:round;vector-effect:non-scaling-stroke; }
+.room-game .atlas-stage .world-map .land > .map-country-shape { stroke:none;stroke-dasharray:none;transition:none;fill:color-mix(in oklch,var(--atlas-biome) 20%,var(--surface-hover)); }
+.room-game .atlas-stage .world-map .land[data-food-status="critical"] > .map-country-shape { fill:color-mix(in oklch,var(--intent-error) 24%,var(--surface-hover)); }
+.room-game .atlas-stage .world-map .land .atlas-material { opacity:.83;filter:saturate(.6) brightness(.86) contrast(1.06); }
+.country-focus-ring { fill:none;stroke:none;pointer-events:none;vector-effect:non-scaling-stroke; }
+.land.is-focused .country-focus-ring,.land:focus-visible .country-focus-ring { stroke:var(--intent-accent);stroke-width:1.6; }
+.land:hover .country-focus-ring { stroke:var(--content-secondary);stroke-width:1; }
+.land:focus-visible { outline:none; }
+.national-frontier { fill:none;stroke:var(--content-secondary);stroke-width:1.25;stroke-dasharray:5 3;stroke-linecap:round;vector-effect:non-scaling-stroke;pointer-events:none;opacity:.85; }
+.room-game .atlas-stage .world-map .land .country-name { font-size:25px;font-weight:500;letter-spacing:2px;stroke-width:2; }
+.room-game .atlas-stage .world-map .land .country-role { font-size:12px;letter-spacing:.3px; }
+.room-game .atlas-stage .world-map .land .map-land-food { font-size:14px; }
+.room-game .atlas-stage .world-map .land .map-facility-label { font-size:11px;fill:var(--content-secondary);stroke:var(--surface-inset);stroke-width:3;paint-order:stroke fill; }
+.room-game .atlas-stage .map-state-summary { font-size:11px;fill:var(--content-default); }
+.atlas-stage .atlas-terrain .atlas-relief { opacity:.08; }
+.atlas-stage .atlas-terrain :is(.atlas-contour,.atlas-ridge) { opacity:.12; }
+.atlas-stage .atlas-terrain .atlas-farm { opacity:.2; }
+.atlas-stage .atlas-toolbar { min-height:44px; }
+.atlas-toolbar>div { display:flex;align-items:center; }
+.map-state-legend { display:flex;flex-wrap:wrap;gap:var(--s3);padding:var(--s2) var(--s3);border-top:1px solid var(--stroke-default);font-size:var(--t-xs);color:var(--content-secondary); }
+.map-state-legend span { display:inline-flex;align-items:center;gap:var(--s1); }
+.map-state-legend i { width:8px;height:8px;background:var(--intent-accent); }
+.map-state-legend .is-strained i { background:var(--intent-notice); }
+.map-state-legend .is-critical i { background:var(--intent-error); }
+.map-state-legend small { font:inherit;color:var(--content-muted); }
+@media(min-width:1100px) { .room-game .atlas-stage .map-container { height:clamp(560px,47vw,720px);min-height:560px; } }
+@media(max-width:600px) {
+ .room-game .atlas-stage .world-map .land .country-name { font-size:38px;letter-spacing:0; }
+ .room-game .atlas-stage .world-map .land .map-land-food { font-size:28px; }
+ .room-game .atlas-stage .world-map .land .country-role { display:none; }
+ .room-game .atlas-stage .world-map .land .map-facility-label { display:none; }
+ .room-game .atlas-stage .map-state-summary { display:none; }
+ .atlas-stage .atlas-live { font-size:var(--t-xs); }
+ .national-frontier { stroke-width:1;stroke-dasharray:3 2; }
+ .map-state-legend { gap:var(--s2); }
+}
+
+.national-frontier-underlay{fill:none;stroke:var(--surface-inset);stroke-width:3.5;opacity:.8;vector-effect:non-scaling-stroke;pointer-events:none}
+.country-condition-wash{fill:color-mix(in oklch,var(--atlas-biome) 12%,transparent);pointer-events:none}
+.land[data-food-status="stressed"] .country-condition-wash{fill:color-mix(in oklch,var(--intent-notice) 7%,transparent)}
+.land[data-food-status="critical"] .country-condition-wash{fill:color-mix(in oklch,var(--intent-error) 16%,transparent)}
+
+.land[data-country="solis"]{--atlas-biome:var(--content-secondary)}
+.room-game .atlas-stage .world-map .land .map-facility-label{display:none}
+.room-game .atlas-stage .world-map :is(.map-food-track,.map-food-bar){display:none!important}
+.room-game .atlas-stage .world-map .map-request-badge rect{fill:var(--surface-inset);fill-opacity:.8;stroke:none}

@@ -1,0 +1,64 @@
+:root{--map-healthy:var(--lumen);--map-stressed:var(--cera);--map-critical:var(--alert);--map-field-dry:#b68d68;--map-field-green:#8ba96d;--map-water:#91adb4;--map-focus:var(--gold);--map-card:#163b36;--map-safe-text:var(--map-text);--map-track:var(--map-grid)}
+.world-map{max-height:none}
+.land>path:first-child{transition:fill .2s ease,stroke .2s ease;stroke-width:2;stroke:transparent;stroke-linejoin:round}
+.land[data-food-status=stressed]>path:first-child{stroke:var(--map-stressed);stroke-width:3;stroke-dasharray:4 3}
+.land[data-food-status=critical]>path:first-child{fill:var(--map-critical)}
+.land.is-focused>path:first-child,.land:focus-visible>path:first-child{stroke:var(--map-focus);stroke-width:5;stroke-dasharray:none}
+.land:focus-visible{outline:none}
+.map-grain,.map-terrain-detail,.land text,.land rect,.map-request-badge{pointer-events:none}
+.map-terrain-detail{fill:none;stroke:var(--ink);stroke-width:2;opacity:.28;stroke-linejoin:round}
+.country-name{font-size:var(--t-h2);letter-spacing:1px}
+.country-role{font-size:var(--t-lg)}
+.map-land-food{fill:var(--ink);font-size:var(--t-lg);font-weight:650;font-variant-numeric:tabular-nums}
+.map-food-track{fill:var(--ocean);opacity:.3}
+.map-food-bar{fill:var(--ocean)}
+.land[data-food-status=critical] text{fill:var(--surface)}
+.land[data-food-status=critical] .map-food-bar{fill:var(--map-safe-text)}
+#map-domestic-terrain,#map-live-foreground,#map-route-layer{pointer-events:none}
+.map-field-patch{fill:var(--map-field-dry);stroke:var(--ocean);stroke-width:.7}
+.world-map[data-climate=rain] .map-field-patch,.world-map[data-climate=recovery] .map-field-patch,#map-fields[data-irrigated=true] .map-field-patch{fill:var(--map-field-green)}
+.world-map[data-climate=cold] .map-field-patch{fill:var(--nord)}
+.map-reservoir-bed{fill:var(--map-field-dry);stroke:var(--ink);stroke-width:1.5}
+.map-water{fill:var(--map-water)}
+.map-irrigation-icon{fill:var(--map-card);stroke:var(--map-water);stroke-width:2;stroke-linejoin:round}
+.map-construction-icon{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round;stroke-dasharray:3 2}
+.map-climate-title{fill:var(--map-safe-text);font-size:var(--t-xl);font-weight:650}
+.map-climate-detail{fill:var(--map-safe-text);font-size:var(--t-md);opacity:.75}
+.map-coordinates{fill:var(--map-safe-text);font-size:var(--t-md);opacity:.7}
+.map-sea-label{fill:var(--map-safe-text);font-size:var(--t-lg);opacity:.35}
+.map-request-badge rect{fill:var(--map-focus);stroke:var(--ocean);stroke-width:2}
+.map-request-badge text{fill:var(--ink);font-size:var(--t-lg);font-weight:750}
+.map-route path{stroke-linecap:round;opacity:.65}
+.map-route.is-blocked path{stroke:var(--alert);stroke-dasharray:4 8;opacity:.65}
+.map-route.is-world-action path{opacity:1}
+.map-route.is-active-route path{opacity:1;filter:drop-shadow(0 0 3px var(--map-focus))}
+.map-route-caption rect{fill:var(--map-card);stroke:var(--map-track);stroke-width:1.5}
+.map-route-caption text{fill:var(--map-safe-text);font-size:var(--t-base);font-weight:650}
+.map-route.is-blocked .map-route-caption text{fill:var(--map-focus)}
+.map-legend{display:none}
+#world-status{padding:0 var(--s6) var(--s5)}
+.world-status-heading{display:flex;gap:var(--s3);align-items:flex-start;margin-bottom:var(--s3);font-size:var(--t-sm)}
+.world-status-heading p{color:var(--map-safe-text);opacity:.8;padding-top:var(--s1)}
+.world-climate-tag{white-space:nowrap;padding:var(--s1) var(--s2);border:1px solid var(--map-track);border-radius:var(--r1);color:var(--map-focus);font-weight:650}
+.world-country-status{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2)}
+.world-country-card{border:1px solid var(--map-track);border-radius:var(--r2);padding:var(--s3);min-width:0;--food-state:var(--map-healthy);background:var(--map-card)}
+.world-country-card.stressed{--food-state:var(--map-stressed)}
+.world-country-card.critical{--food-state:var(--map-critical)}
+.world-country-card.is-focused{border-color:var(--map-focus)}
+.world-country-card-top{display:flex;align-items:center;justify-content:space-between;gap:var(--s1);font-size:var(--t-sm)}
+.world-country-card-top strong{font-weight:650}
+.world-country-card-top>span{font-size:var(--t-xs);color:var(--food-state)}
+.world-country-role{font-size:var(--t-xs);opacity:.65;margin-top:var(--s1)}
+.world-food-value{display:flex;align-items:baseline;gap:var(--s1);margin:var(--s2) 0;font-variant-numeric:tabular-nums}
+.world-food-value>span{font-size:var(--t-xs);opacity:.65}
+.world-food-value b{font-size:var(--t-xl);font-weight:650;margin-left:auto;white-space:nowrap}
+.world-food-value small{font-size:var(--t-sm);font-weight:400;opacity:.7}
+.world-food-value em{font-style:normal;font-size:var(--t-xs);color:var(--map-focus);white-space:nowrap}
+.world-food-meter{height:4px;border-radius:var(--r1);background:var(--map-track);overflow:hidden}
+.world-food-meter i{height:100%;display:block;background:var(--food-state)}
+.world-country-card>p{font-size:var(--t-sm);line-height:1.7;opacity:.8;margin-top:var(--s2)}
+@media(max-width:1100px) and (min-width:961px){.world-country-status{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){#world-status{padding:0 var(--s4) var(--s4)}.world-status-heading{display:block}.world-status-heading p{margin-top:var(--s2)}.world-country-status{grid-template-columns:repeat(2,minmax(0,1fr))}.world-country-card{padding:var(--s2)}.world-food-value{gap:2px}.world-food-value>span{display:none}.world-food-value b{margin-left:0}.world-food-value em{margin-left:auto}.world-country-card-top>span{font-size:var(--t-xs)}.world-country-card>p{font-size:var(--t-sm)}.world-food-value small{font-size:var(--t-sm)}}
+@media(prefers-reduced-motion:reduce){.land>path:first-child{transition:none}}
+.map-facility-pill{fill:var(--map-card);stroke:var(--map-track);stroke-width:1}.map-facility-label{fill:var(--map-safe-text);font-size:var(--t-base);font-weight:650;font-variant-numeric:tabular-nums}
+.map-route-key{list-style:none;margin:var(--s4) 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2)}.map-route-key li{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:var(--s1);min-width:0;padding:var(--s2);border-left:2px solid var(--route-color);background:var(--map-card);border-radius:var(--r1);color:var(--map-safe-text);font-size:var(--t-sm)}.map-route-key b{font-size:var(--t-xs);font-weight:500;color:var(--map-safe-text);opacity:.85}

@@ -1,0 +1,122 @@
+.conflict-actions{display:flex;justify-content:flex-end;gap:var(--s2);flex-wrap:wrap}
+.mediation-goals{display:grid;grid-template-columns:1fr;gap:var(--s2);margin-block:var(--s4)}
+.mediation-goals legend{margin-bottom:var(--s2);font-size:var(--t-sm);font-weight:700}
+.mediation-goals label{display:flex;gap:var(--s2);padding:var(--s3);border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.mediation-goals label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.mediation-goals label:has(input:focus-visible){outline:3px solid var(--alert);outline-offset:3px}
+.mediation-goals input{margin-top:var(--s1)}
+.mediation-goals strong,.mediation-goals small{display:block}
+.mediation-goals small{margin-top:var(--s1);color:var(--muted);font-size:var(--t-xs)}
+.mediation-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3);margin-block:var(--s4)}
+.mediation-fields label{font-size:var(--t-sm);font-weight:700}
+.mediation-fields select{width:100%;min-height:48px;margin-top:var(--s1);border:1px solid var(--line);border-radius:var(--r2);background:var(--surface);color:var(--ink);padding:var(--s2) var(--s3);font:inherit;font-size:var(--t-md)}
+.mediation-fields select:focus-visible{outline:3px solid var(--alert);outline-offset:3px}
+.mediation-terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2);padding-block:var(--s3);border-block:1px solid var(--line)}
+.mediation-terms div span{display:block;color:var(--muted);font-size:var(--t-xs)}
+.mediation-terms div strong{font-size:var(--t-sm)}
+.mediation-terms>p{grid-column:1/-1;margin:0;color:var(--muted);font-size:var(--t-xs)}
+.mediation-preview{margin-block:var(--s4);padding:var(--s3);border-left:3px solid var(--line);background:var(--surface)}
+.mediation-preview.response-accept{border-color:var(--accent)}
+.mediation-preview.response-counter{border-color:var(--gold)}
+.mediation-preview.response-reject{border-color:var(--alert)}
+.mediation-verdict{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s3)}
+.mediation-verdict span,.mediation-preview small{color:var(--muted);font-size:var(--t-xs)}
+.mediation-reactions{display:grid;gap:var(--s2);margin-block:var(--s3)}
+.mediation-reactions article{padding-top:var(--s2);border-top:1px solid var(--line)}
+.mediation-reactions header{display:flex;justify-content:space-between;gap:var(--s2)}
+.mediation-reactions ul{margin:var(--s1) 0 0;padding-left:var(--s4);color:var(--muted);font-size:var(--t-xs)}
+.mediation-counter-hint{color:var(--accent);font-size:var(--t-sm)}
+.mediation-counters{margin-block:var(--s4);padding-block:var(--s3);border-block:1px solid var(--accent)}
+.mediation-counters>div>span{color:var(--accent);font-size:var(--t-xs)}
+.mediation-counters h3{margin:var(--s1) 0 var(--s2);font-size:var(--t-lg)}
+.mediation-counters article{display:grid;grid-template-columns:1fr auto;gap:var(--s2) var(--s4);align-items:center;padding-block:var(--s2);border-top:1px solid var(--line)}
+.mediation-counters article div{display:flex;gap:var(--s2);flex-wrap:wrap}
+.mediation-counters article span,.mediation-counters article p{color:var(--muted);font-size:var(--t-xs)}
+.mediation-counters article p{margin:0}
+.mediation-counters article button{grid-row:1/3;grid-column:2}
+.mediation-results{padding-block:var(--s4);border-block:1px solid var(--accent);margin-block:var(--s4)}
+.mediation-results>span{color:var(--accent);font-size:var(--t-xs)}
+.mediation-results h3{font-size:var(--t-lg);margin-bottom:var(--s2)}
+.mediation-results article{padding-block:var(--s3);border-top:1px solid var(--line)}
+.mediation-results header{display:flex;justify-content:space-between;gap:var(--s2)}
+.mediation-results header span,.mediation-results details p{color:var(--muted);font-size:var(--t-xs)}
+.mediation-paid{font-weight:700;color:var(--accent)}
+.peace-offer-brief{display:flex;justify-content:space-between;align-items:center;gap:var(--s4);padding:var(--s4) var(--s5);border-block:1px solid var(--room-brass);color:var(--map-text);word-break:keep-all}
+.peace-offer-brief span{display:block;color:var(--room-brass);font-size:var(--t-xs)}
+.peace-offer-brief strong{display:block;margin-block:var(--s1);font-size:var(--t-lg)}
+.peace-offer-brief p{margin:0;color:var(--room-muted);font-size:var(--t-xs)}
+.peace-offer-brief>div:last-child{text-align:right;flex-shrink:0}
+.peace-offer-brief b{display:block;margin-bottom:var(--s2);color:var(--room-brass);font-size:var(--t-sm)}
+.peace-offer-brief .secondary-button{background:transparent;color:var(--map-text);border-color:var(--room-line);font-size:var(--t-sm)}
+#diplomacy-inbox>.peace-offer-brief{color:var(--ink);margin-bottom:var(--s4);border-color:var(--accent)}
+#diplomacy-inbox>.peace-offer-brief span,#diplomacy-inbox>.peace-offer-brief b{color:var(--accent)}
+#diplomacy-inbox>.peace-offer-brief p{color:var(--muted)}
+#diplomacy-inbox>.peace-offer-brief .secondary-button{color:var(--ink);border-color:var(--line)}
+.peace-offer-motive{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2) var(--s4);margin:var(--s4) 0;padding:var(--s3) 0;border-block:1px solid var(--line)}
+.peace-offer-motive>div:first-child{grid-column:1/-1}
+.peace-offer-motive dt,.peace-offer-original span,.mediation-comparison span{color:var(--muted);font-size:var(--t-xs)}
+.peace-offer-motive dd{margin:var(--s1) 0 0;font-size:var(--t-sm);font-weight:600}
+.peace-offer-original{display:grid;gap:var(--s1);margin-block:var(--s4);padding-left:var(--s3);border-left:3px solid var(--gold)}
+.peace-offer-resources{padding:var(--s3);background:var(--surface);font-size:var(--t-sm)}
+.peace-offer-actions{display:grid;gap:var(--s2);margin-top:var(--s4)}
+.mediation-comparison{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2);margin-block:var(--s4);padding:var(--s3);border:1px solid var(--line);background:var(--surface)}
+.mediation-comparison div{display:grid;gap:var(--s1)}
+.mediation-comparison p{grid-column:1/-1;margin:0;color:var(--accent);font-size:var(--t-xs)}
+.peace-offer-results,.peace-offer-history{padding-block:var(--s4);border-block:1px solid var(--gold);margin-block:var(--s4)}
+.peace-offer-results>span{color:var(--accent);font-size:var(--t-xs)}
+.peace-offer-results h3,.peace-offer-history h3{font-size:var(--t-lg);margin-bottom:var(--s2)}
+.peace-offer-results article,.peace-offer-history article{padding-block:var(--s3);border-top:1px solid var(--line)}
+.peace-offer-results header,.peace-offer-history header{display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap}
+.peace-offer-results header span,.peace-offer-history header span,.peace-offer-history small{color:var(--muted);font-size:var(--t-xs)}
+.peace-offer-results p,.peace-offer-history p{font-size:var(--t-sm)}
+@media(max-width:700px){.conflict-actions{justify-content:stretch}.conflict-actions button{width:100%}.mediation-goals,.mediation-fields,.mediation-terms,.peace-offer-motive,.mediation-comparison{grid-template-columns:1fr}.mediation-comparison p{grid-column:1}.mediation-counters article{display:block}.mediation-counters article button{width:100%;margin-top:var(--s2)}.peace-offer-brief{align-items:flex-start;flex-direction:column}.peace-offer-brief>div:last-child{text-align:left;width:100%}.peace-offer-brief .secondary-button{width:100%}.peace-offer-actions>*{width:100%}}
+.peace-compliance-brief{display:flex;justify-content:space-between;align-items:center;gap:var(--s4);padding:var(--s3) var(--s5);border-block:1px solid var(--room-brass);color:var(--map-text);word-break:keep-all}
+.peace-compliance-brief span{display:block;color:var(--room-brass);font-size:var(--t-xs)}
+.peace-compliance-brief strong{display:block;margin-block:var(--s1);font-size:var(--t-md)}
+.peace-compliance-brief p{margin:0;color:var(--room-muted);font-size:var(--t-xs)}
+.peace-compliance-brief .secondary-button{flex-shrink:0;background:transparent;color:var(--map-text);border-color:var(--room-line)}
+#diplomacy-inbox>.peace-compliance-brief{margin-bottom:var(--s4);border-color:var(--gold);color:var(--ink)}
+#diplomacy-inbox>.peace-compliance-brief span{color:var(--accent)}
+#diplomacy-inbox>.peace-compliance-brief p{color:var(--muted)}
+#diplomacy-inbox>.peace-compliance-brief .secondary-button{color:var(--ink);border-color:var(--line)}
+.peace-compliance-summary{display:grid;gap:var(--s2);margin-block:var(--s4);padding-block:var(--s3);border-block:1px solid var(--line)}
+.peace-compliance-summary div{display:grid;grid-template-columns:minmax(88px,.4fr) 1fr;gap:var(--s3)}
+.peace-compliance-summary dt{color:var(--muted);font-size:var(--t-xs)}
+.peace-compliance-summary dd{margin:0;font-size:var(--t-sm);font-weight:600}
+.peace-compliance-ledger h3,.peace-compliance-actions h3{font-size:var(--t-lg);margin-bottom:var(--s2)}
+.peace-compliance-empty,.peace-compliance-actions p{color:var(--muted);font-size:var(--t-sm)}
+.peace-compliance-checks{list-style:none;margin:0;padding:0}
+.peace-compliance-checks>li{padding-block:var(--s3);border-top:1px solid var(--line)}
+.peace-compliance-checks header,.peace-compliance-results header,.peace-compliance-world header{display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap}
+.peace-compliance-checks header span,.peace-compliance-checks small,.peace-compliance-results header span,.peace-compliance-world header span,.peace-compliance-world small{color:var(--muted);font-size:var(--t-xs)}
+.peace-compliance-checks li>div{margin-top:var(--s2);padding-left:var(--s3);border-left:2px solid var(--line)}
+.peace-compliance-checks li[data-compliance-check="breached"]>div{border-color:var(--alert)}
+.peace-compliance-checks p{font-size:var(--t-sm);color:var(--muted)}
+.peace-compliance-impact,.peace-compliance-actions{margin-top:var(--s4);padding-block:var(--s3);border-top:1px solid var(--line)}
+.peace-compliance-actions{display:grid;gap:var(--s2)}
+.peace-compliance-facts,.peace-compliance-events{margin:var(--s2) 0;padding-left:var(--s5);font-size:var(--t-sm)}
+.peace-compliance-replaced{margin-top:var(--s4);padding:var(--s3);background:var(--accent-soft);font-size:var(--t-sm)}
+.peace-compliance-results,.peace-compliance-world{padding-block:var(--s4);border-block:1px solid var(--gold);margin-block:var(--s4)}
+.peace-compliance-results>span{color:var(--accent);font-size:var(--t-xs)}
+.peace-compliance-results h3,.peace-compliance-world h3{font-size:var(--t-lg);margin-bottom:var(--s2)}
+.peace-compliance-results article,.peace-compliance-world>article{padding-block:var(--s3);border-top:1px solid var(--line)}
+.peace-compliance-results p,.peace-compliance-world p{margin-block:var(--s2);font-size:var(--t-sm)}
+.peace-compliance-results>small{display:block;color:var(--muted);font-size:var(--t-xs)}
+.peace-compliance-world>article>.secondary-button{margin-top:var(--s3)}
+.peace-response-brief[data-peace-response="active"]{border-color:var(--alert)}
+.peace-response-review{margin-block:var(--s4);padding-block:var(--s3);border-block:1px solid var(--alert);word-break:keep-all}
+.peace-response-review h3{margin-bottom:var(--s2);font-size:var(--t-lg)}
+.peace-response-own{margin-top:var(--s3);padding:var(--s3);border-left:3px solid var(--gold);background:var(--surface);font-size:var(--t-sm)}
+.peace-response-own p{margin-block:var(--s2)}
+.peace-response-own ul{margin:var(--s2) 0;padding-left:var(--s5)}
+.peace-response-own small{color:var(--muted);font-size:var(--t-xs)}
+.peace-response-results{padding-block:var(--s4);border-block:1px solid var(--alert);margin-block:var(--s4)}
+.peace-response-results>span{color:var(--alert);font-size:var(--t-xs)}
+.peace-response-results h3{margin-bottom:var(--s2);font-size:var(--t-lg)}
+.peace-response-results article{padding-block:var(--s3);border-top:1px solid var(--line)}
+.peace-response-results header{display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap}
+.peace-response-results header span,.peace-response-results>small{color:var(--muted);font-size:var(--t-xs)}
+.peace-response-world{margin-top:var(--s3);padding:var(--s3);border-left:3px solid var(--alert);background:var(--surface);word-break:keep-all}
+.peace-response-world p{margin-block:var(--s1)}
+.peace-response-world small{color:var(--muted);font-size:var(--t-xs)}
+@media(max-width:700px){.peace-compliance-brief{align-items:flex-start;flex-direction:column}.peace-compliance-brief .secondary-button,.peace-compliance-actions button{width:100%}.peace-compliance-summary div{grid-template-columns:1fr;gap:var(--s1)}}

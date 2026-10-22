@@ -1,0 +1,294 @@
+/* V20 Oxide operational atlas — loaded after the legacy map styles. */
+
+.atlas-stage {
+  --atlas-ocean-deep: var(--surface-inset);
+  border-color: var(--stroke-default);
+  border-radius: var(--r-md, 2px);
+  background: var(--surface-inset);
+}
+
+.atlas-stage .atlas-toolbar,
+.atlas-stage .map-network-controls,
+.atlas-stage .mobile-command {
+  border-color: var(--stroke-default);
+  background: var(--surface-raise);
+  color: var(--content-default);
+}
+
+.atlas-stage .atlas-toolbar h2,
+.atlas-stage .mobile-command strong {
+  color: var(--content-raise);
+}
+
+.atlas-stage .atlas-live,
+.atlas-stage .map-network-legend {
+  color: var(--content-secondary);
+  font-family: ui-monospace, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.atlas-stage .map-container {
+  min-width: 0;
+  background: var(--surface-inset);
+}
+
+.atlas-stage .world-map {
+  width: 100%;
+  max-width: none;
+  background: var(--surface-inset);
+}
+
+.atlas-ocean-depth {
+  fill: var(--atlas-ocean-deep);
+  opacity: .92;
+}
+
+.atlas-depth-line {
+  fill: none;
+  stroke: var(--stroke-default);
+  stroke-width: 1;
+  opacity: .34;
+}
+
+.map-coordinates {
+  fill: var(--content-muted);
+  font-family: ui-monospace, Consolas, monospace;
+  opacity: 1;
+}
+
+.atlas-stage .world-map > rect:first-of-type {
+  fill: var(--surface-inset);
+}
+
+.atlas-stage .world-map > rect[fill="url(#map-grid)"] {
+  opacity: .78;
+}
+
+.map-country-shape { filter: none; }
+
+.land[data-country="lumen"] { --atlas-biome: var(--intent-accent); }
+.land[data-country="nord"] { --atlas-biome: var(--intent-info); }
+.land[data-country="cera"] { --atlas-biome: var(--intent-notice); }
+.land[data-country="altia"] { --atlas-biome: var(--intent-info); }
+.land[data-country="marin"] { --atlas-biome: var(--content-secondary); }
+.land[data-country="solis"] { --atlas-biome: var(--intent-error); }
+
+.land[data-country="lumen"] > .map-country-shape { fill: color-mix(in oklch, var(--intent-accent) 15%, var(--surface-hover)); }
+.land[data-country="nord"] > .map-country-shape { fill: color-mix(in oklch, var(--intent-info) 15%, var(--surface-hover)); }
+.land[data-country="cera"] > .map-country-shape { fill: color-mix(in oklch, var(--intent-notice) 17%, var(--surface-hover)); }
+.land[data-country="altia"] > .map-country-shape { fill: color-mix(in oklch, var(--intent-info) 22%, var(--surface-raise)); }
+.land[data-country="marin"] > .map-country-shape { fill: color-mix(in oklch, var(--content-secondary) 16%, var(--surface-hover)); }
+.land[data-country="solis"] > .map-country-shape { fill: color-mix(in oklch, var(--intent-error) 17%, var(--surface-hover)); }
+
+.atlas-stage .world-map .land > .map-country-shape {
+  stroke: var(--stroke-raise);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: fill .12s ease, stroke .12s ease;
+}
+
+.atlas-stage .world-map .land:hover > .map-country-shape { stroke: var(--content-secondary); }
+
+.atlas-stage .world-map .land.is-focused > .map-country-shape,
+.atlas-stage .world-map .land:focus-visible > .map-country-shape {
+  fill: color-mix(in oklch, var(--intent-accent) 15%, var(--surface-hover));
+  stroke: color-mix(in oklch, var(--intent-accent) 64%, var(--content-secondary));
+  stroke-width: 2.25;
+}
+
+.atlas-stage .world-map .land[data-food-status="stressed"] > .map-country-shape {
+  stroke: var(--intent-notice);
+  stroke-width: 1.75;
+  stroke-dasharray: 6 5;
+}
+
+.atlas-stage .world-map .land[data-food-status="critical"] > .map-country-shape {
+  fill: color-mix(in oklch, var(--intent-error) 27%, var(--surface-hover));
+  stroke: color-mix(in oklch, var(--intent-error) 72%, var(--content-secondary));
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+
+.atlas-stage .world-map .land[data-food-status="critical"].is-focused > .map-country-shape {
+  fill: color-mix(in oklch, var(--intent-error) 27%, var(--surface-hover));
+  stroke: var(--intent-accent);
+  stroke-width: 2.5;
+}
+
+.land.is-focused .land[data-food-status="critical"] .atlas-contour,
+.atlas-ridge,
+.map-terrain-detail {
+  fill: none;
+  stroke: var(--content-muted);
+  stroke-width: 1;
+  opacity: .52;
+}
+
+.atlas-relief {
+  fill: color-mix(in oklch, var(--atlas-biome) 34%, var(--surface-hover));
+  stroke: none;
+  opacity: .56;
+}
+
+.atlas-terrain .atlas-relief:nth-child(2) {
+  fill: color-mix(in oklch, var(--atlas-biome) 10%, var(--surface-inset));
+  opacity: .68;
+}
+
+.atlas-ridge { stroke-width: 1.1; opacity: .42; stroke-linecap: round; }
+.atlas-river { fill: none; stroke: var(--intent-info); stroke-width: 1.65; opacity: .72; stroke-linecap: round; }
+.atlas-river + .atlas-river { stroke-width: 1; opacity: .72; }
+.atlas-dry-river { fill: none; stroke: var(--intent-notice); stroke-width: 1.25; stroke-dasharray: 4 5; opacity: .62; }
+.atlas-channel { fill: none; stroke: var(--intent-info); stroke-width: 2.5; opacity: .34; stroke-linecap: round; }
+
+.atlas-farm,
+.map-field-patch {
+  fill: transparent;
+  stroke: var(--content-muted);
+  stroke-width: 1;
+  opacity: .72;
+}
+
+.atlas-lake,
+.map-water { fill: var(--intent-info); stroke: var(--surface-inset); opacity: .72; }
+.map-irrigation-icon,
+.map-construction-icon { stroke: var(--content-secondary); opacity: .82; }
+
+.country-name,
+.country-role,
+.map-land-food {
+  fill: var(--content-raise);
+  stroke: var(--surface-inset);
+  stroke-width: 3px;
+  paint-order: stroke fill;
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+}
+
+.country-name { font-size: 20px; font-weight: 600; letter-spacing: 0; }
+.country-role { fill: var(--content-secondary); font-size: 12px; }
+.map-land-food { fill: var(--content-default); font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.room-game .atlas-stage .world-map .land :is(.country-name, .map-land-food) { fill: var(--content-raise); }
+.room-game .atlas-stage .world-map .land .country-role { fill: var(--content-secondary); }
+.room-game .atlas-stage .world-map .land .map-facility-label { fill: var(--content-default); }
+.room-game .atlas-stage .world-map .map-request-badge text { fill: var(--content-raise); }
+.room-game .atlas-stage .world-map .land[data-food-status="stressed"] .map-land-food { fill: var(--intent-notice); }
+.room-game .atlas-stage .world-map .land[data-food-status="critical"] :is(.country-name, .map-land-food) { fill: var(--content-raise); }
+.room-game .atlas-stage .world-map .land[data-food-status="critical"] .country-role { fill: var(--content-default); }
+.room-game .atlas-stage .world-map .land[data-food-status="critical"] .map-facility-label { fill: var(--content-default); }
+.room-game .atlas-stage .world-map .land.is-focused :is(.country-name, .map-land-food) { fill: var(--content-raise); }
+
+.map-food-track { fill: color-mix(in srgb, var(--surface-inset) 72%, transparent); opacity: .8; }
+.map-food-bar { fill: var(--content-secondary); opacity: .82; }
+.land.is-focused .map-food-bar { fill: var(--intent-accent); }
+.land[data-food-status="stressed"] .map-food-bar { fill: var(--intent-notice); }
+.land[data-food-status="critical"] .map-food-bar { fill: var(--intent-error); }
+
+.map-facility-pill,
+.map-route-caption rect,
+.map-network-state rect {
+  fill: var(--surface-default);
+  stroke: var(--stroke-default);
+  stroke-width: 1;
+}
+
+.map-facility-label,
+.map-route-caption text,
+.map-network-state text { fill: var(--content-default); font-family: ui-monospace, Consolas, monospace; }
+
+.map-request-badge rect { fill: color-mix(in srgb, var(--surface-default) 88%, var(--intent-accent)); stroke: color-mix(in srgb, var(--intent-accent) 62%, transparent); }
+.map-request-badge text { fill: var(--content-raise); }
+
+#map-route-layer { filter: none; }
+.map-route path,
+.map-network-path { filter: none; }
+.map-route:not(.is-blocked) path,
+.map-network-link.is-trade { color: var(--intent-info); stroke: var(--intent-info); }
+.map-network-link.is-alliance { color: var(--intent-notice); }
+.map-network-link.is-alliance .map-network-path { stroke-dasharray: 9 7; }
+.map-route.is-blocked path,
+.map-network-link.is-broken,
+.map-network-link.is-cancelled,
+.map-enforcement-path { color: var(--intent-error); stroke: var(--intent-error); }
+.map-route.is-active-route path,
+.map-network-link.is-connected { filter: none; opacity: 1; }
+.map-enforcement-layer circle { fill: var(--surface-inset); stroke: var(--intent-error); }
+.map-enforcement-cross { stroke: var(--intent-error); }
+
+.map-control-group button {
+  border-color: var(--stroke-default);
+  border-radius: var(--r-md, 2px);
+  background: var(--surface-default);
+  color: var(--content-default);
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+.map-control-group button[aria-pressed="true"] {
+  border-color: var(--intent-accent);
+  background: var(--intent-accent-soft);
+  color: var(--content-raise);
+}
+
+.map-control-group button:focus-visible,
+.land:focus-visible { outline: 2px solid var(--intent-accent); outline-offset: 2px; }
+
+.map-network-legend i { border-top-width: 2px; border-top-color: var(--intent-info); }
+.map-network-legend .is-alliance i { border-top-color: var(--intent-notice); }
+.map-network-legend .is-closed i { border-top-color: var(--intent-error); }
+
+.country-tabs {
+  border-color: var(--stroke-default);
+  background: var(--surface-default);
+}
+
+.country-tab {
+  min-height: 44px;
+  color: var(--content-secondary);
+  font-size: 14px;
+}
+
+.country-tab.active {
+  border-bottom-color: var(--intent-accent);
+  background: var(--intent-accent-soft);
+  color: var(--content-raise);
+}
+
+.country-tab:hover { background: var(--surface-hover); color: var(--content-raise); }
+
+.world-map[data-map-mode="network"] .map-land-food,
+.world-map[data-map-mode="network"] .map-food-track,
+.world-map[data-map-mode="network"] .map-food-bar { display: inline; }
+
+@media (min-width: 1100px) {
+  .atlas-stage .map-container { height: clamp(520px, 47vw, 660px); min-height: 520px; aspect-ratio: auto; }
+  .atlas-stage .world-map { height: 100%; aspect-ratio: 900 / 620; }
+}
+
+@media (max-width: 1099px) {
+  .atlas-stage .map-container,
+  .atlas-stage .world-map { height: auto; min-height: 0; aspect-ratio: 900 / 620; }
+}
+
+@media (max-width: 600px) {
+  .atlas-stage .country-name { font-size: 36px; }
+  .atlas-stage .country-role { display: none; }
+  .atlas-stage .map-land-food { display: inline !important; font-size: 29px; }
+  .atlas-stage .map-food-track,
+  .atlas-stage .map-food-bar { display: inline !important; }
+  .country-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; }
+  .country-tab { min-height: 44px; padding: 8px 6px; border-right: 1px solid var(--stroke-default); border-bottom: 1px solid var(--stroke-default); }
+  .country-tab:nth-child(2n) { border-right: 0; }
+  .country-tab span { display: block; margin: 0; color: var(--content-muted); font-size: 12px; line-height: 1.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .land > .map-country-shape { transition: none; }
+}
+.atlas-stage .atlas-material{pointer-events:none;opacity:.78;filter:saturate(.55) brightness(.72) contrast(1.1)}
+.atlas-stage .atlas-relief{opacity:.16}
+.atlas-stage .atlas-contour,.atlas-stage .atlas-ridge{opacity:.18}
+.atlas-dispatch{border-bottom:1px solid var(--stroke-default)}
+.atlas-dispatch>summary{min-height:44px;display:flex;align-items:center;gap:var(--s2);padding:var(--s2) var(--s3);font-size:var(--t-xs);cursor:pointer;color:var(--content-default);background:var(--surface-raise)}
+.atlas-dispatch>summary::before{content:'+';color:var(--intent-accent)}
+.atlas-dispatch[open]>summary::before{content:'−'}
+.atlas-dispatch>summary:focus-visible{outline:2px solid var(--intent-accent);outline-offset:-2px}

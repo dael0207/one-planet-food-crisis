@@ -1,0 +1,21 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {COUNTRY_IDS,COUNTRIES,createGame,advanceTurn,eventForTurn,getAction} from '../dist/engine.mjs';
+const play=(ids,state=createGame())=>ids.reduce((current,id)=>advanceTurn(current,id),state);
+test('six countries continue four hundred quarters with finite sustainable state',()=>{
+ const state=play(Array(400).fill('maintain'));
+ assert.equal(state.version,13);assert.equal(state.playerId,'lumen');assert.equal(state.turn,400);assert.equal(COUNTRY_IDS.length,6);
+ assert.deepEqual(Object.keys(state.countries),COUNTRY_IDS);
+ for(const country of Object.values(state.countries)){assert.ok(COUNTRIES[country.id].role);for(const metric of ['food','treasury','approval','trust'])assert.ok(Number.isFinite(country[metric])&&country[metric]>=0&&country[metric]<=100);assert.ok(country.price>=50&&country.price<=220);}
+ assert.ok(state.countries.lumen.food>15&&state.countries.lumen.food<95);assert.ok(state.countries.lumen.treasury>0&&state.countries.lumen.treasury<100);
+});
+test('same commands reproduce outcomes and leave input snapshots immutable',()=>{
+ const initial=createGame(),before=JSON.stringify(initial),ids=['embargo','invest','maintain','reopen',...Array(156).fill('maintain')];
+ const next=play(ids,initial);assert.equal(JSON.stringify(initial),before);assert.deepEqual(next,play(next.commands));assert.equal(next.history.length,80);assert.equal(next.commands.length,160);
+});
+test('seasons keep varying after the first ten quarters',()=>{assert.ok(eventForTurn(10).title);assert.notEqual(eventForTurn(10).foodDelta,eventForTurn(11).foodDelta);assert.deepEqual(eventForTurn(53),eventForTurn(53));});
+test('unaffordable and unknown policies leave state untouched',()=>{const state=createGame();state.countries.lumen.treasury=0;state.countries.lumen.food=2;const before=JSON.stringify(state);assert.throws(()=>advanceTurn(state,'subsidy'),/국고/);assert.throws(()=>advanceTurn(state,'aid'),/국고|식량/);assert.throws(()=>advanceTurn(state,'unknown'),/정책|요청/);assert.equal(JSON.stringify(state),before);});
+test('export restrictions persist and change foreign prices trust and market share',()=>{const normal=advanceTurn(createGame(),'balanced'),restricted=advanceTurn(createGame(),'embargo');assert.ok(restricted.countries.lumen.food>normal.countries.lumen.food);assert.ok(restricted.countries.nord.price>normal.countries.nord.price);assert.ok(restricted.countries.nord.trust<normal.countries.nord.trust);assert.ok(restricted.marketShare<normal.marketShare);assert.equal(advanceTurn(restricted,'subsidy').activePolicy,'embargo');assert.equal(advanceTurn(restricted,'reopen').activePolicy,'open');});
+test('irrigation takes two quarters and allows three sequential upgrades',()=>{let state=advanceTurn(createGame(),'invest');assert.throws(()=>advanceTurn(state,'invest'),/시설/);assert.equal(advanceTurn(state,'maintain').farmLevel,0);state=play(['maintain','maintain'],state);assert.equal(state.farmLevel,1);for(let index=0;index<2;index++){state.countries.lumen.treasury=100;state=play(['invest','maintain','maintain'],state);}assert.equal(state.farmLevel,3);assert.throws(()=>advanceTurn(state,'invest'),/시설/);});
+test('exact food accounting and same-world counterfactual include transfers and boundaries',()=>{let state=createGame();for(const id of ['embargo','aid','subsidy','reopen','invest',...Array(18).fill('maintain')]){const baseline=advanceTurn(state,'maintain'),next=advanceTurn(state,id),record=next.history.at(-1);assert.deepEqual(record.beforeCountries,state.countries);assert.equal(record.foodBreakdown.reduce((sum,item)=>sum+item.value,0),next.countries.lumen.food-state.countries.lumen.food);for(const metric of ['food','price','treasury','trust'])assert.equal(record.policyEffect[metric],next.countries.lumen[metric]-baseline.countries.lumen[metric]);assert.equal(record.citizens.length,3);assert.ok(record.citizens.every(story=>story.before&&story.text));state=next;}});
+test('JSON restore and dynamic cost metadata remain usable',()=>{const state=play(['invest','embargo','aid']);assert.deepEqual(advanceTurn(JSON.parse(JSON.stringify(state)),'maintain'),advanceTurn(state,'maintain'));assert.equal(getAction(createGame(),'invest').cost,16);assert.equal(getAction(state,'maintain').cost,0);assert.equal(getAction(state,'missing'),null);});

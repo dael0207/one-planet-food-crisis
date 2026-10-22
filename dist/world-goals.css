@@ -1,0 +1,61 @@
+.foreign-goal-intent{grid-column:2/-1;padding:var(--s3) 0;border-block:1px solid var(--room-line);color:var(--map-text);word-break:keep-all;overflow-wrap:anywhere}
+.foreign-goal-intent header{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s3)}
+.foreign-goal-intent header span,.foreign-goal-last span{color:var(--room-brass);font-size:var(--t-xs)}
+.foreign-goal-intent header strong{font-size:var(--t-sm);font-weight:600}
+.foreign-goal-stage{margin-top:var(--s1);color:var(--room-muted);font-size:var(--t-xs)}
+.foreign-goal-intent details{margin-top:var(--s2);border-top:1px solid var(--room-line)}
+.foreign-goal-intent summary,.world-goals summary,.goal-consequences summary{display:flex;align-items:center;min-height:44px;cursor:pointer;font-size:var(--t-sm);font-weight:600}
+.foreign-goal-intent summary{color:var(--room-brass)}
+.foreign-goal-intent summary:focus-visible,.world-goals summary:focus-visible,.goal-consequences summary:focus-visible{outline:3px solid var(--alert);outline-offset:3px}
+.foreign-goal-intent ul,.world-goal-row ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s1) var(--s3);list-style:none;padding:0;margin:0 0 var(--s2)}
+.foreign-goal-intent li,.world-goal-row li{display:flex;justify-content:space-between;gap:var(--s2);color:var(--room-muted);font-size:var(--t-xs)}
+.foreign-goal-intent li.is-met,.world-goal-row li.is-met{color:var(--map-text)}
+.foreign-goal-intent li b{color:var(--room-brass)}
+.foreign-goal-last{padding-top:var(--s2);border-top:1px solid var(--room-line)}
+.foreign-goal-last strong,.foreign-goal-last small{display:block;margin-top:var(--s1)}
+.foreign-goal-last small{color:var(--room-muted);font-size:var(--t-xs)}
+.foreign-goal-intent.is-pending>span{color:var(--room-brass);font-size:var(--t-xs)}
+.foreign-goal-intent.is-pending>strong{display:block;margin-top:var(--s1)}
+.foreign-goal-intent.is-pending>p{margin-top:var(--s1);color:var(--room-muted);font-size:var(--t-xs)}
+.world-goals{margin-top:var(--s5);padding-block:var(--s5);border-block:1px solid var(--line);word-break:keep-all;overflow-wrap:anywhere}
+.world-goals-heading h3{margin-top:var(--s1);font-size:var(--t-xl)}
+.world-goal-list{margin-top:var(--s4);border-top:1px solid var(--line)}
+.world-goal-row{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:var(--s2) var(--s4);padding:var(--s3) 0;border-bottom:1px solid var(--line)}
+.world-goal-row>div span{display:block;color:var(--muted);font-size:var(--t-xs)}
+.world-goal-row>div strong{display:block;margin-top:var(--s1);font-size:var(--t-sm)}
+.world-goal-row>p{color:var(--accent);font-size:var(--t-sm);font-weight:600;text-align:right}
+.world-goal-row details{grid-column:1/-1}
+.world-goal-row summary{color:var(--accent);font-size:var(--t-xs)}
+.world-goal-row li{color:var(--muted)}
+.world-goal-row li b{color:var(--accent)}
+.world-goal-row details>p{padding:var(--s2) 0;color:var(--muted);font-size:var(--t-sm)}
+.world-goal-quarter,.world-goal-relations-detail{border-bottom:1px solid var(--line)}
+.world-goals summary{color:var(--accent)}
+.world-goal-dispatch,.world-goal-relations{list-style:none;padding:0 0 var(--s3);margin:0}
+.world-goal-dispatch li,.world-goal-relations li{display:grid;grid-template-columns:minmax(96px,.35fr) minmax(0,1fr);gap:var(--s3);padding:var(--s2) 0;border-top:1px solid var(--line)}
+.world-goal-dispatch span,.world-goal-relations span{color:var(--muted);font-size:var(--t-xs)}
+.world-goal-dispatch p,.world-goal-relations p{font-size:var(--t-sm)}
+.world-goal-relations strong{font-size:var(--t-sm)}
+.world-goal-relations p{grid-column:2;color:var(--muted)}
+.world-goals-empty{padding:var(--s3) 0;color:var(--muted);font-size:var(--t-sm)}
+.goal-consequences{margin-block:var(--s4);padding:var(--s3) 0;border-block:1px solid var(--line);word-break:keep-all;overflow-wrap:anywhere}
+.goal-consequences-heading span{color:var(--accent);font-size:var(--t-xs);font-weight:600}
+.goal-consequences-heading h3{margin-top:var(--s1);font-size:var(--t-lg)}
+.goal-consequence{display:grid;grid-template-columns:minmax(92px,.45fr) minmax(0,1fr);gap:var(--s1) var(--s3);padding:var(--s3) 0;border-top:1px solid var(--line)}
+.goal-consequence>span{grid-row:1/5;color:var(--muted);font-size:var(--t-xs)}
+.goal-consequence strong{font-size:var(--t-sm)}
+.goal-consequence p{color:var(--muted);font-size:var(--t-xs)}
+.goal-consequence small{color:var(--ink);font-size:var(--t-xs)}
+.goal-consequence b{color:var(--accent);font-size:var(--t-sm)}
+.goal-consequences>details{border-top:1px solid var(--line)}
+.goal-consequences>details>summary{color:var(--accent)}
+@media(max-width:700px){
+ .foreign-goal-intent{grid-column:1}
+ .foreign-goal-intent header{display:block}
+ .foreign-goal-intent header strong{display:block;margin-top:var(--s1)}
+ .foreign-goal-intent ul,.world-goal-row ul{grid-template-columns:1fr}
+ .world-goal-row{grid-template-columns:1fr;gap:var(--s1)}
+ .world-goal-row>p{text-align:left}
+ .world-goal-dispatch li,.world-goal-relations li,.goal-consequence{grid-template-columns:1fr;gap:var(--s1)}
+ .world-goal-relations p,.goal-consequence>span{grid-column:auto;grid-row:auto}
+}

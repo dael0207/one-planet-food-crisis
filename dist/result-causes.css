@@ -1,0 +1,21 @@
+.result-causes{margin-block:var(--s3);padding-block:var(--s3);border-block:1px solid var(--line);word-break:keep-all;overflow-wrap:anywhere}
+.result-causes header span,.cause-decision>span,.cause-timing span{color:var(--muted);font-size:var(--t-xs)}
+.result-causes h3{margin-top:var(--s1);font-size:var(--t-lg)}
+.cause-decision,.cause-timing,.cause-events li{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s1);padding-block:var(--s2);border-bottom:1px solid var(--line)}
+.cause-decision strong{font-size:var(--t-md)}
+.cause-decision b{color:var(--accent);font-size:var(--t-sm);font-variant-numeric:tabular-nums}
+.cause-decision p,.cause-events span{color:var(--muted);font-size:var(--t-xs);line-height:1.7}
+.cause-timing strong,.cause-events strong{font-size:var(--t-sm)}
+.cause-totals{display:grid;grid-template-columns:minmax(0,1fr);border-bottom:1px solid var(--line)}
+.cause-totals>div{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--s1) var(--s2);align-items:baseline;padding-block:var(--s2);border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.cause-totals>div:last-child{border-bottom:0}.cause-totals span,.cause-totals small{color:var(--muted);font-size:var(--t-xs)}
+.cause-totals b,.cause-totals strong{font-size:var(--t-sm)}.cause-totals strong{color:var(--accent)}
+.cause-totals small{grid-column:1/-1}.cause-totals i{font-style:normal;color:var(--ink)}
+.cause-comparison-note{padding-block:var(--s2);color:var(--muted);font-size:var(--t-xs);line-height:1.7}
+.cause-events{list-style:none;margin:0;padding:0}
+.cause-reconciliation summary{display:flex;align-items:center;min-height:44px;cursor:pointer;color:var(--accent);font-size:var(--t-sm);font-weight:650}
+.cause-reconciliation summary:focus-visible{outline:3px solid var(--alert);outline-offset:3px}
+.cause-reconciliation>p,.cause-reconciliation>small{display:block;color:var(--muted);font-size:var(--t-xs);line-height:1.7}
+.cause-reconciliation>div{margin-block:var(--s2);border-top:1px solid var(--line)}
+.cause-reconciliation>div>div{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s1);padding-block:var(--s2);border-bottom:1px solid var(--line);font-size:var(--t-xs);font-variant-numeric:tabular-nums}
+.cause-reconciliation small{color:var(--muted)}

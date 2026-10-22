@@ -1,0 +1,299 @@
+.command-dock .decision-panel {
+  border: 1px solid var(--stroke-default); border-radius: var(--r1); background: var(--surface-default);
+  color: var(--content-default); box-shadow: none;
+}
+
+.command-console,.quarterly-report {min-width: 0;}
+
+.command-dock .dispatch-heading {
+  display: flex; align-items: center; gap: var(--s2);
+  margin-bottom: var(--s2);
+  color: var(--content-muted);
+  font-family: var(--font-mono, ui-monospace, Consolas, monospace);
+  font-size: var(--t-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.command-dock .dispatch-heading .console-step {padding: 3px 6px; border: 1px solid var(--stroke-default); color: var(--intent-accent); white-space: nowrap;}
+
+.command-dock .dispatch-heading strong {font-weight: 500;}
+
+.command-dock .decision-panel h2 {
+  margin: 0 0 var(--s2);
+  color: var(--content-raise);
+  font-size: var(--t-xl);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.command-dock .decision-brief {margin: 0 0 var(--s2); color: var(--content-default); font-size: var(--t-sm); line-height: 1.6;}
+
+.command-dock .decision-context,.command-dock .additional-orders,
+.command-dock .result-events,.command-dock .result-ledger,.command-dock .result-details {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--stroke-default);
+  background: transparent;
+}
+
+.command-dock .decision-context > summary,.command-dock .additional-orders > summary,
+.command-dock .result-events > summary,.command-dock .result-ledger > summary,
+.command-dock .result-details > summary {
+  min-height: 44px;
+  padding: var(--s2) 0;
+  color: var(--content-secondary);
+  cursor: pointer;
+  font-family: var(--font-mono, ui-monospace, Consolas, monospace);
+  font-size: var(--t-xs);
+  font-weight: 500;
+}
+
+.command-dock .decision-context p {padding: 0 0 var(--s2); color: var(--content-secondary); font-size: var(--t-sm); line-height: 1.55;}
+
+.command-dock fieldset legend {
+  margin: var(--s2) 0;
+  color: var(--content-muted);
+  font-family: var(--font-mono, ui-monospace, Consolas, monospace);
+  font-size: var(--t-xs);
+}
+
+.command-dock .command-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--stroke-default);
+}
+
+.command-dock .policy {
+  display: grid;
+  grid-template-columns: 20px 24px minmax(0, 1fr);
+  gap: var(--s2);
+  min-height: 72px;
+  padding: var(--s2) 0;
+  border: 0;
+  border-bottom: 1px solid var(--stroke-default);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.command-dock .policy.selected {box-shadow: inset 2px 0 0 var(--intent-accent); background: var(--intent-accent-soft);}
+
+.command-dock .policy.unavailable {color: var(--content-muted); opacity: 1;}
+
+.command-dock .policy input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--intent-accent);
+}
+
+.command-index {
+  padding-top: 2px;
+  color: var(--content-muted);
+  font-family: var(--font-mono, ui-monospace, Consolas, monospace);
+  font-size: var(--t-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.command-dock .policy-title {
+  align-items: baseline;
+  gap: var(--s2);
+}
+
+.command-dock .policy-title strong {
+  color: var(--content-raise);
+  font-size: var(--t-base);
+  font-weight: 500;
+}
+
+.command-dock .policy-cost {
+  color: var(--content-secondary);
+  font-family: var(--font-mono, ui-monospace, Consolas, monospace);
+  font-size: var(--t-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.command-dock .policy-tradeoffs {
+  display: grid;
+  gap: 2px;
+  margin-top: var(--s1);
+  font-size: var(--t-sm);
+  line-height: 1.45;
+}
+
+.command-dock .policy-tradeoffs > span {
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: var(--s2);
+}
+
+.command-dock .policy-tradeoffs b {
+  color: var(--content-muted);
+  font-family: var(--font-mono, ui-monospace, Consolas, monospace);
+  font-size: var(--t-xs); white-space: nowrap;
+  font-weight: 500;
+}
+
+.command-dock .policy-tradeoffs em {
+  color: var(--content-secondary);
+}
+
+.command-dock .selected-forecast {
+  min-height: 44px;
+  padding: var(--s2) 0;
+  border-bottom: 1px solid var(--stroke-default);
+  color: var(--intent-accent);
+  font-family: var(--font-mono, ui-monospace, Consolas, monospace);
+  font-size: var(--t-xs);
+  line-height: 1.45;
+}
+
+.command-dock .primary-button {
+  min-height: 44px;
+  border: 1px solid var(--intent-accent);
+  border-radius: var(--r1);
+  background: var(--intent-accent);
+  color: var(--surface-inset);
+  font-family: var(--font-mono, ui-monospace, Consolas, monospace);
+  font-size: var(--t-sm);
+}
+
+.command-dock .primary-button:disabled {
+  border-color: var(--stroke-default); background: var(--surface-raise); color: var(--content-muted);
+}
+
+.quarterly-report .report-context {
+  margin-bottom: var(--s2);
+  color: var(--content-muted);
+  font-size: var(--t-sm);
+}
+
+.command-dock .order-effect {
+  margin: 0;
+  padding: var(--s2) 0;
+  border-block: 1px solid var(--stroke-default);
+}
+
+.command-dock .order-effect span {
+  display: block;
+  color: var(--content-muted);
+  font-family: var(--font-mono, ui-monospace, Consolas, monospace);
+  font-size: var(--t-xs);
+}
+
+.command-dock .order-effect strong {
+  display: block;
+  margin-top: var(--s1);
+  color: var(--content-raise);
+  font-size: var(--t-base);
+  font-weight: 500;
+}
+
+.command-dock .development-panel {
+  margin: 0;
+  padding: var(--s2) 0;
+  border: 0;
+  border-bottom: 1px solid var(--stroke-default);
+  background: transparent;
+}
+
+.command-dock .development-panel h3 {
+  color: var(--content-raise);
+  font-size: var(--t-base);
+}
+
+.command-dock .development-benefit,
+.command-dock .development-facts {
+  margin: var(--s1) 0 0;
+  padding: 0;
+  color: var(--content-secondary);
+  font-size: var(--t-sm);
+}
+
+.command-dock .result-primary-outcomes {border-bottom: 1px solid var(--stroke-default);}
+.command-dock .result-primary-outcomes > * {
+  margin: 0; padding: var(--s2) 0; border: 0;
+  border-bottom: 1px solid var(--stroke-default); border-radius: 0; background: transparent;
+}
+.command-dock .result-totals {padding: var(--s2) 0; border-block: 1px solid var(--stroke-default);}
+.command-dock .result-totals > p {margin: 0 0 var(--s2); color: var(--content-muted); font-size: var(--t-xs); line-height: 1.45;}
+.command-dock .result-total-grid {display: grid; grid-template-columns: minmax(0,1fr); gap: var(--s2);}
+.command-dock .result-total {display: grid; grid-template-columns:32px minmax(0,1fr) 16px minmax(0,1fr) auto; align-items: baseline; gap: var(--s1); color: var(--content-secondary); font-size: var(--t-base); font-variant-numeric: tabular-nums;}
+.command-dock .result-total > span {color: var(--content-muted); font-size: var(--t-xs);}
+.command-dock .result-total b {font-weight: 400;text-align:right;}
+.command-dock .result-total i {color: var(--content-muted); font-style: normal;}
+.command-dock .result-total strong {color: var(--content-raise); font-size: var(--t-lg); font-weight: 500;text-align:right;}
+.command-dock .result-total small {color: var(--intent-accent); text-align: right;}.command-dock .result-total[data-delta^="-"] small{color:var(--intent-error)}.command-dock .result-total[data-delta="0"] small{color:var(--content-secondary)}
+
+.command-dock .policy-comparison {border:0;border-bottom: 1px solid var(--stroke-default);border-radius:0;padding:0;margin:var(--s3) 0;}
+.command-dock .policy-comparison .order-effect {border: 0;}
+.command-dock .policy-relation-effects {display: grid; gap: var(--s1); padding: 0 0 var(--s2);}
+.command-dock .policy-relation-effects span {color: var(--content-secondary); font-size: var(--t-sm);}
+.command-dock .policy-relation-effects b {color: var(--intent-accent); font-weight: 500;}.command-dock .policy-relation-effects [data-delta^="-"] b{color:var(--intent-error)}
+
+.command-dock .result-continuation-rail {position:sticky;bottom:0;z-index:4;margin:0;padding:var(--s3) 0;border:0;border-block:1px solid var(--stroke-default);background:var(--surface-raise);}
+
+.command-dock .result-continuation-rail .next-consequence {
+  margin: 0 0 var(--s2);
+  padding: 0;
+  background: transparent;
+}
+
+.command-dock .next-consequence p {
+  margin: var(--s1) 0 0;
+  color: var(--content-secondary);
+  font-size: var(--t-sm);
+}
+
+.command-dock .next-consequence small {display: block; margin-top: var(--s1); color: var(--content-muted); font-size: var(--t-xs); line-height: 1.45;}
+
+.command-dock .result-events > :not(summary),
+.command-dock .result-ledger > :not(summary),
+.command-dock .result-details > :not(summary) {
+  margin-block: var(--s2);
+}
+
+.command-dock .quarterly-delta-strip,
+.command-dock .policy-comparison,
+.command-dock .food-accounting {
+  padding: var(--s2) 0;
+  border-color: var(--stroke-default);
+  border-radius: 0;
+  background: transparent;
+}
+
+.command-dock .result-record-links {border-top: 1px solid var(--stroke-default);}
+
+.command-dock .result-record-links .text-button {
+  color: var(--content-secondary);
+  font-family: var(--font-mono, ui-monospace, Consolas, monospace);
+  font-size: var(--t-xs);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .command-dock .policy:hover {
+    background: var(--surface-hover);
+  }
+}
+
+@media (max-width: 520px) {
+  .command-dock .decision-panel {
+    padding: var(--s4) var(--s3);
+  }
+
+  .command-dock .policy {
+    grid-template-columns: 20px 20px minmax(0, 1fr);
+  }
+
+  .command-dock .policy-title {
+    display: grid;
+  }
+
+  .command-dock .policy-cost {
+    max-width: none;
+    text-align: left;
+  }
+
+  .command-dock .dispatch-heading {align-items: flex-start; flex-direction: column; gap: var(--s1);}
+  .command-dock .result-total-grid {grid-template-columns: 1fr; gap: var(--s2);}
+}

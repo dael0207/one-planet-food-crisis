@@ -1,0 +1,86 @@
+[
+  {
+    "playerId": "lumen",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "610b758958b90323af0fc3635543bf11b9d7c4dfc26e84c5a46e39740796cc7d"
+  },
+  {
+    "playerId": "nord",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "bc3d90d7adfd7f0406c21790ba85b19154b30412a9eff4396415c5ca8afdcd09"
+  },
+  {
+    "playerId": "cera",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "ce1c8b24a607ac47ef7468686d5f4b7bde9a5a2648319458c1fca1c35550b5ef"
+  },
+  {
+    "playerId": "altia",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "c3b245e540addd93a8738ab9f9ec6518fc88d54cdc41e8c89d38b309625a9d86"
+  },
+  {
+    "playerId": "marin",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "51beeef04d9e46ec77e98e64326e70d2084af9afde5758ded4118ec7bc5a9dde"
+  },
+  {
+    "playerId": "solis",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "7f877bffc9931e809b436c1ae06017d4dbd1c971eb41b11280d57d41c5ca72aa"
+  }
+]

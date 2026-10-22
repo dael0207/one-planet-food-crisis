@@ -1,0 +1,38 @@
+.atlas-stage .map-container{height:clamp(400px,41vw,500px);aspect-ratio:auto}
+.atlas-stage .world-map{overflow:hidden}
+.atlas-ocean-depth{fill:url(#atlas-shelf);opacity:.45}
+.atlas-ocean-labels{fill:var(--map-text);font-family:Georgia,"Malgun Gothic",serif;font-size:12px;letter-spacing:8px;opacity:.28}
+.atlas-shore{pointer-events:none}
+.atlas-shelf-outer,.atlas-shelf-inner,.atlas-islet-shelf{fill:none;stroke:var(--map-water);stroke-linejoin:round}
+.atlas-shelf-outer{stroke-width:18;opacity:.1}
+.atlas-shelf-inner{stroke-width:9;opacity:.16}
+.atlas-islet-shelf{stroke-width:8;opacity:.16}
+.map-country-shape{filter:drop-shadow(0 3px 2px color-mix(in srgb,var(--ocean) 56%,transparent))}
+.atlas-islet{fill:currentColor;stroke:color-mix(in srgb,var(--ink) 40%,transparent);stroke-width:1.2;pointer-events:none}
+.land[data-country=lumen] .atlas-islet{color:var(--lumen)}
+.land[data-country=nord] .atlas-islet{color:var(--nord)}
+.land[data-country=cera] .atlas-islet{color:var(--cera)}
+.land[data-country=altia] .atlas-islet{color:var(--altia)}
+.land[data-country=marin] .atlas-islet{color:var(--marin)}
+.land[data-country=solis] .atlas-islet{color:var(--solis)}
+.atlas-terrain{pointer-events:none}
+.atlas-contour{fill:none;stroke:var(--ink);stroke-width:1.15;opacity:.2}
+.atlas-ridge{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;opacity:.3}
+.atlas-river{fill:none;stroke:var(--map-water);stroke-width:3;stroke-linecap:round;opacity:.88}
+.atlas-river+.atlas-river{stroke-width:1.7;opacity:.72}
+.atlas-dry-river{fill:none;stroke:var(--cera);stroke-width:2.5;stroke-dasharray:5 4;stroke-linecap:round;opacity:.68}
+.atlas-farm{fill:color-mix(in srgb,var(--gold) 18%,transparent);stroke:var(--ink);stroke-width:1;opacity:.48}
+.atlas-tree{fill:var(--ink);opacity:.27}
+.atlas-lake{fill:var(--map-water);stroke:var(--ink);stroke-width:1;opacity:.72}
+.atlas-region-label{fill:var(--ink);font-family:Georgia,"Malgun Gothic",serif;font-size:9px;letter-spacing:1.5px;opacity:.56;pointer-events:none}
+.country-name,.country-role,.map-land-food,.map-facility-label{paint-order:stroke fill;stroke:color-mix(in srgb,var(--room-paper) 76%,transparent);stroke-width:3px;stroke-linejoin:round}
+.country-role,.map-land-food,.map-facility-label{stroke-width:2.5px}
+.map-facility-label{fill:var(--map-safe-text);stroke:none;paint-order:normal}
+.map-facility-pill{fill:color-mix(in srgb,var(--map-card) 91%,transparent);stroke:var(--map-track)}
+#map-route-layer{filter:drop-shadow(0 1px 2px color-mix(in srgb,var(--ocean) 72%,transparent))}
+.atlas-compass path,.atlas-scale path{fill:none;stroke:var(--map-text);stroke-width:1.2;opacity:.72}
+.atlas-compass path{fill:var(--room-brass);stroke:var(--room-brass)}
+.atlas-compass text,.atlas-scale text{fill:var(--map-text);font-size:10px;letter-spacing:1px;opacity:.78}
+@media(max-width:960px){.atlas-stage .map-container{height:auto;aspect-ratio:900/620}.atlas-stage .world-map{height:auto;aspect-ratio:900/620}}
+@media(max-width:600px){.atlas-ocean-labels,.atlas-region-label,.atlas-scale{display:none}.atlas-stage .country-name{font-size:32px}.atlas-stage .country-role{font-size:13px}.atlas-stage .map-land-food{font-size:22px}.atlas-stage .map-facility-label{font-size:12px}.atlas-stage .map-container{min-height:0}.atlas-shelf-outer{stroke-width:14}.atlas-shelf-inner{stroke-width:7}}
+@media(prefers-reduced-motion:reduce){.map-country-shape{filter:none}}

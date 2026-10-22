@@ -1,0 +1,116 @@
+[
+  {
+    "playerId": "lumen",
+    "scenario": "accepted-incoming-relief",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "peace-reply:peace-offer-goal-conflict-marin-nord-3-4:accept",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "027917718f5a3d1e3e6d40e62cc302305cfa0b13a88a335f7486bf44b1b265f3"
+  },
+  {
+    "playerId": "nord",
+    "scenario": "accepted-incoming-peace",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "peace-reply:peace-offer-goal-conflict-cera-lumen-3-4:accept",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "50d3e51cc09ebab5e9197041c8123d4a43731f4b4ff8ad295bcc5e99553ff16c"
+  },
+  {
+    "playerId": "cera",
+    "scenario": "accepted-player-counter",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "peace-counter:peace-offer-goal-conflict-marin-nord-3-4:relief:mutual:0:0",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "3120a8111781718706418abe7acd8294e9cf4ac575f2ef6d1da2008044afc898"
+  },
+  {
+    "playerId": "altia",
+    "scenario": "counter-with-foreign-followup",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "peace-counter:peace-offer-goal-conflict-cera-lumen-3-4:relief:mutual:0:0",
+      "mediate-accept:mediation-goal-conflict-cera-lumen-3-5",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "d87409c894899eb952a2f75d68394c8e1acc0045252346542c0c80d6c7b35a39"
+  },
+  {
+    "playerId": "marin",
+    "scenario": "declined-incoming-relief",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "peace-reply:peace-offer-goal-conflict-cera-lumen-3-4:decline",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "26ba69c0b6d56725313053faa7cb24a8e45d1c9b2f63c4f72345c7f663f0dedb"
+  },
+  {
+    "playerId": "solis",
+    "scenario": "unanswered-incoming-relief-expired",
+    "commands": [
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain",
+      "maintain"
+    ],
+    "expectedSha256": "6fd0e2e4b87384c51e9123f329500adea8edd4ea3c4be89d913ab3073611413e"
+  }
+]

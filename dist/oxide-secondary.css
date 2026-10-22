@@ -1,0 +1,61 @@
+/* Shared ruled ledgers: secondary work keeps the same control-room grammar. */
+.room-game .nation-grid{display:block;border-top:1px solid var(--stroke-default)}
+.room-game .nation-card{display:grid;grid-template-columns:24px minmax(120px,.8fr) minmax(150px,1fr) auto;align-items:center;gap:var(--s2) var(--s3);min-height:52px;padding:var(--s2) var(--s3);margin:0;border:0;border-bottom:1px solid var(--stroke-default);border-radius:0;background:transparent}
+.room-game .nation-card:has(input:checked){background:var(--intent-accent-soft);box-shadow:inset 2px 0 var(--intent-accent);border-color:var(--stroke-default)}
+.room-game .nation-card input{grid-column:1;width:20px;height:20px;margin:0;accent-color:var(--intent-accent)}
+.room-game .nation-identity{display:flex;align-items:baseline;gap:var(--s2);min-width:0}
+.room-game .nation-identity strong{font-size:var(--t-base);font-weight:600;color:var(--content-raise)}
+.room-game .nation-identity small,.room-game .nation-role{font-size:var(--t-xs);color:var(--content-secondary)}
+.room-game .nation-role{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.room-game .nation-card .nation-save{margin:0;font-size:var(--t-xs);color:var(--content-muted)}
+.room-game .nation-card .nation-swatch{display:none}
+.room-game .nation-summary{border-bottom:1px solid var(--stroke-default)}
+.room-game .nation-summary-panel{display:none;grid-template-columns:minmax(0,1.5fr) minmax(180px,1fr);align-items:end;gap:var(--s4);padding:var(--s3);background:var(--surface-inset)}
+.room-game .nation-summary-panel h3{margin:var(--s1) 0 0;font-size:var(--t-base);font-weight:500;line-height:1.45}
+.room-game .nation-summary-panel p{display:grid;gap:var(--s1);margin:0;font-size:var(--t-xs);color:var(--content-secondary)}
+.room-game .nation-summary-panel p strong{color:var(--content-raise);font-size:var(--t-sm);font-weight:600}
+.room-game .nation-grid:has(input[value="lumen"]:checked)~.nation-summary [data-nation-summary="lumen"],.room-game .nation-grid:has(input[value="nord"]:checked)~.nation-summary [data-nation-summary="nord"],.room-game .nation-grid:has(input[value="cera"]:checked)~.nation-summary [data-nation-summary="cera"],.room-game .nation-grid:has(input[value="altia"]:checked)~.nation-summary [data-nation-summary="altia"],.room-game .nation-grid:has(input[value="marin"]:checked)~.nation-summary [data-nation-summary="marin"],.room-game .nation-grid:has(input[value="solis"]:checked)~.nation-summary [data-nation-summary="solis"]{display:grid}
+.room-game .nation-detail-wrap{margin:var(--s2) 0;border-radius:0;background:transparent}
+.room-game .nation-detail{border-radius:0;background:var(--surface-inset);padding:var(--s4)}
+.room-game .nation-detail h3{font-size:var(--t-lg);font-weight:500}
+.room-game .nation-detail dl{background:transparent}
+.room-game .picker-footer{padding-top:var(--s4);margin-top:var(--s3);border-color:var(--stroke-default)}
+.room-game .picker-footer span{font-size:var(--t-xs)}
+.room-game .picker-intro{font-size:var(--t-xs)}
+.room-game .request-card,.room-game .treaty-card,.room-game .outbound-card,.room-game .network-treaty,.room-game .goal-country,.room-game .foreign-goal-card{border-inline:0;border-radius:0;box-shadow:none;background:transparent}
+.room-game .inbox-section,.room-game .treaty-ledger,.room-game .outbound-section{border:0;border-radius:0;background:transparent}
+.room-game .request-card,.room-game .outbound-card{padding:var(--s4) 0;border-bottom:1px solid var(--stroke-default)}
+.room-game .dispatch-grid,.room-game .foreign-treaty-list{display:grid;grid-template-columns:1fr;gap:0}
+.room-game .dispatch-card,.room-game .agreement-card,.room-game .foreign-treaty-card{padding:var(--s4) 0;border:0;border-bottom:1px solid var(--stroke-default);border-radius:0;background:transparent;box-shadow:none}
+.room-game .dispatch-card h3,.room-game .foreign-treaty-card h3{font-size:var(--t-lg);font-weight:500}
+.room-game .request-card h3,.room-game .treaty-card h3{font-size:var(--t-lg);font-weight:500}
+.room-game .diplomacy-inbox,.room-game .foreign-network,.room-game .foreign-network-grid{gap:0}
+.room-game .diplomacy-entry,.room-game .treaty-item{border-radius:0;box-shadow:none}
+.room-game .country-more>summary{color:var(--content-secondary)}
+.room-game .chronicle{border-radius:0;background:transparent}
+.room-game .chronicle-heading h2{font-size:var(--t-h3);font-weight:500}
+.room-game .chronicle-summary{border-radius:0;background:var(--surface-inset)}
+.room-game .chronicle-panel{border-radius:0;box-shadow:none;background:var(--surface-inset)}
+.room-game .chronicle-controls button{border-radius:2px}
+.room-game .chronicle-timeline article{border-radius:0;box-shadow:none;background:transparent;border-inline:0}
+.room-game .chronicle-entry{border:0;border-bottom:1px solid var(--stroke-default);border-radius:0;box-shadow:none;background:transparent}
+.room-game .chronicle-entry[aria-pressed="true"]{background:var(--intent-accent-soft);border-color:var(--stroke-default)}
+.room-game .chronicle-summary>div,.room-game .chronicle-detail-grid>div{border:0;border-radius:0;background:transparent;box-shadow:none}
+.room-game .chronicle-table{font-variant-numeric:tabular-nums}
+.room-game .mediation-comparison,.room-game .mediation-terms,.room-game .mediation-preview,.room-game .peace-offer-original,.room-game .peace-compliance-terms{border-radius:2px;box-shadow:none;background:var(--surface-inset)}
+.room-game .mediation-goals label{border-radius:2px;background:var(--surface-default)}
+.room-game .mediation-goals label:has(input:checked){background:var(--intent-accent-soft);border-color:var(--intent-accent)}
+.room-game .proposal-effects,.room-game .settlement-deltas{border-radius:0}
+.room-game .treaty-fields input,.room-game .proposal-fields input,.room-game .mediation-fields select{border-radius:2px;min-height:44px}
+@media(min-width:1100px){.room-game dialog:has(#country-picker-form){width:760px;max-height:90dvh;padding:var(--s6)}}
+@media(max-width:700px){
+ .room-game dialog{padding:var(--s4)}
+ .room-game .nation-card{grid-template-columns:22px minmax(0,1fr) auto;padding:var(--s2);gap:2px var(--s2)}
+ .room-game .nation-card input{grid-row:1/3}
+ .room-game .nation-identity{grid-column:2;flex-wrap:wrap;gap:0 var(--s2)}
+ .room-game .nation-role{grid-column:2;grid-row:2}
+ .room-game .nation-card .nation-save{grid-column:3;grid-row:1/3;text-align:right}
+ .room-game .nation-summary-panel{grid-template-columns:1fr;gap:var(--s2);padding:var(--s3) var(--s2)}
+ .room-game .picker-footer{align-items:stretch}
+ .room-game .picker-footer .primary-button{width:100%}
+}

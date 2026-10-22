@@ -1,0 +1,70 @@
+.map-camera-controls {
+  align-items: center;
+  background: var(--surface-default);
+  border: 1px solid var(--stroke-default);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  padding: 8px 12px;
+}
+
+.map-camera-button {
+  align-items: center;
+  background: var(--surface-inset);
+  border: 1px solid var(--stroke-default);
+  border-radius: var(--r2);
+  color: var(--content-default);
+  cursor: pointer;
+  display: inline-flex;
+  font: 650 var(--t-sm)/1 var(--font-sans);
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 var(--s3);
+}
+
+.map-camera-button:hover,
+.map-camera-button:focus-visible,
+.map-camera-button[aria-pressed="true"] {
+  background: var(--surface-hover);
+  border-color: var(--intent-accent);
+  outline: 2px solid var(--intent-accent);
+  outline-offset: 2px;
+}
+
+.map-camera-button:disabled {
+  color: var(--content-muted);
+  cursor: default;
+  opacity: .55;
+}
+
+.map-camera-scale {
+  color: var(--content-secondary);
+  font: 650 var(--t-sm)/1 var(--font-mono);
+  min-width: 42px;
+  text-align: center;
+}
+
+.map-camera-pan-pad {
+  display: flex;
+  gap: 2px;
+  height: 44px;
+}
+
+.map-camera-pan-pad .map-camera-button { padding: 0; }
+
+.world-map[data-camera-pan="true"] {
+  cursor: grab;
+  touch-action: none;
+}
+
+.world-map.is-camera-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+@media (max-width: 640px) {
+  .map-camera-controls { gap: var(--s1); }
+  .map-camera-pan-pad { display: none; }
+  .map-camera-button { padding-inline: var(--s2); }
+}

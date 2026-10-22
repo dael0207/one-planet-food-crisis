@@ -1,0 +1,16 @@
+.atlas-country-appearance,
+.atlas-country-appearance * { pointer-events: none; }
+
+.map-state-summary {
+  display: none;
+  fill: var(--content-default);
+  stroke: var(--surface-inset);
+  stroke-width: 3;
+  paint-order: stroke fill;
+  font: 500 var(--t-xs)/1 var(--font-mono);
+  letter-spacing: .2px;
+}
+
+@media (max-width: 640px) {
+  .map-state-summary { font-size: var(--t-xs); }
+}

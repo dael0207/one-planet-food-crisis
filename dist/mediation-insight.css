@@ -1,0 +1,41 @@
+.room-game .mediation-preview { padding:var(--s3) 0;border:0;border-block:1px solid var(--stroke-default);background:transparent;margin-block:var(--s3) }
+.room-game .mediation-verdict { gap:var(--s2);flex-wrap:wrap }
+.room-game .mediation-verdict strong { font-size:var(--t-base) }
+.room-game .consent-list { display:grid;gap:var(--s3);margin-block:var(--s3) }
+.room-game .consent-list article { border-top:1px solid var(--stroke-default);padding-top:var(--s2) }
+.room-game .consent-list header { display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap;font-size:var(--t-sm) }
+.room-game .consent-list p { margin:var(--s1) 0;font-size:var(--t-xs);color:var(--content-secondary);line-height:1.6 }
+.room-game .consent-list .consent-gap { color:var(--intent-notice);font-weight:500 }
+.room-game [data-consent-score] .consent-gap span { display:block;color:var(--content-secondary) }
+.room-game .consent-list article:has(header strong) { min-width:0 }
+.room-game .draft-change { padding:var(--s3);border-left:2px solid var(--intent-accent);background:var(--surface-raise);margin-block:var(--s3) }
+.room-game .draft-change strong,.room-game .draft-change p { font-size:var(--t-xs);margin:var(--s1) 0;line-height:1.6 }
+.room-game .draft-change strong { color:var(--content-raise);font-weight:500 }
+.room-game .peace-levers { margin-block:var(--s3);font-size:var(--t-xs) }
+.room-game .peace-levers summary { display:flex;align-items:center;min-height:44px;cursor:pointer;color:var(--content-default);border-block:1px solid var(--stroke-default) }
+.room-game .peace-levers summary::before { content:'+';margin-right:var(--s2);color:var(--intent-accent) }
+.room-game .peace-levers[open] summary::before { content:'−' }
+.room-game .peace-levers div { border-bottom:1px solid var(--stroke-default);padding:var(--s2) 0 }
+.room-game .peace-levers strong,.room-game .peace-levers span,.room-game .peace-levers small { display:block;font-size:var(--t-xs);line-height:1.6 }
+.room-game .peace-levers strong { font-weight:500;color:var(--content-raise) }
+.room-game .peace-levers small { color:var(--content-muted) }
+.room-game .mediation-payment { font-size:var(--t-sm);color:var(--content-default);margin-block:var(--s2) }
+.room-game .mediation-preview > small { display:block;line-height:1.6 }
+.room-game .mediation-goals { margin-block:var(--s3);gap:0 }
+.room-game .mediation-goals label { border:0;border-bottom:1px solid var(--stroke-default);padding:var(--s2);min-height:44px }
+.room-game .mediation-goals strong { font-size:var(--t-sm);font-weight:500 }
+.room-game .mediation-goals small { font-size:var(--t-xs);line-height:1.5 }
+.room-game .mediation-goals input { width:18px;height:18px;flex-shrink:0 }
+.room-game .mediation-fields { margin-block:var(--s3);gap:var(--s2) }
+.room-game .mediation-fields label { font-weight:500 }
+.room-game .mediation-detail { border-bottom:1px solid var(--stroke-default);margin-block:var(--s2);font-size:var(--t-xs) }
+.room-game .mediation-detail > summary { cursor:pointer;min-height:44px;display:flex;align-items:center;gap:var(--s2);color:var(--content-secondary) }
+.room-game .mediation-detail > summary::before { content:'+';color:var(--intent-accent) }
+.room-game .mediation-detail[open] > summary::before { content:'−' }
+.room-game .mediation-relation-list + .consent-list { margin-top:var(--s3) }
+.room-game .peace-offer-resources { font-size:var(--t-xs) }
+.room-game #mediation-preview .draft-change p { color:var(--content-default) }
+.room-game [data-consent-attitude="accept"] .consent-gap{color:var(--intent-accent)}
+.room-game [data-consent-attitude="reject"] .consent-gap{color:var(--intent-error)}
+.room-game .consent-list header{color:var(--content-default)}
+.room-game .mediation-shortfall{font-size:var(--t-xs);color:var(--intent-error);line-height:1.6}

@@ -1,0 +1,8 @@
+.policy-tradeoffs{display:grid;gap:var(--s1);margin-top:var(--s2);font-size:var(--t-sm);line-height:1.6}
+.policy-tradeoffs>span{display:grid;grid-template-columns:64px minmax(0,1fr);gap:var(--s2)}
+.policy-tradeoffs b{font-size:var(--t-xs);font-weight:600;color:var(--accent)}
+.policy-tradeoffs>span:last-child b{color:var(--muted)}
+.policy-tradeoffs em{font-style:normal;color:var(--muted)}
+.result-total-note{display:block;margin-top:var(--s1);font-size:var(--t-xs);color:var(--muted)}
+.comparison-pills b{font-weight:500}
+@media(max-width:600px){.policy-tradeoffs{font-size:var(--t-xs)}.policy-tradeoffs>span{grid-template-columns:56px minmax(0,1fr);gap:var(--s1)}}
