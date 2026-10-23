@@ -1,10 +1,10 @@
-import {COUNTRIES} from './country-data.mjs?v=29';
-import {PROFILES} from './nation-profiles.mjs?v=29';
-import {SITE_DEFS} from './site-operations.mjs?v=29';
-import {quarterDate} from './calendar.mjs?v=29';
-import {escape,signed} from './render.mjs?v=29';
-import {jointConstructionBenefit} from './construction-benefits.mjs?v=29';
-import {cabinetResult} from './cabinet-ui.mjs?v=29';
+import {COUNTRIES} from './country-data.mjs?v=30';
+import {PROFILES} from './nation-profiles.mjs?v=30';
+import {SITE_DEFS} from './site-operations.mjs?v=30';
+import {quarterDate} from './calendar.mjs?v=30';
+import {escape,signed} from './render.mjs?v=30';
+import {jointConstructionBenefit} from './construction-benefits.mjs?v=30';
+import {cabinetResult} from './cabinet-ui.mjs?v=30';
 
 const period=turn=>{
  const date=quarterDate(Math.max(0,turn-1));

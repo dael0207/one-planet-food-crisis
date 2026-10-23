@@ -1,8 +1,8 @@
-import {COUNTRIES} from './country-data.mjs?v=29';
-import {adjustRelation,getRelation} from './negotiations.mjs?v=29';
-import {changeReliability} from './treaty-effects.mjs?v=29';
-import {mediationAction,mediationCommand,previewMediation} from './mediation.mjs?v=29';
-import {ACCORD_ID,accordById,accordId,activeRestriction,clamp,complianceAssessment,enabled,obligation,observerIds,otherPrincipal,parseDraft,restrictionContext,syntheticConflictId} from './peace-compliance-model.mjs?v=29';
+import {COUNTRIES} from './country-data.mjs?v=30';
+import {adjustRelation,getRelation} from './negotiations.mjs?v=30';
+import {changeReliability} from './treaty-effects.mjs?v=30';
+import {mediationAction,mediationCommand,previewMediation} from './mediation.mjs?v=30';
+import {ACCORD_ID,accordById,accordId,activeRestriction,clamp,complianceAssessment,enabled,obligation,observerIds,otherPrincipal,parseDraft,restrictionContext,syntheticConflictId} from './peace-compliance-model.mjs?v=30';
 
 const recordEvent=(state,accord,event,actions=[])=>{state.lastPeaceComplianceEvents.push(event);accord.events=[...(accord.events??[]),structuredClone(event)].slice(-20);actions.push({...event,source:'peace_compliance'});return event;};
 const executable=(state,accord)=>accord?.status==='violated'&&!accord.response&&accord.violation&&state.turn+1<accord.violation.untilTurn;

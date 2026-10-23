@@ -1,7 +1,7 @@
-import {COUNTRIES,COUNTRY_IDS,PROFILES,createGame,getPolicies} from './engine.mjs?v=29';
-import {escape} from './render.mjs?v=29';
+import {COUNTRIES,COUNTRY_IDS,PROFILES,createGame,getPolicies} from './engine.mjs?v=30';
+import {escape} from './render.mjs?v=30';
 
-import {getObjectivePlan} from './objectives.mjs?v=29';
+import {getObjectivePlan} from './objectives.mjs?v=30';
 
 const hiddenPolicyIds=new Set(['maintain','subsidy','invest','reopen','aid']);
 

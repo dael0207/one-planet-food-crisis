@@ -1,6 +1,6 @@
-import {COUNTRIES} from './country-data.mjs?v=29';
-import {goalPairAffinity} from './goal-relations.mjs?v=29';
-import {getRelation} from './negotiations.mjs?v=29';
+import {COUNTRIES} from './country-data.mjs?v=30';
+import {goalPairAffinity} from './goal-relations.mjs?v=30';
+import {getRelation} from './negotiations.mjs?v=30';
 
 const COMMERCIAL_KINDS=['buy','sell','trade_buy','trade_sell'];
 const otherPrincipal=(accord,id)=>accord.principalIds?.find(countryId=>countryId!==id)??null;

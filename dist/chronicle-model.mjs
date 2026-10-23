@@ -1,4 +1,4 @@
-import {COUNTRY_IDS,advanceTurn,createGame} from './engine.mjs?v=29';
+import {COUNTRY_IDS,advanceTurn,createGame} from './engine.mjs?v=30';
 
 const METRICS=['food','treasury','price','trust','approval'];
 const cache=new WeakMap();

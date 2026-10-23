@@ -1,10 +1,10 @@
-import {COUNTRIES} from './country-data.mjs?v=29';
-import {activeConflicts,conflictAction} from './goal-conflicts.mjs?v=29';
-import {previewMediation,reliefActive} from './mediation.mjs?v=29';
-import {defaultMediationDraft,renderMediationCounters,renderMediationResults} from './mediation-ui.mjs?v=29';
-import {renderPeaceOfferBrief,renderPeaceOfferHistory,renderPeaceOfferResults} from './peace-offer-ui.mjs?v=29';
-import {peaceComplianceCountryLabel,renderPeaceComplianceBrief,renderPeaceComplianceResults,renderPeaceComplianceWorld} from './peace-compliance-ui.mjs?v=29';
-import {escape} from './render.mjs?v=29';
+import {COUNTRIES} from './country-data.mjs?v=30';
+import {activeConflicts,conflictAction} from './goal-conflicts.mjs?v=30';
+import {previewMediation,reliefActive} from './mediation.mjs?v=30';
+import {defaultMediationDraft,renderMediationCounters,renderMediationResults} from './mediation-ui.mjs?v=30';
+import {renderPeaceOfferBrief,renderPeaceOfferHistory,renderPeaceOfferResults} from './peace-offer-ui.mjs?v=30';
+import {peaceComplianceCountryLabel,renderPeaceComplianceBrief,renderPeaceComplianceResults,renderPeaceComplianceWorld} from './peace-compliance-ui.mjs?v=30';
+import {escape} from './render.mjs?v=30';
 
 const names=ids=>(ids??[]).map(id=>COUNTRIES[id]?.name??id).join(' · ');
 const STANCES={sanction:'제재 동참',response:'공동 대응 참여',neutral:'중립 선언'};

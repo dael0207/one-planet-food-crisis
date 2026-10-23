@@ -47,8 +47,6 @@
 .map-site-workyard { fill: color-mix(in srgb, var(--intent-notice) 15%, transparent) !important; stroke-dasharray: 2 2; }
 .map-site-workcrane { stroke: var(--intent-notice) !important; }
 
-.map-site-farm[data-food-status="strained"] .map-site-raster { filter: saturate(.48) brightness(.78) sepia(.12) contrast(1.06); }
-.map-site-farm[data-food-status="critical"] .map-site-raster { opacity: .6; filter: saturate(.25) brightness(.65) sepia(.26) contrast(1.1); }
 .map-site-target[data-food-status="critical"] .map-site-service-light { display: none; }
 .map-site-target[data-owned="true"] { color: var(--content-default); }
 .map-site-target[data-selected="true"] .map-site-focus,

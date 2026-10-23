@@ -1,8 +1,9 @@
-import {COUNTRIES,getAction} from './engine.mjs?v=29';
-import {SITE_KINDS,SITE_DEFS,siteView} from './site-operations.mjs?v=29';
-import {escape} from './render.mjs?v=29';
-import {renderForeignSiteInfo} from './foreign-sites-ui.mjs?v=29';
-import {renderJointSection} from './joint-investments-ui.mjs?v=29';
+import {COUNTRIES,getAction} from './engine.mjs?v=30';
+import {SITE_KINDS,SITE_DEFS,siteView} from './site-operations.mjs?v=30';
+import {escape} from './render.mjs?v=30';
+import {renderForeignSiteInfo} from './foreign-sites-ui.mjs?v=30';
+import {renderJointSection} from './joint-investments-ui.mjs?v=30';
+import {renderFarmLandscape} from './farm-landscape-ui.mjs?v=30';
 
 const disabledReason=(state,view,phase,operation,action)=>{
  if(!view.owned)return '외국 시설은 직접 운영할 수 없습니다.';
@@ -43,7 +44,7 @@ export function renderSitePanel(state,selection,phase,operation=null,jointDraft=
  const country=COUNTRIES[view.countryId];
  const status=view.level!==null?view.project?'공사 중 · '+view.remaining+'분기 뒤 '+view.project.level+'단계 완공':view.level+'/3단계 운영':'국가 시설 기반 '+view.aggregateInfrastructure+'단계';
  const foreign=renderJointSection(state,view,phase,jointDraft)+(!jointDraft?renderForeignSiteInfo(state,view)+(phase==='decision'?'<button type="button" class="secondary-button" data-action="open-proposal" data-country="'+view.countryId+'">'+escape(country.name)+'와 무역 협상 →</button>':''):'');
- const panel=view.owned?ownSitePanel(state,selection,phase,operation,view):foreign;
+ const panel=(view.kind==='farm'?renderFarmLandscape(state,view.countryId):'')+(view.owned?ownSitePanel(state,selection,phase,operation,view):foreign);
  return '<section class="site-console" data-site-panel="'+view.kind+'" data-site-country="'+view.countryId+'" aria-labelledby="decision-title"><div class="dispatch-heading"><span class="console-step">시설 관리</span><button type="button" class="text-button" data-action="close-facility">'+(phase==='result'?'결과로 돌아가기':'국정 명령으로')+' ↗</button></div><h2 id="decision-title" tabindex="-1">'+escape(country.name)+' · '+escape(view.name)+'</h2><div class="site-status"><strong>'+escape(status)+'</strong><button type="button" class="text-button" data-action="site-show-map">지도에서 보기 ↖</button></div>'+panel+'</section>';
 }
 export function renderSiteResults(state){

@@ -1,7 +1,7 @@
-import {nationalProjects} from './project-state.mjs?v=29';
-import { COUNTRY_IDS, COUNTRIES, eventForTurn } from './country-data.mjs?v=29';
-import { PROFILES } from './nation-profiles.mjs?v=29';
-import {renderForeignGoalIntel} from './world-goals-ui.mjs?v=29';
+import {nationalProjects} from './project-state.mjs?v=30';
+import { COUNTRY_IDS, COUNTRIES, eventForTurn } from './country-data.mjs?v=30';
+import { PROFILES } from './nation-profiles.mjs?v=30';
+import {renderForeignGoalIntel} from './world-goals-ui.mjs?v=30';
 
 const numeric = (value, fallback = 0) => Number.isFinite(Number(value)) ? Number(value) : fallback;
 const escape = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);

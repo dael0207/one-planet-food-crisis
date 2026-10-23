@@ -1,5 +1,5 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=29';
-import {SITE_DEFS,SITE_KINDS} from './site-operations.mjs?v=29';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
+import {SITE_DEFS,SITE_KINDS} from './site-operations.mjs?v=30';
 
 const emptySite=()=>({level:0,project:null,lastDecision:null});
 

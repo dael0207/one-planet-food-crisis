@@ -1,10 +1,10 @@
-import { COUNTRY_IDS, COUNTRIES } from './country-data.mjs?v=29';
-import { GEOGRAPHY } from './map-geometry.mjs?v=29';
-import {CONTINENT_PATH,NATIONAL_BORDERS} from './continent-geometry.mjs?v=29';
-import {buildCountryAppearance} from './atlas-state.mjs?v=29';
-import { ATLAS_FEATURES } from './atlas-relief.mjs?v=29';
+import { COUNTRY_IDS, COUNTRIES } from './country-data.mjs?v=30';
+import { GEOGRAPHY } from './map-geometry.mjs?v=30';
+import {CONTINENT_PATH,NATIONAL_BORDERS} from './continent-geometry.mjs?v=30';
+import {buildCountryAppearance} from './atlas-state.mjs?v=30';
+import { ATLAS_FEATURES } from './atlas-relief.mjs?v=30';
 
-export { ATLAS_FEATURES } from './atlas-relief.mjs?v=29';
+export { ATLAS_FEATURES } from './atlas-relief.mjs?v=30';
 
 const NS = 'http://www.w3.org/2000/svg';
 const n = (tag, attrs = {}, text = '') => {

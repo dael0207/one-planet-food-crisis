@@ -1,5 +1,5 @@
-import {GEOGRAPHY} from './map-geometry.mjs?v=29';
-import {SCENE_LAYOUT} from './atlas-state.mjs?v=29';
+import {GEOGRAPHY} from './map-geometry.mjs?v=30';
+import {SCENE_LAYOUT} from './atlas-state.mjs?v=30';
 
 export const WORLD_VIEW = Object.freeze({x: 0, y: 0, width: 900, height: 620, zoom: 1});
 export const CAMERA_ZOOMS = Object.freeze([1, 1.5, 2, 3]);

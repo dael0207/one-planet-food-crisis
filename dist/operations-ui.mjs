@@ -1,7 +1,7 @@
-import {nationalProjects} from './project-state.mjs?v=29';
-import {COUNTRY_IDS,COUNTRIES,PROFILES} from './engine.mjs?v=29';
-import {activeTreaties,getReliability} from './treaties.mjs?v=29';
-import {escape} from './render.mjs?v=29';
+import {nationalProjects} from './project-state.mjs?v=30';
+import {COUNTRY_IDS,COUNTRIES,PROFILES} from './engine.mjs?v=30';
+import {activeTreaties,getReliability} from './treaties.mjs?v=30';
+import {escape} from './render.mjs?v=30';
 
 export function commandTarget(state,requested){
  return COUNTRY_IDS.includes(requested)&&requested!==state.playerId?requested:COUNTRY_IDS.find(id=>id!==state.playerId);

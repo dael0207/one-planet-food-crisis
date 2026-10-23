@@ -1,9 +1,9 @@
-import {mediationCommand} from './mediation.mjs?v=29';
-import {peaceCounterCommand,peaceOfferAction,peaceOfferPreview,peaceReplyCommand} from './peace-offers.mjs?v=29';
-import {peaceComplianceCommand,peaceCompliancePreview} from './peace-compliance.mjs?v=29';
-import {mediationDraftFromForm,renderMediationComparison,renderMediationForm,renderMediationPreview,renderMediationTerms} from './mediation-ui.mjs?v=29';
-import {renderPeaceOfferReview} from './peace-offer-ui.mjs?v=29';
-import {renderPeaceAccordReview,renderPeaceSanctionReview} from './peace-compliance-ui.mjs?v=29';
+import {mediationCommand} from './mediation.mjs?v=30';
+import {peaceCounterCommand,peaceOfferAction,peaceOfferPreview,peaceReplyCommand} from './peace-offers.mjs?v=30';
+import {peaceComplianceCommand,peaceCompliancePreview} from './peace-compliance.mjs?v=30';
+import {mediationDraftFromForm,renderMediationComparison,renderMediationForm,renderMediationPreview,renderMediationTerms} from './mediation-ui.mjs?v=30';
+import {renderPeaceOfferReview} from './peace-offer-ui.mjs?v=30';
+import {renderPeaceAccordReview,renderPeaceSanctionReview} from './peace-compliance-ui.mjs?v=30';
 
 export function createMediationController({state,resolveAction,decisionContent,clearCompeting,rerender,commit,focus}){
  let draft=null,previousDraft=null,offerId=null,accordId=null,sanctionId=null;

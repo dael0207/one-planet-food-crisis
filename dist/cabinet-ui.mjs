@@ -1,6 +1,6 @@
-import {cabinetPlanFacts} from './cabinet-agendas.mjs?v=29';
-import {quarterDate} from './calendar.mjs?v=29';
-import {escape} from './render.mjs?v=29';
+import {cabinetPlanFacts} from './cabinet-agendas.mjs?v=30';
+import {quarterDate} from './calendar.mjs?v=30';
+import {escape} from './render.mjs?v=30';
 
 const LABELS={food:'식량',treasury:'국고',price:'물가',trust:'신뢰',approval:'지지도'};
 const number=value=>value<0?`−${Math.abs(value)}`:`+${value}`;

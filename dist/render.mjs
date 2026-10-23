@@ -1,7 +1,7 @@
-import {nationalProjects} from './project-state.mjs?v=29';
-import {getReliability,activeTreaties} from './treaties.mjs?v=29';
-import {getRelation,relationLabel} from './negotiations.mjs?v=29';
-import {COUNTRIES,COUNTRY_IDS,PROFILES} from './engine.mjs?v=29';
+import {nationalProjects} from './project-state.mjs?v=30';
+import {getReliability,activeTreaties} from './treaties.mjs?v=30';
+import {getRelation,relationLabel} from './negotiations.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS,PROFILES} from './engine.mjs?v=30';
 export const escape=text=>String(text).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export const signed=value=>`${value>0?'+':''}${value}`;
 export function renderMetrics(state){

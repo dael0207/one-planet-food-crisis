@@ -1,8 +1,8 @@
-import {COUNTRIES, COUNTRY_IDS} from './country-data.mjs?v=29';
-import {quarterDate} from './calendar.mjs?v=29';
-import {PROFILES} from './nation-profiles.mjs?v=29';
-import {SITE_DEFS, SITE_KINDS} from './site-operations.mjs?v=29';
-import {jointConstructionBenefit} from './construction-benefits.mjs?v=29';
+import {COUNTRIES, COUNTRY_IDS} from './country-data.mjs?v=30';
+import {quarterDate} from './calendar.mjs?v=30';
+import {PROFILES} from './nation-profiles.mjs?v=30';
+import {SITE_DEFS, SITE_KINDS} from './site-operations.mjs?v=30';
+import {jointConstructionBenefit} from './construction-benefits.mjs?v=30';
 
 const JOINT_LABELS={farm:'공동 농경지',port:'공동 항만'};
 const SANCTION_TYPES=new Set(['sanction','conflict','ceasefire_ended','expiry','accord_sanctioned','accord_restriction_expired','peace_response_sanction','peace_response_expired']);

@@ -1,9 +1,11 @@
-import {COUNTRIES, COUNTRY_IDS} from './country-data.mjs?v=29';
-import {GEOGRAPHY} from './map-geometry.mjs?v=29';
-import {SCENE_LAYOUT, countryAppearance} from './atlas-state.mjs?v=29';
-import {siteView} from './site-operations.mjs?v=29';
-import {jointAt,JOINT_STATUS} from './joint-investments-ui.mjs?v=29';
-import {buildMapSiteScene} from './map-art.mjs?v=29';
+import {COUNTRIES, COUNTRY_IDS} from './country-data.mjs?v=30';
+import {GEOGRAPHY} from './map-geometry.mjs?v=30';
+import {SCENE_LAYOUT, countryAppearance} from './atlas-state.mjs?v=30';
+import {siteView} from './site-operations.mjs?v=30';
+import {jointAt,JOINT_STATUS} from './joint-investments-ui.mjs?v=30';
+import {buildMapSiteScene} from './map-art.mjs?v=30';
+import {farmLandscape} from './farm-landscape.mjs?v=30';
+import {buildFarmScene, updateFarmScene} from './farm-map.mjs?v=30';
 
 const NS = 'http://www.w3.org/2000/svg';
 export const SITE_KINDS = ['city', 'port', 'farm'];
@@ -35,6 +37,7 @@ export function mapSiteModels(state, selection = null) {
     point: MAP_SITE_POSITIONS[countryId][kind],
     selected: selection?.countryId === countryId && selection?.kind === kind,
     view: siteView(state, countryId, kind),
+    landscape: kind === 'farm' ? farmLandscape(state, countryId) : null,
     joint: jointAt(state,countryId,kind),
     appearance: countryAppearance(state, countryId),
   })));
@@ -50,14 +53,52 @@ function buildTarget(model) {
   });
   target.append(svgNode('circle', {class: 'map-site-hit', r: 22}));
   target.append(svgNode('circle', {class: 'map-site-ring', r: 17}));
-  target.append(buildMapSiteScene(svgNode, kind, countryId));
+  if (kind !== 'farm') target.append(buildMapSiteScene(svgNode, kind, countryId));
   target.append(svgNode('circle', {class: 'map-site-focus', r: 25}));
-  target.append(svgNode('text', {class: 'map-site-label', y: point.y>560?-36:35, 'text-anchor': 'middle'}, SITE_LABELS[kind]), svgNode('text', {class: 'map-site-status', y: point.y>560?-24:46, 'text-anchor': 'middle'}),svgNode('text',{class:'map-site-joint',y:-32,'text-anchor':'middle','aria-hidden':'true'}));
+  const labelAbove = point.y > 560 || kind === 'farm' && point.y > 450;
+  const labelY = kind === 'farm' ? labelAbove ? -51 : 50 : labelAbove ? -36 : 35;
+  const statusY = kind === 'farm' ? labelAbove ? -40 : 61 : labelAbove ? -24 : 46;
+  target.append(svgNode('text', {class: 'map-site-label', y: labelY, 'text-anchor': 'middle'}, SITE_LABELS[kind]), svgNode('text', {class: 'map-site-status', y: statusY, 'text-anchor': 'middle'}),svgNode('text',{class:'map-site-joint',y:-32,'text-anchor':'middle','aria-hidden':'true'}));
   return target;
 }
 
+function mountFarmScene(svg, model) {
+  const country = svg.querySelector(`.land[data-country="${model.countryId}"]`);
+  const local = SCENE_LAYOUT[model.countryId]?.farm;
+  if (!country || !local) return null;
+  let clip = country.querySelector(`.farm-landscape-clip[data-country="${model.countryId}"]`);
+  if (!clip) {
+    clip = svgNode('g', {
+      class: 'farm-landscape-clip',
+      'data-country': model.countryId,
+      'clip-path': `url(#atlas-clip-${model.countryId})`,
+      'aria-hidden': 'true',
+    });
+    const scene = buildFarmScene(svgNode, model.countryId);
+    scene.setAttribute('transform', `translate(${local[0]} ${local[1]})`);
+    clip.append(scene);
+    const anchor = country.querySelector('.atlas-country-appearance') ?? country.querySelector('.country-focus-ring') ?? country.querySelector('.country-name');
+    if (anchor) country.insertBefore(clip, anchor);
+    else country.append(clip);
+  }
+  const scene = clip.querySelector('.farm-landscape');
+  updateFarmScene(scene, model.landscape);
+  scene.setAttribute('data-selected', String(model.selected));
+  return scene;
+}
+
+function farmClimateLabel(landscape) {
+  if (!landscape) return '';
+  const impact = Number.isFinite(landscape.climateImpact)
+    ? `, 최근 기후·수확 ${landscape.climateImpact > 0 ? '+' : ''}${landscape.climateImpact}`
+    : '';
+  if (landscape.phase === 'drought') return `, 가뭄 진행${impact}`;
+  if (landscape.phase === 'recovering') return `, 가뭄 흔적 회복 ${landscape.recoveryElapsed}/4분기${impact}`;
+  return landscape.reason === 'recovered-drought' ? `, 가뭄 흔적 회복 완료${impact}` : ', 관측된 가뭄 없음';
+}
+
 function applyTarget(target, model) {
-  const {countryId, kind, selected, view, joint, appearance} = model;
+  const {countryId, kind, selected, view, joint, appearance, landscape} = model;
   const jointLabel=joint&&['building','active','suspended'].includes(joint.status)?JOINT_STATUS[joint.status]:'';
   target.setAttribute('data-joint-status',jointLabel?joint.status:'none');
   target.querySelector('.map-site-joint').textContent=jointLabel;
@@ -77,7 +118,8 @@ function applyTarget(target, model) {
     ? `현지 단계 미확인, 국가 기반 시설 ${view.aggregateInfrastructure}단계`
     : `${level}단계${view.remaining !== null ? `, 완공까지 ${view.remaining}분기` : ''}`;
   const reason=view.lastDecision?.reason?`, 최근 자국 결정: ${view.lastDecision.reason}`:'';
-  target.setAttribute('aria-label', `${COUNTRIES[countryId].name} ${siteName}, ${fact}${reason}${jointLabel?', '+jointLabel:''}`);
+  const climate = kind === 'farm' ? farmClimateLabel(landscape) : '';
+  target.setAttribute('aria-label', `${COUNTRIES[countryId].name} ${siteName}, ${fact}${climate}${reason}${jointLabel?', '+jointLabel:''}`);
 }
 
 function wireKeyboard(layer) {
@@ -100,6 +142,7 @@ export function updateMapSites(svg, state, selection = null) {
   }
   const models = mapSiteModels(state, selection);
   for (const model of models) {
+    if (model.kind === 'farm') mountFarmScene(svg, model);
     let target = layer.querySelector(`.map-site-target[data-country="${model.countryId}"][data-site="${model.kind}"]`);
     if (!target) {
       target = buildTarget(model);

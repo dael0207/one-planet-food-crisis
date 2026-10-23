@@ -1,6 +1,6 @@
-import {COUNTRIES} from './country-data.mjs?v=29';
-import {createPeaceResponseOffer} from './peace-offers.mjs?v=29';
-import {peaceResponseDecision,peaceResponseEnabled} from './peace-response-model.mjs?v=29';
+import {COUNTRIES} from './country-data.mjs?v=30';
+import {createPeaceResponseOffer} from './peace-offers.mjs?v=30';
+import {peaceResponseDecision,peaceResponseEnabled} from './peace-response-model.mjs?v=30';
 
 const record=(state,accord,event,actions)=>{
  state.lastPeaceComplianceEvents.push(event);accord.events=[...(accord.events??[]),structuredClone(event)].slice(-20);actions.push({...event,source:'peace_response'});

@@ -1,0 +1,91 @@
+.farm-landscape,
+.farm-landscape-clip { pointer-events: none; }
+
+.farm-landscape-base,
+.farm-expansion {
+  filter: saturate(.78) brightness(.82) contrast(1.08) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+}
+
+.farm-growth,
+.farm-planned-works,
+.farm-climate-scar,
+.farm-recovery-layer { display: none; }
+
+.farm-growth {
+  fill: color-mix(in srgb, var(--intent-accent) 18%, transparent);
+  stroke: color-mix(in srgb, var(--content-muted) 72%, transparent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: .8;
+  vector-effect: non-scaling-stroke;
+}
+
+.farm-parcel { fill: none; }
+
+.farm-landscape[data-farm-level="1"] .farm-growth[data-farm-tier="1"],
+.farm-landscape[data-farm-level="2"] .farm-growth:is([data-farm-tier="1"], [data-farm-tier="2"]),
+.farm-landscape[data-farm-level="3"] .farm-growth { display: inline; }
+
+.farm-irrigation {
+  fill: none;
+  stroke: color-mix(in srgb, var(--intent-info) 68%, var(--content-muted));
+}
+
+.farm-service-path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--surface-raise) 72%, var(--content-secondary));
+  stroke-width: 1.4;
+}
+
+.farm-expansion { opacity: .86; }
+.farm-landscape[data-farm-phase="drought"] .farm-expansion {
+  filter: saturate(.22) sepia(.55) hue-rotate(-14deg) brightness(.66) contrast(1.12) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+  opacity: .68;
+}
+
+.farm-landscape[data-farm-phase="recovering"][data-recovery-elapsed="1"] .farm-expansion {
+  filter: saturate(.3) sepia(.42) hue-rotate(-10deg) brightness(.7) contrast(1.1) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+  opacity: .72;
+}
+
+.farm-landscape[data-farm-phase="recovering"][data-recovery-elapsed="2"] .farm-expansion {
+  filter: saturate(.48) sepia(.24) brightness(.75) contrast(1.08) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+  opacity: .78;
+}
+
+.farm-landscape[data-farm-phase="recovering"][data-recovery-elapsed="3"] .farm-expansion {
+  filter: saturate(.66) sepia(.1) brightness(.8) contrast(1.08) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+  opacity: .84;
+}
+.farm-landscape[data-farm-phase="drought"][data-farm-severity="1"] .farm-climate-scar[data-farm-tier="1"],
+.farm-landscape[data-farm-phase="drought"][data-farm-severity="2"] .farm-climate-scar:not([data-farm-tier="3"]),
+.farm-landscape[data-farm-phase="drought"][data-farm-severity="3"] .farm-climate-scar { display: inline; }
+
+.farm-climate-scar {
+  fill: none;
+  stroke: color-mix(in srgb, var(--intent-error) 68%, var(--content-muted));
+  stroke-linecap: round;
+  stroke-width: .8;
+  vector-effect: non-scaling-stroke;
+}
+
+.farm-landscape[data-farm-phase="recovering"] .farm-recovery-layer { display: inline; }
+.farm-landscape[data-recovery-elapsed="1"] .farm-recovery-layer { opacity: .2; }
+.farm-landscape[data-recovery-elapsed="2"] .farm-recovery-layer { opacity: .45; }
+.farm-landscape[data-recovery-elapsed="3"] .farm-recovery-layer { opacity: .72; }
+.farm-landscape[data-farm-building="true"] .farm-planned-works { display: inline; }
+
+.farm-soil-scar,
+.farm-survey-line {
+  fill: none;
+  stroke: color-mix(in srgb, var(--intent-notice) 72%, var(--content-muted));
+  stroke-linecap: round;
+  stroke-width: .9;
+  vector-effect: non-scaling-stroke;
+}
+
+.farm-survey-line { opacity: .72; stroke-dasharray: 3 3; }
+
+.farm-landscape[data-selected="true"] .farm-landscape-base {
+  filter: saturate(.9) brightness(.9) contrast(1.08) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+}

@@ -1,23 +1,24 @@
-import {nationalProjects,siteProjects} from './project-state.mjs?v=29';
-import {activeTreaties} from './treaties.mjs?v=29';
-import {renderTreatyResults} from './treaty-ui.mjs?v=29';
-import {COUNTRIES,PROFILES,getAction} from './engine.mjs?v=29';
-import {getScenario} from './scenarios.mjs?v=29';
-import {escape,signed} from './render.mjs?v=29';
-import {pendingRequests} from './diplomacy-ui.mjs?v=29';
-import {renderNegotiationResult} from './negotiation-ui.mjs?v=29';
-import {renderOrders} from './orders-ui.mjs?v=29';
-import {renderSiteResults} from './site-ui.mjs?v=29';
-import {renderForeignSiteResults} from './foreign-sites-ui.mjs?v=29';
-import {renderJointResults} from './joint-investments-ui.mjs?v=29';
-import {renderDevelopment} from './development-ui.mjs?v=29';
-import {renderObjectiveAchievements} from './objectives-ui.mjs?v=29';
-import {renderGoalConsequences} from './world-goals-ui.mjs?v=29';
-import {renderConflictResults} from './conflict-ui.mjs?v=29';
-import {quarterDate} from './calendar.mjs?v=29';
-import {renderResultCauses} from './result-causes.mjs?v=29';
-import {renderCabinetFollowthrough} from './cabinet-ui.mjs?v=29';
-import {renderStrategyResults} from './foreign-strategy-ui.mjs?v=29';
+import {nationalProjects,siteProjects} from './project-state.mjs?v=30';
+import {activeTreaties} from './treaties.mjs?v=30';
+import {renderTreatyResults} from './treaty-ui.mjs?v=30';
+import {COUNTRIES,PROFILES,getAction} from './engine.mjs?v=30';
+import {getScenario} from './scenarios.mjs?v=30';
+import {escape,signed} from './render.mjs?v=30';
+import {pendingRequests} from './diplomacy-ui.mjs?v=30';
+import {renderNegotiationResult} from './negotiation-ui.mjs?v=30';
+import {renderOrders} from './orders-ui.mjs?v=30';
+import {renderSiteResults} from './site-ui.mjs?v=30';
+import {renderForeignSiteResults} from './foreign-sites-ui.mjs?v=30';
+import {renderJointResults} from './joint-investments-ui.mjs?v=30';
+import {renderDevelopment} from './development-ui.mjs?v=30';
+import {renderObjectiveAchievements} from './objectives-ui.mjs?v=30';
+import {renderGoalConsequences} from './world-goals-ui.mjs?v=30';
+import {renderConflictResults} from './conflict-ui.mjs?v=30';
+import {quarterDate} from './calendar.mjs?v=30';
+import {renderResultCauses} from './result-causes.mjs?v=30';
+import {renderCabinetFollowthrough} from './cabinet-ui.mjs?v=30';
+import {renderStrategyResults} from './foreign-strategy-ui.mjs?v=30';
+import {renderFarmResult} from './farm-landscape-ui.mjs?v=30';
 const metrics=[['food','식량 안정'],['price','생활물가'],['treasury','국고'],['trust','외교 신뢰']];
 export function renderPhase(state,flow){
  const date=quarterDate(flow.phase==='decision'?state.turn:state.turn-1),calendar=`${date.year}년 ${date.quarter}분기`;
@@ -95,6 +96,7 @@ export function renderOutcome(state,_step,_country=state.playerId){
  const investments=`${renderDevelopment(state)}${renderJointResults(state)}${renderSiteResults(state)}${renderForeignSiteResults(state)}`;
  return `<div class="quarterly-report" data-console="result"><div class="dispatch-heading"><span class="console-step" data-stage="result">02 · 결과 확인</span><strong data-calendar-year="${date.year}" data-calendar-quarter="${date.quarter}">${date.year}년 ${date.quarter}분기 마감</strong></div><h2 id="decision-title" tabindex="-1">${headingMarkup(last.actionLabel)}</h2>
  ${renderResultCauses(state)}
+ ${renderFarmResult(state)}
  ${renderCabinetFollowthrough(state)}
  ${renderStrategyResults(state)}
  <details class="result-reconciliation"><summary>전체 보유량과 정책 비교</summary>${resultTotals(state,last)}${policyComparison(last)}</details>

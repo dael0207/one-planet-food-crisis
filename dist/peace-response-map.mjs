@@ -1,7 +1,7 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=29';
-import {routeGeometry} from './map-geometry.mjs?v=29';
-import {peaceResponsePairs,peaceResponseMarketContext} from './peace-response-model.mjs?v=29';
-import {escape} from './render.mjs?v=29';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
+import {routeGeometry} from './map-geometry.mjs?v=30';
+import {peaceResponsePairs,peaceResponseMarketContext} from './peace-response-model.mjs?v=30';
+import {escape} from './render.mjs?v=30';
 
 const name=id=>COUNTRIES[id]?.name??'';
 const effective=(state,phase)=>({...state,turn:state.turn+(phase==='decision'?1:0),peaceResponseForecastTurn:state.turn+(phase==='decision'?1:0)});

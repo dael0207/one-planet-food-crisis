@@ -1,6 +1,6 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=29';
-import {peaceResponseMarketContext,peaceResponsePairs,peaceResponseSummary} from './peace-response-model.mjs?v=29';
-import {escape} from './render.mjs?v=29';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
+import {peaceResponseMarketContext,peaceResponsePairs,peaceResponseSummary} from './peace-response-model.mjs?v=30';
+import {escape} from './render.mjs?v=30';
 
 const STATUS={active:'시행 중',proposed:'회신 대기',expired:'종료',settled:'회신 처리 종료'};
 const EVENT={peace_response_sanction:'타국 제재 선언',peace_response_aid:'동맹 긴급 지원',peace_response_expired:'타국 제재 종료',peace_response_proposed:'타국 재협상 제안'};

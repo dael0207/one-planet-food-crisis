@@ -1,4 +1,4 @@
-import {COUNTRIES} from './country-data.mjs?v=29';
+import {COUNTRIES} from './country-data.mjs?v=30';
 
 const GOALS=['relief','peace'],CONDITIONS=['mutual','target'],FOOD=[0,4,8],MONEY=[0,6,12];
 const pairKey=(a,b)=>[a,b].sort().join(':');

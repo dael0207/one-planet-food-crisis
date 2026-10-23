@@ -1,4 +1,4 @@
-import {createGame,advanceTurn,getAction,COUNTRY_IDS} from './engine.mjs?v=29';
+import {createGame,advanceTurn,getAction,COUNTRY_IDS} from './engine.mjs?v=30';
 const KEY='one-planet-food-crisis-v4';
 const fresh=(status,id='lumen')=>({state:createGame(id),flow:{phase:'decision',step:0},requestId:null,status});
 const validId=id=>COUNTRY_IDS.includes(id);

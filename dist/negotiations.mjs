@@ -1,6 +1,6 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=29';
-import {marketContext} from './foreign-diplomacy.mjs?v=29';
-import {tradeBlocked} from './goal-conflicts.mjs?v=29';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
+import {marketContext} from './foreign-diplomacy.mjs?v=30';
+import {tradeBlocked} from './goal-conflicts.mjs?v=30';
 
 const KINDS=['buy','sell','aid_out','aid_in'];
 const INITIAL={

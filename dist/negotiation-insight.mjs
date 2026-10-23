@@ -1,4 +1,4 @@
-import {previewProposal} from './negotiations.mjs?v=29';
+import {previewProposal} from './negotiations.mjs?v=30';
 
 const change=(before,after)=>({before,after,delta:after-before});
 

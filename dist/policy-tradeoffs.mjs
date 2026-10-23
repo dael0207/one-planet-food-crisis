@@ -1,4 +1,4 @@
-import {cabinetTerms} from './cabinet-ui.mjs?v=29';
+import {cabinetTerms} from './cabinet-ui.mjs?v=30';
 export function policyTradeoffs(state, action) {
   if(action.source==='cabinet')return cabinetTerms(state,action);
   const cost = `국고 ${action.cost}억`;

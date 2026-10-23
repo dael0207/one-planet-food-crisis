@@ -1,5 +1,5 @@
-import {COUNTRIES} from './country-data.mjs?v=29';
-import {escape,signed} from './render.mjs?v=29';
+import {COUNTRIES} from './country-data.mjs?v=30';
+import {escape,signed} from './render.mjs?v=30';
 
 const outcomeName={accepted:'합의 가능',countered:'역제안 예상',rejected:'거절 예상',escalated:'갈등 확대 위험'};
 const name=id=>COUNTRIES[id]?.name??id;

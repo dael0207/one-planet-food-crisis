@@ -1,0 +1,16 @@
+.farm-landscape-intel { margin-block:var(--s4); padding-block:var(--s3); border-block:1px solid var(--stroke-default); }
+.farm-landscape-heading, .farm-landscape-result { display:flex; align-items:center; justify-content:space-between; gap:var(--s3); }
+.farm-landscape-heading span, .farm-landscape-intel p, .farm-landscape-facts, .farm-landscape-result small { color:var(--content-secondary); font-size:var(--t-xs); }
+.farm-landscape-heading strong { color:var(--intent-accent); font-size:var(--t-base); font-weight:500; }
+.farm-landscape-intel[data-farm-landscape="drought"] .farm-landscape-heading strong { color:var(--intent-notice); }
+.farm-landscape-intel p { margin-block:var(--s2); }
+.farm-landscape-facts { display:grid; gap:var(--s2); margin-block:var(--s3); }
+.farm-landscape-facts strong { color:var(--content-default); font-variant-numeric:tabular-nums; }
+.farm-landscape-intel summary { display:flex; align-items:center; min-height:44px; cursor:pointer; font-size:var(--t-xs); color:var(--content-secondary); }
+.farm-landscape-intel summary:before { content:'▸'; margin-right:var(--s2); }
+.farm-landscape-intel details[open] summary:before { content:'▾'; }
+.farm-landscape-intel summary:focus-visible { outline:2px solid var(--intent-accent); outline-offset:2px; }
+.farm-landscape-result { padding-block:var(--s3); border-block-end:1px solid var(--stroke-default); font-size:var(--t-xs); }
+.farm-landscape-result small { display:block; margin-top:var(--s2); }
+.farm-landscape-result .text-button { min-height:44px; flex-shrink:0; }
+.farm-landscape-intel, .farm-landscape-result { word-break:keep-all; overflow-wrap:anywhere; }

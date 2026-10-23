@@ -1,8 +1,8 @@
-import {COUNTRIES} from './country-data.mjs?v=29';
-import {peaceCompliancePreview} from './peace-compliance.mjs?v=29';
-import {peaceResponseCountryLabel} from './peace-response-model.mjs?v=29';
-import {peaceResponseEvents,renderPeaceResponseBrief,renderPeaceResponseResults,renderPeaceResponseReview,renderPeaceResponseWorld} from './peace-response-ui.mjs?v=29';
-import {escape} from './render.mjs?v=29';
+import {COUNTRIES} from './country-data.mjs?v=30';
+import {peaceCompliancePreview} from './peace-compliance.mjs?v=30';
+import {peaceResponseCountryLabel} from './peace-response-model.mjs?v=30';
+import {peaceResponseEvents,renderPeaceResponseBrief,renderPeaceResponseResults,renderPeaceResponseReview,renderPeaceResponseWorld} from './peace-response-ui.mjs?v=30';
+import {escape} from './render.mjs?v=30';
 
 const STATUS={monitoring:'감시 중',violated:'합의 위반',sanctioned:'재제재 중',renegotiating:'재협상 회신 대기',completed:'감시 종료',replaced:'수정 합의로 대체'};
 const EVENT={accord_registered:'합의 감시 시작',accord_fulfilled:'약속 이행',accord_breached:'합의 위반',accord_sanctioned:'재제재 실행',accord_restriction_expired:'교역 제한 종료',accord_completed:'합의 감시 종료',accord_replaced:'수정 합의로 대체',accord_renegotiation_accepted:'수정안 합의',accord_renegotiation_countered:'수정안 역제안',accord_renegotiation_rejected:'수정안 거절'};

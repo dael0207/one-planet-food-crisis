@@ -1,8 +1,8 @@
-import {COUNTRIES} from './country-data.mjs?v=29';
-import {pendingPeaceOffers,peaceOfferAction,peaceOfferPreview,peaceReplyCommand} from './peace-offers.mjs?v=29';
-import {renderMediationPreview,renderMediationTerms} from './mediation-ui.mjs?v=29';
-import {renderConsent} from './mediation-insight.mjs?v=29';
-import {escape} from './render.mjs?v=29';
+import {COUNTRIES} from './country-data.mjs?v=30';
+import {pendingPeaceOffers,peaceOfferAction,peaceOfferPreview,peaceReplyCommand} from './peace-offers.mjs?v=30';
+import {renderMediationPreview,renderMediationTerms} from './mediation-ui.mjs?v=30';
+import {renderConsent} from './mediation-insight.mjs?v=30';
+import {escape} from './render.mjs?v=30';
 
 const GOALS={relief:'교역 제재 완화',peace:'분쟁 완전 종결'};
 const CONDITIONS={mutual:'양측의 상호 양보',target:'대응국의 단독 양보'};

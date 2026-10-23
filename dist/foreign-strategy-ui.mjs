@@ -1,7 +1,7 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=29';
-import {escape,signed} from './render.mjs?v=29';
-import {quarterDate} from './calendar.mjs?v=29';
-import {foreignStrategyContext} from './foreign-strategy.mjs?v=29';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
+import {escape,signed} from './render.mjs?v=30';
+import {quarterDate} from './calendar.mjs?v=30';
+import {foreignStrategyContext} from './foreign-strategy.mjs?v=30';
 
 const calendar=turn=>{const date=quarterDate(Math.max(0,turn-1));return `${date.year}년 ${date.quarter}분기`;};
 const postureLabel={cooperate:'협력 중',contain:'견제 중',neutral:'중립'};

@@ -1,15 +1,15 @@
-import {nationalProjects,siteProjects} from './project-state.mjs?v=29';
-import { COUNTRY_IDS, COUNTRIES } from './country-data.mjs?v=29';
-import { eventForTurn } from './engine.mjs?v=29';
-import { mapRoutes, routeGeometry } from './map-geometry.mjs?v=29';
-import { PROFILES } from './nation-profiles.mjs?v=29';
-import { updateNetworkMap } from './map-network-ui.mjs?v=29';
-import { mapCountryResult, completedTurnLabel } from './room-map-ui.mjs?v=29';
-import { buildAtlas } from './atlas-art.mjs?v=29';
-import {updateCountryAppearance} from './atlas-state.mjs?v=29';
-import { conflictCountryLabel } from './conflict-ui.mjs?v=29';
-import {peaceResponseCountryLabel} from './peace-response-model.mjs?v=29';
-import {updatePeaceResponseMap} from './peace-response-map.mjs?v=29';
+import {nationalProjects,siteProjects} from './project-state.mjs?v=30';
+import { COUNTRY_IDS, COUNTRIES } from './country-data.mjs?v=30';
+import { eventForTurn } from './engine.mjs?v=30';
+import { mapRoutes, routeGeometry } from './map-geometry.mjs?v=30';
+import { PROFILES } from './nation-profiles.mjs?v=30';
+import { updateNetworkMap } from './map-network-ui.mjs?v=30';
+import { mapCountryResult, completedTurnLabel } from './room-map-ui.mjs?v=30';
+import { buildAtlas } from './atlas-art.mjs?v=30';
+import {updateCountryAppearance} from './atlas-state.mjs?v=30';
+import { conflictCountryLabel } from './conflict-ui.mjs?v=30';
+import {peaceResponseCountryLabel} from './peace-response-model.mjs?v=30';
+import {updatePeaceResponseMap} from './peace-response-map.mjs?v=30';
 
 const NS = 'http://www.w3.org/2000/svg';
 const numeric = (value, fallback = 0) => Number.isFinite(Number(value)) ? Number(value) : fallback;
