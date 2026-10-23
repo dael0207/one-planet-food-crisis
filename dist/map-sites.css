@@ -8,24 +8,32 @@
 
 .map-site-raster {
   opacity: .84;
-  transform: scale(.94);
-  transform-box: fill-box;
-  transform-origin: center;
   filter: saturate(.68) brightness(.78) contrast(1.1);
 }
-.map-site-target[data-level="unknown"] .map-site-raster { opacity: .58; filter: saturate(.28) brightness(.64) contrast(1.04); }
-.map-site-target[data-level="0"] .map-site-raster { opacity: .68; filter: saturate(.42) brightness(.68) contrast(1.08); }
-.map-site-target[data-level="1"] .map-site-raster { opacity: .82; }
-.map-site-target[data-level="2"] .map-site-raster { opacity: .92; filter: saturate(.76) brightness(.82) contrast(1.1); }
-.map-site-target[data-level="3"] .map-site-raster { opacity: 1; filter: saturate(.84) brightness(.86) contrast(1.12); }
+.map-site-scene[data-level="unknown"] .map-site-raster { opacity: .85; filter: saturate(.42) brightness(.82) contrast(1.04); }
+.map-site-scene[data-level="0"] .map-site-raster { opacity: .9; filter: saturate(.42) brightness(.84) contrast(1.04); }
+.map-site-scene[data-level="1"] .map-site-raster { opacity: .82; }
+.map-site-scene[data-level="2"] .map-site-raster { opacity: .92; filter: saturate(.76) brightness(.82) contrast(1.1); }
+.map-site-scene[data-level="3"] .map-site-raster { opacity: 1; filter: saturate(.84) brightness(.86) contrast(1.12); }
+
+.map-site-scene.is-city .map-site-raster { opacity:.94;filter:saturate(.45) brightness(.88) contrast(1.02); }
+
+.map-settlement-road-bed, .map-settlement-road-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.map-settlement-road-bed { stroke: color-mix(in srgb, var(--map-ground-soil) 68%, transparent); stroke-width: 2.6; }
+.map-settlement-road-line { stroke: var(--map-ground-road); stroke-width: .8; opacity: .7; }
 
 .map-site-detail, .map-national-detail, .map-site-worksite { display: none; }
-.map-site-target[data-level="1"] .map-site-detail[data-site-tier="1"],
-.map-site-target[data-level="2"] .map-site-detail:is([data-site-tier="1"], [data-site-tier="2"]),
-.map-site-target[data-level="3"] .map-site-detail { display: inline; }
-.map-site-target[data-national-level="1"] .map-national-detail[data-site-tier="1"],
-.map-site-target[data-national-level="2"] .map-national-detail:not([data-site-tier="3"]),
-.map-site-target[data-national-level="3"] .map-national-detail { display: inline; }
+.map-site-scene[data-level="1"] .map-site-detail[data-site-tier="1"],
+.map-site-scene[data-level="2"] .map-site-detail:is([data-site-tier="1"], [data-site-tier="2"]),
+.map-site-scene[data-level="3"] .map-site-detail { display: inline; }
+.map-site-scene[data-national-level="1"] .map-national-detail[data-site-tier="1"],
+.map-site-scene[data-national-level="2"] .map-national-detail:not([data-site-tier="3"]),
+.map-site-scene[data-national-level="3"] .map-national-detail { display: inline; }
 
 .map-site-detail, .map-national-detail, .map-site-worksite path {
   fill: none;
@@ -39,15 +47,15 @@
 .map-site-cargo { fill: color-mix(in srgb, var(--surface-raise) 76%, var(--content-muted)); }
 .map-national-detail { stroke: color-mix(in srgb, var(--content-secondary) 60%, transparent); }
 
-.map-site-target[data-stage="building"] .map-site-worksite,
-.map-site-target[data-stage="construction"] .map-site-worksite,
-.map-site-target[data-stage="started"] .map-site-worksite,
-.map-site-target[data-national-construction="true"] .map-site-worksite { display: inline; }
-.map-site-target:is([data-stage="building"], [data-stage="construction"], [data-stage="started"]) .map-site-raster { opacity: .58; filter: saturate(.38) brightness(.66) contrast(1.08); }
+.map-site-scene[data-stage="building"] .map-site-worksite,
+.map-site-scene[data-stage="construction"] .map-site-worksite,
+.map-site-scene[data-stage="started"] .map-site-worksite,
+.map-site-scene[data-national-construction="true"] .map-site-worksite { display: inline; }
+.map-site-scene:is([data-stage="building"], [data-stage="construction"], [data-stage="started"]) .map-site-raster { opacity: .82; filter: saturate(.38) brightness(.8) contrast(1.04); }
 .map-site-workyard { fill: color-mix(in srgb, var(--intent-notice) 15%, transparent) !important; stroke-dasharray: 2 2; }
 .map-site-workcrane { stroke: var(--intent-notice) !important; }
 
-.map-site-target[data-food-status="critical"] .map-site-service-light { display: none; }
+.map-site-scene[data-food-status="critical"] .map-site-service-light { display: none; }
 .map-site-target[data-owned="true"] { color: var(--content-default); }
 .map-site-target[data-selected="true"] .map-site-focus,
 .map-site-target:focus-visible .map-site-focus { stroke: color-mix(in srgb, var(--intent-accent) 70%, transparent); stroke-dasharray: 2 3; }

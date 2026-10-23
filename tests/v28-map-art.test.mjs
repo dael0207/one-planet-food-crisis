@@ -15,8 +15,9 @@ class Node {
 const make = (tag, attributes = {}) => new Node(tag, attributes);
 const descendants = (root) => root.children.flatMap((child) => [child, ...descendants(child)]);
 
-test('V34 uses three real transparent orthographic map scene assets as decorative SVG images', async () => {
-  assert.deepEqual(MAP_SITE_ASSETS, {city: 'map-city-v34.webp', port: 'map-port-v34.webp', farm: 'farm-healthy-v34.webp'});
+test('V35 registers correctly scaled orthographic map scene assets', async () => {
+  assert.deepEqual(MAP_SITE_ASSETS, {city: 'map-city-v35.webp', port: 'map-port-v34.webp', farm: 'farm-healthy-v35.webp'});
+  const expectedWidths = {city: 448, port: 42, farm: 80};
   for (const [kind, file] of Object.entries(MAP_SITE_ASSETS)) {
     await access(new URL(`../dist/${file}`, import.meta.url));
     const scene = buildMapSiteScene(make, kind);
@@ -24,13 +25,13 @@ test('V34 uses three real transparent orthographic map scene assets as decorativ
     assert.equal(image.attributes.get('href'), file);
     assert.equal(scene.attributes.get('aria-hidden'), 'true');
     assert.equal(image.attributes.get('aria-hidden'), undefined);
-    assert.equal(image.attributes.get('preserveAspectRatio'), 'xMidYMid meet');
-    assert.ok(Number(image.attributes.get('width')) >= 70 && Number(image.attributes.get('width')) <= 88);
+    assert.equal(image.attributes.get('preserveAspectRatio'),kind==='city'?'xMidYMid slice':'xMidYMid meet');
+    assert.equal(Number(image.attributes.get('width')), expectedWidths[kind]);
   }
 });
 
-test('V28 turns the decorative quay toward each real coast without moving its hit target', () => {
-  assert.deepEqual(PORT_ROTATIONS, {lumen: 180, nord: -90, cera: 0, altia: 90, marin: 90, solis: 0});
+test('V35 turns the decorative quay shipward toward each real coast without moving its hit target', () => {
+  assert.deepEqual(PORT_ROTATIONS, {lumen: 131, nord: 153, cera: -68, altia: 15, marin: 11, solis: -62});
   for (const [countryId, rotation] of Object.entries(PORT_ROTATIONS)) {
     const scene = buildMapSiteScene(make, 'port', countryId);
     assert.equal(scene.attributes.get('data-coast-rotation'), String(rotation));

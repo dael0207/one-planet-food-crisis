@@ -1,15 +1,15 @@
 export const MAP_SITE_ASSETS = Object.freeze({
-  city: 'map-city-v34.webp',
+  city: 'map-city-v35.webp',
   port: 'map-port-v34.webp',
-  farm: 'farm-healthy-v34.webp',
+  farm: 'farm-healthy-v35.webp',
 });
 
-export const PORT_ROTATIONS = Object.freeze({lumen: 180, nord: -90, cera: 0, altia: 90, marin: 90, solis: 0});
+export const PORT_ROTATIONS = Object.freeze({lumen: 131, nord: 153, cera: -68, altia: 15, marin: 11, solis: -62});
 
 const FRAME = Object.freeze({
-  city: {x: -39, y: -27, width: 78, height: 54},
-  port: {x: -44, y: -22, width: 88, height: 44},
-  farm: {x: -35, y: -28, width: 70, height: 56},
+  city: {x: -224, y: -152, width: 448, height: 304},
+  port: {x: -21, y: -10.5, width: 42, height: 21},
+  farm: {x: -40, y: -30, width: 80, height: 60},
 });
 
 const path = (node, className, d, tier = null) => node('path', {
@@ -46,11 +46,26 @@ export function buildMapSiteScene(node, kind, countryId = null) {
   const frame = FRAME[kind];
   if (!frame || !MAP_SITE_ASSETS[kind]) return null;
   const rotation = kind === 'port' ? PORT_ROTATIONS[countryId] ?? 0 : 0;
-  const scene = node('g', {class: `map-site-scene is-${kind}`, 'data-coast-rotation': rotation, 'aria-hidden': 'true'});
+  const scene = node('g', {
+    class: `map-site-scene is-${kind}`,
+    'data-site-scene': kind,
+    'data-grounded': 'true',
+    'data-coast-rotation': rotation,
+    'aria-hidden': 'true',
+  });
   const material = node('g', {class: 'map-site-material', transform: `rotate(${rotation})`});
+  const cityMask=`city-ground-${countryId??'preview'}`;
+  if(kind==='city'){
+    const defs=node('defs'),filter=node('filter',{id:`${cityMask}-feather`,x:'-15%',y:'-15%',width:'130%',height:'130%'});
+    filter.append(node('feGaussianBlur',{stdDeviation:2}));
+    const mask=node('mask',{id:cityMask,maskUnits:'userSpaceOnUse',x:-34,y:-24,width:68,height:48});
+    mask.append(node('path',{d:'M-26-11L-16-11L-16-18L2-18L2-13L16-13L16-8L26-8L26 4L20 4L20 13L9 13L9 17L-7 17L-7 12L-23 12L-23 4L-28 4Z',fill:'white',filter:`url(#${cityMask}-feather)`}));
+    defs.append(filter,mask);material.append(defs);
+  }
   material.append(node('image', {
     class: 'map-site-raster', href: MAP_SITE_ASSETS[kind],
-    ...frame, preserveAspectRatio: 'xMidYMid meet',
+    ...frame, preserveAspectRatio: kind==='city'?'xMidYMid slice':'xMidYMid meet',
+    ...(kind==='city'?{mask:`url(#${cityMask})`}:{}),
   }));
   addOperationalDetails(material, node, kind);
   if (kind === 'city') {

@@ -1,8 +1,8 @@
 export const FARM_LANDSCAPE_ASSETS = Object.freeze({
-  healthy: 'farm-healthy-v34.webp',
-  drought: 'farm-drought-v34.webp',
-  recovering: 'farm-recovering-v34.webp',
-  expansion: 'farm-expansion-v34.webp',
+  healthy: 'farm-healthy-v35.webp',
+  drought: 'farm-drought-v35.webp',
+  recovering: 'farm-recovering-v35.webp',
+  expansion: 'farm-healthy-v35.webp',
 });
 
 const FARM_MATERIAL_TRANSFORMS = Object.freeze({
@@ -13,11 +13,19 @@ const FARM_MATERIAL_TRANSFORMS = Object.freeze({
   marin: 'translate(6 -12) rotate(-7) scale(.86 1.04)',
   solis: 'translate(0 -4) rotate(7) scale(-.94 .9)',
 });
-const FARM_EXPANSION_TRANSFORMS = Object.freeze({
-  lumen: '', nord: 'translate(-2 1) rotate(-4)', cera: 'translate(2 -1) rotate(5)',
-  altia: 'translate(1 0) rotate(-3)', marin: 'translate(-2 -1) rotate(-7)',
-  solis: 'translate(2 1) rotate(6)',
+const FARM_DISTRICTS = Object.freeze({
+  lumen: 'M-46-19C-27-32-13-23 2-30L21-24L39-10L34 9L46 20L24 32L4 26L-19 34L-39 20L-47 3Z',
+  nord: 'M-44-20L-18-28L2-30L21-24L39-10L34 9L46 20L24 32L4 26L-19 34L-39 20L-47 3Z',
+  cera: 'M-46-19L-22-32L2-30L21-24L39-10L34 9L46 20L24 32L4 26L-19 34L-39 20L-47 3Z',
+  altia: 'M-46-19L-26-26L2-30L21-24L39-10L34 9L46 20L24 32L4 26L-19 34L-39 20L-47 3Z',
+  marin: 'M-46-19L-20-31L2-30L21-24L39-10L34 9L46 20L24 32L4 26L-19 34L-39 20L-47 3Z',
+  solis: 'M-46-19L-25-34L2-30L21-24L39-10L34 9L46 20L24 32L4 26L-19 34L-39 20L-47 3Z',
 });
+const EXPANSION_PARCELS = Object.freeze([
+  'M-47 3L-39 20L-19 34L-35 42L-59 29L-61 13Z',
+  'M2-30L21-24L39-10L56-19L45-39L24-43Z',
+  'M34 9L46 20L24 32L37 43L65 28L60 7Z',
+]);
 const FARM_PHASES = Object.freeze(['healthy', 'drought', 'recovering']);
 const IRRIGATION_COUNTRIES = Object.freeze(['lumen', 'solis']);
 
@@ -27,71 +35,42 @@ const path = (node, className, d, tier = null) => node('path', {
   ...(tier === null ? {} : {'data-farm-tier': tier}),
 });
 
+function groundMasks(node, countryId) {
+  const defs=node('defs'),filter=node('filter',{id:`farm-feather-${countryId}`,x:'-15%',y:'-15%',width:'130%',height:'130%'});
+  filter.append(node('feGaussianBlur',{stdDeviation:1.4}));defs.append(filter);
+  const main=FARM_DISTRICTS[countryId];
+  [main,...EXPANSION_PARCELS].forEach((d,index)=>{
+    const mask=node('mask',{id:`farm-ground-${countryId}-${index}`,maskUnits:'userSpaceOnUse',x:-80,y:-64,width:160,height:128});
+    mask.append(node('path',{d,fill:'white',filter:`url(#farm-feather-${countryId})`}));defs.append(mask);
+  });
+  return defs;
+}
+
+const groundImage=(node,className,href,countryId,index,tier=null)=>node('image',{
+  class:className,href,x:-72,y:-56,width:144,height:112,
+  mask:`url(#farm-ground-${countryId}-${index})`,preserveAspectRatio:'xMidYMid slice',
+  ...(tier===null?{}:{'data-farm-tier':tier}),
+});
+
 export function buildFarmScene(node, countryId) {
+  if(!Object.hasOwn(FARM_DISTRICTS,countryId))return null;
   const scene = node('g', {
     class: 'farm-landscape',
     'data-country': countryId,
     'aria-hidden': 'true',
   });
   const material = node('g', {class: 'farm-landscape-material', transform: FARM_MATERIAL_TRANSFORMS[countryId] ?? ''});
-  material.append(node('image', {
-    class: 'farm-landscape-base',
-    href: FARM_LANDSCAPE_ASSETS.healthy,
-    x: -46,
-    y: -42,
-    width: 92,
-    height: 84,
-    preserveAspectRatio: 'xMidYMid meet',
-  }));
-  const expansion = node('g', {class: 'farm-expansion-cluster', transform: FARM_EXPANSION_TRANSFORMS[countryId] ?? ''});
-  expansion.append(
-    node('image', {
-      class: 'farm-growth farm-expansion',
-      href: FARM_LANDSCAPE_ASSETS.expansion,
-      x: -62,
-      y: -4,
-      width: 62,
-      height: 45,
-      preserveAspectRatio: 'xMidYMid meet',
-      'data-farm-tier': 1,
-    }),
-    node('image', {
-      class: 'farm-growth farm-expansion',
-      href: FARM_LANDSCAPE_ASSETS.expansion,
-      x: 2,
-      y: -43,
-      width: 66,
-      height: 48,
-      preserveAspectRatio: 'xMidYMid meet',
-      'data-farm-tier': 2,
-    }),
-    node('image', {
-      class: 'farm-growth farm-expansion',
-      href: FARM_LANDSCAPE_ASSETS.expansion,
-      x: 19,
-      y: 1,
-      width: 48,
-      height: 35,
-      preserveAspectRatio: 'xMidYMid meet',
-      'data-farm-tier': 3,
-    }),
-  );
+  material.append(groundMasks(node,countryId),groundImage(node,'farm-landscape-base',FARM_LANDSCAPE_ASSETS.healthy,countryId,0));
+  const expansion = node('g', {class: 'farm-expansion-cluster', transform: ''});
+  EXPANSION_PARCELS.forEach((_d,index)=>expansion.append(groundImage(node,'farm-growth farm-expansion',FARM_LANDSCAPE_ASSETS.healthy,countryId,index+1,index+1)));
   material.append(
-    node('image', {
-      class: 'farm-recovery-layer',
-      href: FARM_LANDSCAPE_ASSETS.healthy,
-      x: -46,
-      y: -42,
-      width: 92,
-      height: 84,
-      preserveAspectRatio: 'xMidYMid meet',
-    }),
+    groundImage(node,'farm-recovery-layer',FARM_LANDSCAPE_ASSETS.healthy,countryId,0),
     expansion,
-    path(node, 'farm-growth farm-parcel', 'M-48 9C-36 3-24 4-13 10L-18 24C-29 27-42 24-52 18Z', 1),
+    path(node, 'farm-growth farm-parcel', EXPANSION_PARCELS[0], 1),
     path(node, 'farm-growth farm-irrigation', 'M-43 15C-31 12-22 14-15 19M-38 20C-30 18-24 19-18 22', 1),
-    path(node, 'farm-growth farm-parcel', 'M15-25C27-27 42-23 52-16L47-5C35-8 24-6 13-10Z', 2),
+    path(node, 'farm-growth farm-parcel', EXPANSION_PARCELS[1], 2),
     path(node, 'farm-growth farm-service-path', 'M-47 5C-24-5-9-1 8-9S36-18 49-10', 2),
-    path(node, 'farm-growth farm-parcel', 'M35 7C47 5 58 10 64 19L53 30C43 27 34 22 27 15Z', 3),
+    path(node, 'farm-growth farm-parcel', EXPANSION_PARCELS[2], 3),
     path(node, 'farm-climate-scar', 'M-39-8C-30-4-23-6-16 0', 1),
     path(node, 'farm-climate-scar', 'M7-25C14-15 12-7 21 1', 2),
     path(node, 'farm-climate-scar', 'M27 12C37 7 48 12 55 21', 3),
@@ -141,5 +120,6 @@ export function updateFarmScene(target, landscape) {
   target.setAttribute('data-national-irrigation-building', String(nationalBuilding));
   const base = target.querySelector('.farm-landscape-base');
   if (base) base.setAttribute('href', FARM_LANDSCAPE_ASSETS[phase]);
+  for(const image of target.querySelector('.farm-expansion-cluster')?.children??[])image.setAttribute('href',FARM_LANDSCAPE_ASSETS[phase]);
   return target;
 }

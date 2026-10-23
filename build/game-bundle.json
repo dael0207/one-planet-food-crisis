@@ -6,8 +6,8 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 654518,
-    "sha256": "f146529456edeaee817d540156c8bdbf7819a45946bfd6bf7ed5a17185a56dba"
+    "bytes": 657854,
+    "sha256": "b646c2dbee27d52038461d54d2bbb141b3989572104b8e6f6fa87172e8633a03"
   },
   "inputs": [
     {
@@ -16,7 +16,7 @@
     },
     {
       "file": "dist/atlas-art.mjs",
-      "sha256": "129460382011cb1fc31683b3381c2d325b364e7c36d68623d02efac10308512a"
+      "sha256": "7aa9f3490471c8402fe0937141f512b4ae2fb1858f66fd335152dc73f8a63b63"
     },
     {
       "file": "dist/atlas-relief.mjs",
@@ -104,7 +104,7 @@
     },
     {
       "file": "dist/farm-map.mjs",
-      "sha256": "cbebb592340145d9f2e91e312f9ac9d5f6e208146bac202bf0a09344c4ce3001"
+      "sha256": "49636d34d419879b52853d8090ff3f91b6ce6e0d7ac0977eb2898a1a35f92eb7"
     },
     {
       "file": "dist/flow.mjs",
@@ -168,7 +168,7 @@
     },
     {
       "file": "dist/map-art.mjs",
-      "sha256": "e9db70fa1ba97a630b50ee2274e4768ec8a64e4040eaf21cd6a3146fee120dd3"
+      "sha256": "1c32782e21a2432f38be4adb50598266ed0768dcba40f719061b6623f73b53d6"
     },
     {
       "file": "dist/map-attention-ui.mjs",
@@ -200,7 +200,7 @@
     },
     {
       "file": "dist/map-sites.mjs",
-      "sha256": "2a9b369f5d4a4a299f41cd36396bb7efa9b6379cb339d6f1dae4f1de2d73ed55"
+      "sha256": "095fa32b2ca6a05c290729a079c458d7ba1cd82fd72d8e31f787cc1d4c82011f"
     },
     {
       "file": "dist/map.mjs",

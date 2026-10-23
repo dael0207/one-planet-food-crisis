@@ -59,10 +59,10 @@ const landscape = (overrides = {}) => ({
   ...overrides,
 });
 
-test('Given climate phases When farm scenes render Then each uses its real transparent landscape asset', async () => {
+test('Given climate phases When farm scenes render Then each uses its registered ground material', async () => {
   assert.deepEqual(FARM_LANDSCAPE_ASSETS, {
-    healthy: 'farm-healthy-v34.webp', drought: 'farm-drought-v34.webp', recovering: 'farm-recovering-v34.webp',
-    expansion: 'farm-expansion-v34.webp',
+    healthy: 'farm-healthy-v35.webp', drought: 'farm-drought-v35.webp', recovering: 'farm-recovering-v35.webp',
+    expansion: 'farm-healthy-v35.webp',
   });
   await access(new URL(`../dist/${FARM_LANDSCAPE_ASSETS.expansion}`, import.meta.url));
   for (const [phase, file] of Object.entries(FARM_LANDSCAPE_ASSETS).filter(([key]) => key !== 'expansion')) {
@@ -71,8 +71,8 @@ test('Given climate phases When farm scenes render Then each uses its real trans
     updateFarmScene(scene, landscape({phase}));
     const base = scene.querySelector('.farm-landscape-base');
     assert.equal(base.getAttribute('href'), file);
-    assert.equal(base.getAttribute('width'), '92');
-    assert.equal(base.getAttribute('height'), '84');
+    assert.equal(base.getAttribute('width'), '144');
+    assert.equal(base.getAttribute('height'), '112');
     assert.equal(scene.getAttribute('aria-hidden'), 'true');
   }
 });
@@ -192,7 +192,8 @@ test('Given the existing strategic map When sites mount Then all eighteen contro
     assert.equal(lumenClip.querySelector('.farm-landscape').getAttribute('data-selected'), 'false');
     assert.equal(svg.querySelector('.farm-landscape[data-country="altia"]').getAttribute('data-selected'), 'true');
     assert.equal(COUNTRY_IDS.filter((countryId) => svg.querySelector(`.farm-landscape-clip[data-country="${countryId}"]`)).length, 6);
-    assert.ok(layer.querySelector('.map-site-scene'));
+    assert.equal(layer.querySelector('.map-site-scene'), null);
+    assert.ok(lumenCountry.querySelector('.map-site-grounding[data-country="lumen"]'));
     assert.equal(layer.querySelector('.map-site-target[data-country="lumen"][data-site="city"]').querySelector('.map-site-label').getAttribute('y'), '35');
     assert.equal(layer.querySelector('.map-site-target[data-country="marin"][data-site="farm"]').querySelector('.map-site-label').getAttribute('y'), '-51');
     assert.equal(mapSiteModels(state).filter(({landscape}) => landscape).length, 6);

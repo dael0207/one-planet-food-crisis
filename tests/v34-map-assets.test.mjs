@@ -7,35 +7,37 @@ import {MAP_SITE_ASSETS} from '../dist/map-art.mjs';
 import {FARM_LANDSCAPE_ASSETS} from '../dist/farm-map.mjs';
 
 const ACTIVE = Object.freeze([
-  'terrain-relief-v34.webp',
-  'map-city-v34.webp',
+  'terrain-relief-v35.webp',
+  'map-city-v35.webp',
   'map-port-v34.webp',
-  'farm-healthy-v34.webp',
-  'farm-drought-v34.webp',
-  'farm-recovering-v34.webp',
-  'farm-expansion-v34.webp',
+  'farm-healthy-v35.webp',
+  'farm-drought-v35.webp',
+  'farm-recovering-v35.webp',
 ]);
 
-const transparent = new Set(ACTIVE.slice(1));
+const transparent = new Set(['map-port-v34.webp']);
 const bytes = (file) => readFile(new URL(`../dist/${file}`, import.meta.url));
 const hash = (buffer) => createHash('sha256').update(buffer).digest('hex');
 
 function vp8xSize(buffer) {
   const offset = buffer.indexOf(Buffer.from('VP8X'));
-  if (offset < 0) return null;
+  if (offset < 0) {
+    const frame=buffer.indexOf(Buffer.from([0x9d,0x01,0x2a]));
+    return frame<0?null:{width:buffer.readUInt16LE(frame+3)&0x3fff,height:buffer.readUInt16LE(frame+5)&0x3fff};
+  }
   const start = offset + 12;
   const width = 1 + buffer[start] + (buffer[start + 1] << 8) + (buffer[start + 2] << 16);
   const height = 1 + buffer[start + 3] + (buffer[start + 4] << 8) + (buffer[start + 5] << 16);
   return {width, height};
 }
 
-test('V34 activates one coherent seven-file raster set and retires old live references', async () => {
+test('V35 activates six grounded materials and cutouts and retires old live references', async () => {
   assert.deepEqual(MAP_SITE_ASSETS, {
-    city: 'map-city-v34.webp', port: 'map-port-v34.webp', farm: 'farm-healthy-v34.webp',
+    city: 'map-city-v35.webp', port: 'map-port-v34.webp', farm: 'farm-healthy-v35.webp',
   });
   assert.deepEqual(FARM_LANDSCAPE_ASSETS, {
-    healthy: 'farm-healthy-v34.webp', drought: 'farm-drought-v34.webp',
-    recovering: 'farm-recovering-v34.webp', expansion: 'farm-expansion-v34.webp',
+    healthy: 'farm-healthy-v35.webp', drought: 'farm-drought-v35.webp',
+    recovering: 'farm-recovering-v35.webp', expansion: 'farm-healthy-v35.webp',
   });
   const [atlas, mapArt, farms] = await Promise.all([
     readFile(new URL('../dist/atlas-art.mjs', import.meta.url), 'utf8'),
@@ -44,7 +46,7 @@ test('V34 activates one coherent seven-file raster set and retires old live refe
   ]);
   const source = `${atlas}\n${mapArt}\n${farms}`;
   for (const file of ACTIVE) assert.match(source, new RegExp(file.replace('.', '\\.')));
-  assert.doesNotMatch(source, /terrain-relief-v22|map-(?:city|port|farm)-v28|farm-(?:healthy|drought|recovering|expansion)-v30/);
+  assert.doesNotMatch(source, /terrain-relief-v(?:22|34)|map-(?:city|port|farm)-v28|farm-(?:healthy|drought|recovering|expansion)-v(?:30|34)/);
 });
 
 test('V34 transparent sprites keep real alpha and enough resolution for phone zoom', async () => {
@@ -60,7 +62,7 @@ test('V34 transparent sprites keep real alpha and enough resolution for phone zo
 });
 
 test('V34 climate variants preserve the master frame while remaining distinct', async () => {
-  const files = ['farm-healthy-v34.webp', 'farm-drought-v34.webp', 'farm-recovering-v34.webp'];
+  const files = ['farm-healthy-v35.webp', 'farm-drought-v35.webp', 'farm-recovering-v35.webp'];
   const buffers = await Promise.all(files.map(bytes));
   assert.deepEqual(buffers.map(vp8xSize), [
     {width: 768, height: 768}, {width: 768, height: 768}, {width: 768, height: 768},

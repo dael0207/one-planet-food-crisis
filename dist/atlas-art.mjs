@@ -13,7 +13,6 @@ const n = (tag, attrs = {}, text = '') => {
   if (text) item.textContent = text;
   return item;
 };
-const paths = (parent, list, className) => list?.forEach((d) => parent.append(n('path', { d, class: className })));
 
 function addDefs(svg) {
   const defs = n('defs');
@@ -28,28 +27,14 @@ function addDefs(svg) {
 
 function addOcean(svg) {
   svg.append(n('rect', { width: 900, height: 620, fill: 'url(#map-ocean)' }));
-  svg.append(n('path', { d: 'M0 118C180 94 298 139 449 111S728 83 900 121V0H0ZM0 488C179 518 309 477 452 506s285 41 448-2v116H0Z', class: 'atlas-ocean-depth' }));
-  paths(svg, [
-    'M12 173C145 145 271 183 388 157S641 128 884 171',
-    'M21 352C173 326 285 366 422 342S689 314 881 350',
-    'M31 535C195 506 323 548 475 526S727 496 870 523',
-  ], 'atlas-depth-line');
-  svg.append(n('rect', { width: 900, height: 620, fill: 'url(#map-grid)' }));
+  svg.append(n('rect', { width: 900, height: 620, fill: 'url(#map-grid)',opacity:.18 }));
 
 }
 
 function addTerrain(parent, id) {
   const feature = ATLAS_FEATURES[id];
   const terrain = n('g', { class: `atlas-terrain is-${feature.biome}`, 'clip-path': `url(#atlas-clip-${id})`, 'aria-hidden': 'true' });
-  terrain.append(n('image', {href:'terrain-relief-v34.webp',x:-GEOGRAPHY[id].x,y:-GEOGRAPHY[id].y,width:900,height:620,preserveAspectRatio:'xMidYMid slice',class:'atlas-material'}));
-  paths(terrain, feature.relief, 'atlas-relief');
-  paths(terrain, feature.contours, 'atlas-contour');
-  paths(terrain, feature.ridges, 'atlas-ridge');
-  paths(terrain, feature.rivers, 'atlas-river');
-  paths(terrain, feature.dryRivers, 'atlas-dry-river');
-  paths(terrain, feature.channels, 'atlas-channel');
-  paths(terrain, feature.farms, 'atlas-farm');
-  feature.lakes?.forEach(([cx,cy,rx,ry]) => terrain.append(n('ellipse', { cx, cy, rx, ry, class: 'atlas-lake' })));
+  terrain.append(n('image', {href:'terrain-relief-v35.webp',x:-GEOGRAPHY[id].x,y:-GEOGRAPHY[id].y,width:900,height:620,preserveAspectRatio:'xMidYMid slice',class:'atlas-material'}));
   parent.append(terrain);
 }
 

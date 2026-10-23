@@ -3,7 +3,7 @@
 
 .farm-landscape-base,
 .farm-expansion {
-  filter: saturate(.72) brightness(.78) contrast(1.1);
+  filter: saturate(.57) brightness(.72) contrast(1.02);
 }
 
 .farm-growth,
@@ -22,7 +22,7 @@
   vector-effect: non-scaling-stroke;
 }
 
-.farm-parcel { fill: none; }
+.farm-parcel { fill: none;stroke:var(--map-ground-soil);stroke-width:.45;opacity:.38; }
 
 .farm-landscape[data-farm-level="1"] .farm-growth[data-farm-tier="1"],
 .farm-landscape[data-farm-level="2"] .farm-growth:is([data-farm-tier="1"], [data-farm-tier="2"]),
@@ -39,10 +39,10 @@
   stroke-width: 1.4;
 }
 
-.farm-expansion { opacity: .86; }
+.farm-expansion { opacity: .93; }
 .farm-landscape[data-farm-phase="drought"] .farm-expansion {
-  filter: saturate(.22) sepia(.55) hue-rotate(-14deg) brightness(.66) contrast(1.12);
-  opacity: .68;
+  filter: saturate(.5) brightness(.72) contrast(1.02);
+  opacity: .93;
 }
 
 .farm-landscape[data-farm-phase="recovering"][data-recovery-elapsed="1"] .farm-expansion {

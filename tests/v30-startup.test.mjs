@@ -57,7 +57,7 @@ test('startup waits for the DOM and appends the native game bundle exactly once'
  app.dispatchDomReady();
  assert.equal(app.scripts.length,1);
  assert.equal(app.scripts[0].tagName,'script');
- assert.equal(app.scripts[0].src,'./game.bundle.js?v=36');
+ assert.equal(app.scripts[0].src,'./game.bundle.js?v=37');
 });
 
 test('bundle stays pending until native load confirms the rendered country and 18 controls',async()=>{
@@ -75,7 +75,7 @@ test('bundle stays pending until native load confirms the rendered country and 1
 
 test('native bundle load failure logs the raw error and offers manual retry only',async()=>{
  const app=await startupHarness(),failure=new Error('https://example.test/game.bundle.js failed');
- failure.src='./game.bundle.js?v=36';
+ failure.src='./game.bundle.js?v=37';
  app.fail(failure);
  app.fail(new Error('duplicate event'));
  assert.equal(app.message.textContent,'게임을 불러오지 못했습니다.');
@@ -110,7 +110,7 @@ test('success settles once and ignores a later native error callback',async()=>{
 test('index retains the external classic startup boundary and accessible initial state',async()=>{
  const html=await readFile(new URL('../dist/index.html',import.meta.url),'utf8');
  assert.match(html,/<link rel="stylesheet" href="startup\.css\?v=\d+">/);
- assert.match(html,/<script defer src="startup\.js\?v=36"><\/script>/);
+ assert.match(html,/<script defer src="startup\.js\?v=37"><\/script>/);
  assert.doesNotMatch(html,/<script type="module" src="app\.mjs/);
  assert.match(html,/<body class="room-game boot-pending" aria-busy="true">/);
  assert.match(html,/id="boot-message"[^>]*>상황실을 여는 중…</);

@@ -69,7 +69,8 @@ test('V22 terrain uses clipped relief masses and geographic waterways without tr
   assert.ok(ATLAS_FEATURES.solis.dryRivers.length >= 1);
 
   const { all } = renderAtlas();
-  assert.equal(all.filter((item) => item.attributes.class === 'atlas-relief').length >= 12, true);
+  assert.equal(all.filter((item) => item.attributes.class === 'atlas-material').length, 6);
+  assert.equal(all.some((item) => ['atlas-relief','atlas-river','atlas-lake'].includes(item.attributes.class)), false, 'waterways and relief belong to the shared terrain material rather than floating glyphs');
   assert.equal(all.some((item) => item.attributes.class === 'atlas-tree'), false);
 });
 
@@ -101,7 +102,7 @@ test('V22 preserves all live countries, labels, state overlays and route inserti
   }
   for(const id of IDS){
     const terrain=all.find(item=>item.attributes['clip-path']===`url(#atlas-clip-${id})`);
-    assert.ok(terrain.children.some(item=>item.tag==='image'&&item.attributes.href==='terrain-relief-v34.webp'));
+    assert.ok(terrain.children.some(item=>item.tag==='image'&&item.attributes.href==='terrain-relief-v35.webp'));
   }
   const countryIndex = svg.children.findIndex((item) => item.attributes.id === 'map-country-layer');
   const facilityIndex = svg.children.findIndex((item) => item.attributes.id === 'map-frontier-layer');
