@@ -6,8 +6,8 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 636704,
-    "sha256": "aafb8793527cc1c979ab14538dae5e1198e16e1b1cfc5d04f4a072f5f7177e17"
+    "bytes": 638187,
+    "sha256": "e1b31a6eef654d674772db003ef1fc1f2ee0051f0e5c04c938b87ec08c7c1777"
   },
   "inputs": [
     {
@@ -48,11 +48,11 @@
     },
     {
       "file": "dist/command-preview-ui.mjs",
-      "sha256": "7ad2e8271495c8b1260082c556d9f0204445482ab099142e44b1e9ef4b8514be"
+      "sha256": "da12a6e2ca96a1cf4710e8fbfcb4abc8fde38c83c268b5d1902ba733cb0d69f6"
     },
     {
       "file": "dist/command-preview.mjs",
-      "sha256": "f28b24178995dacbae8b071e6a1f026c4f6e8e03121963697155717179a3dad5"
+      "sha256": "bd70a50921afd7c5c7516881b229a97673f939bb7112f2a37bcec96031860b38"
     },
     {
       "file": "dist/command-ui.mjs",
@@ -224,7 +224,7 @@
     },
     {
       "file": "dist/negotiation-ui.mjs",
-      "sha256": "ac1e7a8d60d5f4d45f59ecdc3885e6878ed4c57338e00b754034e8880284fbf1"
+      "sha256": "aa675130211f7a44fa3b61c4e12342c138ad759dde54380a91b336e82a2ff2e0"
     },
     {
       "file": "dist/negotiations.mjs",

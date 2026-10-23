@@ -55,3 +55,11 @@ test('invalid and unaffordable commands have no command review',()=>{
  assert.equal(renderCommandReview(poor,'aid'),'');
  assert.equal(renderCommandReview(null,'balanced'),'');
 });
+
+test('stored counteroffer review shows actual transaction terms rather than claiming free acceptance',()=>{
+ const state=advanceTurn(createGame('lumen'),'propose:cera:buy:3:3'),record=state.negotiations.at(-1);
+ assert.equal(record.status,'countered');
+ const html=renderCommandReview(state,`reply:${record.id}:accept`);
+ assert.match(html,new RegExp(`식량 ${record.counterTerms.food} 확보 · 국고 ${record.counterTerms.money}억 지급`));
+ assert.doesNotMatch(html,/국고 지출 없음/);
+});

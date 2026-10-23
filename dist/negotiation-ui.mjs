@@ -10,7 +10,7 @@ const STATUS_LABELS={accepted:'수락·이행',countered:'역제안 도착',reje
 const DEFAULT_DRAFT={kind:'buy',food:4,money:8};
 
 const countryName=id=>COUNTRIES[id]?.name??'상대국';
-const termsText=(kind,terms)=>{
+export const termsText=(kind,terms)=>{
  const food=Math.round(terms?.food??0),money=Math.round(terms?.money??0);
  if(kind==='buy')return `식량 ${food} 확보 · 국고 ${money}억 지급`;
  if(kind==='sell')return `식량 ${food} 제공 · 국고 ${money}억 확보`;

@@ -2,11 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {performance} from 'node:perf_hooks';
 
-import {COUNTRY_IDS,advanceTurn,createGame,getAction,jointCommand} from '../dist/engine.mjs';
+import {COUNTRY_IDS,advanceTurn,createGame,getAction,jointCommand,pendingPeaceOffers,peaceReplyCommand} from '../dist/engine.mjs';
 import {commandPreview} from '../dist/command-preview.mjs';
 import {proposalCommand} from '../dist/negotiations.mjs';
 
 const quiet={networkStartTurn:999,policyStartTurn:1,objectiveStartTurn:999,worldGoalStartTurn:999,conflictStartTurn:999,mediationStartTurn:999,peaceOfferStartTurn:999,peaceComplianceStartTurn:999,peaceResponseStartTurn:999,foreignSiteStartTurn:999,jointStartTurn:999,foreignStrategyStartTurn:999};
+const run=(state,count,command='maintain')=>{for(let turn=0;turn<count;turn++)state=advanceTurn(state,command);return state;};
+const offered=()=>run(createGame('lumen',{foreignSiteStartTurn:999}),4);
 
 test('all six countries receive exact immutable quarter forecasts from the canonical engine',()=>{
  for(const playerId of COUNTRY_IDS){
@@ -68,8 +70,7 @@ test('balanced trade exposes Nord relation change against maintain while aid sho
  assert.match(relationPin.value,new RegExp(`유지 대비 \\+${balanced.relations['lumen:nord']-baseline.relations['lumen:nord']}`));
  const nordPin=aidModel.pins.find(pin=>pin.countryId==='nord');
  assert.equal(nordPin.label,'노르드');
- assert.match(nordPin.value,new RegExp(`식량 ${state.countries.nord.food} → ${aided.countries.nord.food} 예상`));
- assert.match(nordPin.value,new RegExp(`국고 ${state.countries.nord.treasury} → ${aided.countries.nord.treasury} 예상`));
+ assert.equal(nordPin.value,`유지 대비 식량 ${aided.countries.nord.food-baseline.countries.nord.food>0?'+':''}${aided.countries.nord.food-baseline.countries.nord.food} · 국고 ${aided.countries.nord.treasury-baseline.countries.nord.treasury>0?'+':''}${aided.countries.nord.treasury-baseline.countries.nord.treasury} 예상`);
  assert.equal(aidModel.metrics.find(metric=>metric.key==='food').after,aided.countries.lumen.food);
  assert.equal(aidModel.metrics.find(metric=>metric.key==='treasury').after,aided.countries.lumen.treasury);
 });
@@ -87,13 +88,28 @@ test('accepted and rejected proposals use structured target outcomes while inval
  // Then
  assert.equal(getAction(acceptedState,acceptedCommand).preview.response,'accept');
  assert.equal(accepted.pins.find(pin=>pin.countryId==='cera').label,'세라');
- assert.match(accepted.pins.find(pin=>pin.countryId==='cera').value,/식량 \d+ → \d+ 예상/);
- assert.match(accepted.pins.find(pin=>pin.countryId==='cera').value,/국고 \d+ → \d+ 예상/);
+ assert.equal(accepted.pins.find(pin=>pin.countryId==='cera').value,'유지 대비 식량 −3 · 국고 +6 예상');
  assert.equal(getAction(rejectedState,rejectedCommand).preview.response,'reject');
  assert.equal(rejected.pins.find(pin=>pin.countryId==='cera').label,'세라 관계');
  assert.match(rejected.pins.find(pin=>pin.countryId==='cera').value,/예상 · 유지 대비/);
  assert.equal(commandPreview(rejectedState,'propose:lumen:buy:2:2'),null);
  assert.equal(commandPreview(rejectedState,'propose:cera:buy:0:2'),null);
+});
+
+test('declining a canonical peace offer keeps the offering nation visible despite zero direct effects',()=>{
+ // Given
+ const state=offered(),offer=pendingPeaceOffers(state)[0],command=peaceReplyCommand(offer.id,'decline');
+ const maintained=advanceTurn(state,'maintain'),declined=advanceTurn(state,command);
+ assert.deepEqual(declined.countries,maintained.countries);
+ assert.deepEqual(declined.relations,maintained.relations);
+
+ // When
+ const model=commandPreview(state,command);
+
+ // Then
+ assert.deepEqual(model.pins[0],{id:`preview:peace-reply:${offer.id}`,countryId:offer.fromId,siteKind:null,label:state.countries[offer.fromId].name,value:'평화 제안 거절 예정 · 직접 변화 없음',tone:'preview',icon:'reply',action:'focus-order',changeId:null});
+ assert.ok(model.pins.length<=2);
+ assert.deepEqual(model.metrics.map(metric=>metric.commandEffect),[0,0]);
 });
 
 test('site management targets the facility and port procurement identifies the actual seller',()=>{
