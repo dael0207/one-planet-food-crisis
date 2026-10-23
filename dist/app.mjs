@@ -266,7 +266,6 @@ get('modal-content').addEventListener('submit',event=>{
  get('announcement').textContent=state.turn?`${COUNTRIES[state.playerId].name}의 운영 기록을 열었습니다. ${state.turn}분기 완료.`:`${COUNTRIES[state.playerId].name}의 첫 분기입니다. 첫 명령을 골라주세요.`;
 });
 get('modal').addEventListener('close',()=>get('modal').classList.remove('country-picker-dialog'));
-get('review-button').addEventListener('click',()=>showView('records',true));
 get('help-button').addEventListener('click',()=>modal(renderHelp(flow.phase==='result')));
 get('history-button').addEventListener('click',()=>showView('records',true));
 get('records-content').addEventListener('change',event=>{

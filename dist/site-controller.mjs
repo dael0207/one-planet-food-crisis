@@ -46,6 +46,7 @@ export function createSiteController(context){
   button.disabled=!available;
   button.textContent=available?`${order.action.name} 실행 · 1분기 진행 →`:'실행할 명령을 선택하세요';
   status.textContent=available?`${order.action.name} · 국고 −${order.action.cost}억 · 1분기 진행`:order?.reason??'실행할 명령을 선택하세요.';
+  status.hidden=false;
   for(const label of document.querySelectorAll('.site-order'))label.classList.toggle('is-selected',label.querySelector('input').value===operation);
   return true;
  }

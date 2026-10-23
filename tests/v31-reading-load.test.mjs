@@ -11,6 +11,7 @@ test('main footer only offers restart and supplementary reports live in Records'
  const footer=html.match(/<footer>([\s\S]*?)<\/footer>/)[1];
  assert.equal(footer.trim(),'<button class="text-button" id="restart-button">처음부터 다시</button>');
  assert.doesNotMatch(html,/끝없이 이어지는 세계|모든 나라는 연결되어|class="save-strip"/);
+ assert.doesNotMatch(html,/id="review-button"/);
  const records=html.match(/<section id="records-view"[\s\S]*?(?=\n  <footer>)/)?.[0]??'';
  assert.match(records,/id="metrics"/);assert.match(records,/id="report"/);
  assert.match(html,/id="save-status"[^>]*hidden/);

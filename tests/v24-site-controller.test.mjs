@@ -13,6 +13,17 @@ function mounted(run){
 const radio=value=>({target:{value,closest:()=>({id:'site-form'})}});
 const submit={target:{id:'site-form'}};
 
+test('selecting a site operation reveals its exact cost and time after the quiet idle state',()=>mounted(({controller,status,execute,commits,state})=>{
+ controller.dispatch('open-facility',{country:'lumen',site:'farm'});
+ assert.match(controller.render(),/id="site-order-status"[^>]* hidden/);
+ status.hidden=true;
+ const before=structuredClone(state());
+ controller.input(radio('upgrade'));
+ assert.equal(status.hidden,false);
+ assert.match(status.textContent,/국고 −12억 · 1분기 진행/);
+ assert.equal(execute.disabled,false);assert.deepEqual(commits,[]);assert.deepEqual(state(),before);
+}));
+
 test('mounted own site selection commits the exact canonical command once without spending during inspection',()=>mounted(({controller,execute,commits,state})=>{
  const before=structuredClone(state());controller.dispatch('open-facility',{country:'lumen',site:'city'});
  assert.deepEqual(state(),before);assert.deepEqual(controller.selection(),{countryId:'lumen',kind:'city'});

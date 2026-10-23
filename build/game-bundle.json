@@ -6,13 +6,13 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 612829,
-    "sha256": "7895fc9ba1f29f6644d4c509cc200e9e2692f13e26e8f739c8c1b86dc02e0bbe"
+    "bytes": 612772,
+    "sha256": "ff2cdcc35876d06eacd2c7d065fcfa1224dcb27a2eee2aaf416984f0d381c53e"
   },
   "inputs": [
     {
       "file": "dist/app.mjs",
-      "sha256": "24c24ad0ec92c79a1af7440a74c4c671f7d68ecab7b53793c159029ea8b012bd"
+      "sha256": "ca4413f576ff6b8c1768cb06a35f1b44900521f6c3874968100731813e862857"
     },
     {
       "file": "dist/atlas-art.mjs",
@@ -308,7 +308,7 @@
     },
     {
       "file": "dist/site-controller.mjs",
-      "sha256": "02f603e245145781ab4b106893d5386acbb5d96b5af0fe496a4db031401c1248"
+      "sha256": "89ef019a2dba03dc2630ca20e996d91a4a1762103d8652692c354bdcec269c5d"
     },
     {
       "file": "dist/site-operations.mjs",
