@@ -6,13 +6,13 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 612772,
-    "sha256": "ff2cdcc35876d06eacd2c7d065fcfa1224dcb27a2eee2aaf416984f0d381c53e"
+    "bytes": 623999,
+    "sha256": "d5ecaf094667136cfa8b2eadf1d32de93c13ca747167de12d61d764b5a9f6f07"
   },
   "inputs": [
     {
       "file": "dist/app.mjs",
-      "sha256": "ca4413f576ff6b8c1768cb06a35f1b44900521f6c3874968100731813e862857"
+      "sha256": "f791d131a6d117f9a7c01c09089f5d2b474119ec21eb3aa12ab783f30b059394"
     },
     {
       "file": "dist/atlas-art.mjs",
@@ -153,6 +153,14 @@
     {
       "file": "dist/map-art.mjs",
       "sha256": "1e27a72be9206c4c0d7c5512f80f4076be3005d921680885e212cfa44ba73662"
+    },
+    {
+      "file": "dist/map-attention-ui.mjs",
+      "sha256": "c19b9227730d26aebcb613f7a2a61fdf1ec0c88929e31ee4701d2020fe422cd5"
+    },
+    {
+      "file": "dist/map-attention.mjs",
+      "sha256": "48d1a6d3d29fba3d62cc81be3931ed4b0015f0079d427946b440349d1dcef5d1"
     },
     {
       "file": "dist/map-camera.mjs",

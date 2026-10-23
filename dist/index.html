@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="result-causes.css?v=31"><link rel="stylesheet" href="quarter-priority.css?v=33"><link rel="stylesheet" href="map-consequences.css?v=31"><link rel="stylesheet" href="decision-flow.css?v=33">
   <link rel="stylesheet" href="foreign-strategy.css?v=31">
   <link rel="stylesheet" href="farm-map.css?v=31"><link rel="stylesheet" href="farm-landscape.css?v=31">
-  <link rel="stylesheet" href="startup.css?v=31"><script defer src="startup.js?v=33"></script>
+  <link rel="stylesheet" href="startup.css?v=31"><script defer src="startup.js?v=34"></script>
+  <link rel="stylesheet" href="map-attention.css?v=34">
 </head>
 <body class="room-game boot-pending" aria-busy="true">
 <div id="boot-status" role="status" aria-live="polite" aria-busy="true"><p id="boot-message">상황실을 여는 중…</p><button id="boot-retry" type="button" hidden>다시 연결</button></div>
@@ -28,7 +29,7 @@
   <div class="situation-room" id="situation-room">
     <section class="atlas-stage" aria-label="국정 상황실 지도">
       <div id="mobile-command" class="mobile-command"></div><details class="atlas-tools"><summary><h2>세계 지도</h2><span>확대·표시</span></summary><div id="map-network-controls"></div><div id="map-camera-controls" class="map-camera-controls" aria-label="지도 확대와 이동"></div><div class="map-state-legend" aria-label="지도 상태 범례"><span><i></i>식량 안정</span><span class="is-strained"><i></i>식량 긴장</span><span class="is-critical"><i></i>식량 위기</span><small>시설을 눌러 관리 · 국가를 눌러 외교<br>농지는 기후·회복과 투자 단계를, 숫자는 식량 비축을 보여줍니다.</small></div></details>
-      <div id="conflict-brief"></div><div class="map-container"><svg class="world-map" viewBox="0 0 900 620" role="group" aria-label="여섯 나라의 협정망과 실제 교역 지도"></svg></div><div id="map-consequences"></div>
+      <div id="conflict-brief"></div><div id="map-attention-header" class="map-attention-header" tabindex="-1"></div><div class="map-container"><svg class="world-map" viewBox="0 0 900 620" role="group" aria-label="여섯 나라의 협정망과 실제 교역 지도"></svg><div id="map-attention-layer" class="map-attention-layer" role="group" aria-label="주요 현안과 명령 결과"></div></div><div id="map-consequences"></div>
       <div id="site-selector" class="site-selector"></div>
       <div id="map-enforcement-summary" hidden></div><div id="map-brief" class="map-brief"></div>
       <div class="country-tabs" id="country-tabs" role="group" aria-label="국가 선택"></div>

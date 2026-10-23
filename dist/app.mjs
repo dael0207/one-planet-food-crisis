@@ -26,6 +26,7 @@ import {renderHelp} from './help-ui.mjs?v=31';
 import {createSiteController} from './site-controller.mjs?v=31';
 import {quarterPriority,renderQuarterPriority} from './quarter-priority.mjs?v=31';
 import {mapConsequences,renderMapConsequences,updateMapConsequences} from './map-consequences.mjs?v=31';
+import {createMapAttention} from './map-attention-ui.mjs?v=31';
 const get=id=>document.getElementById(id);
 const loaded=loadGame();
 let state=loaded.state,flow=loaded.flow,requestId=loaded.requestId,selected=null,country=loaded.state.playerId;
@@ -36,6 +37,7 @@ let conflictReviewId=null;
 let mediation=null,site=null;
 let currentView='decision',inspecting=false;
 let mapMode='network',mapFilter='all';
+let mapAttention=null;
 let chronicleOptions={period:12,metric:'food',filter:'all',page:0};
 function renderRecords(){
  const model=buildChronicle(state);
@@ -102,6 +104,8 @@ function render(){
  updateMap(state,{...flow,selectedCountry:country,mapMode,mapFilter});
  site.updateMap(document.querySelector('.world-map'),country);
  updateMapConsequences(document.querySelector('.world-map'),state,flow.phase);
+ if(!mapAttention)mapAttention=createMapAttention(document.querySelector('.world-map'),get('map-attention-header'),get('map-attention-layer'));
+ mapAttention.update(state,flow.phase);
  get('map-consequences').innerHTML=renderMapConsequences(state,flow.phase);
  get('country-intel').hidden=!inspecting;
  get('country-intel').innerHTML=inspecting?renderCountryIntel(state,country,flow.phase):'';
@@ -123,6 +127,7 @@ function updateSelection(){
  document.querySelectorAll('.policy').forEach(label=>label.classList.toggle('selected',label.querySelector('input').value===selected));
 }
 function focusResult(){showView('decision');get('decision-title').focus({preventScroll:true});const target=window.matchMedia('(max-width:1099px)').matches?document.querySelector('.command-dock'):get('situation-room');target.scrollIntoView({block:'start',behavior:'instant'});}
+function focusMapOutcome(){showView('decision');document.querySelector('[data-camera-action="reset"]')?.click();get('map-attention-header').focus({preventScroll:true});get('map-attention-header').scrollIntoView({block:'start',behavior:'instant'});}
 function modal(content){get('modal-content').innerHTML=content;if(!get('modal').open)get('modal').showModal();}
 function restart(){state=createGame(state.playerId);flow={phase:'decision',step:0};currentView='decision';selected=null;requestId=null;clearDrafts();country=state.playerId;inspecting=false;persist();get('modal').close();get('migration-notice').textContent='';render();window.scrollTo({top:0,behavior:'instant'});}
 function inspect(id){if(!COUNTRY_IDS.includes(id))return;site?.clear();country=id;inspecting=true;render();get('country-intel').setAttribute('tabindex','-1');get('country-intel').focus({preventScroll:true});}
@@ -182,7 +187,7 @@ get('decision-content').addEventListener('input',event=>{if(site.input(event)||m
 get('decision-content').addEventListener('change',event=>{if(site.input(event)||mediation.input(event))return;if(treatyDraft){updateTreaty(event);return;}if(proposalDraft){updateProposal(event);return;}if(event.target instanceof HTMLInputElement){selected=event.target.value;updateSelection();}});
 function commitDecision(command){
  if(!canDecide(flow))return;
- try{state=advanceTurn(state,command);chronicleOptions={...chronicleOptions,turn:state.turn,page:0};flow=beginReview();selected=null;requestId=null;clearDrafts();country=state.playerId;inspecting=false;persist();get('migration-notice').textContent='';render();focusResult();get('announcement').textContent=`${state.turn}분기 결과. ${state.history.at(-1).headline}`;}
+ try{state=advanceTurn(state,command);chronicleOptions={...chronicleOptions,turn:state.turn,page:0};flow=beginReview();selected=null;requestId=null;clearDrafts();country=state.playerId;inspecting=false;persist();get('migration-notice').textContent='';render();focusMapOutcome();get('announcement').textContent=`${state.turn}분기 결과. ${state.history.at(-1).headline}`;}
  catch(error){const target=get('mediation-preview')??get('treaty-preview')??get('proposal-preview')??get('forecast')??get('announcement');target.textContent=error instanceof Error?error.message:'대응을 실행할 수 없습니다.';}
 }
 get('decision-content').addEventListener('submit',event=>{
