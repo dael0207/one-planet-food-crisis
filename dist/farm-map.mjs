@@ -10,6 +10,7 @@ const FARM_INSETS = Object.freeze({
   altia: 'translate(0 6)', marin: 'translate(6 -12)', solis: 'translate(0 -4)',
 });
 const FARM_PHASES = Object.freeze(['healthy', 'drought', 'recovering']);
+const IRRIGATION_COUNTRIES = Object.freeze(['lumen', 'solis']);
 
 const path = (node, className, d, tier = null) => node('path', {
   class: className,
@@ -81,6 +82,9 @@ export function buildFarmScene(node, countryId) {
     path(node, 'farm-climate-scar', 'M-39-8C-30-4-23-6-16 0', 1),
     path(node, 'farm-climate-scar', 'M7-25C14-15 12-7 21 1', 2),
     path(node, 'farm-climate-scar', 'M27 12C37 7 48 12 55 21', 3),
+    node('path', {class: 'farm-national-channel', d: 'M-49-20C-33-15-22-20-7-14S18-4 28-9', 'data-national-tier': 1}),
+    node('path', {class: 'farm-national-channel', d: 'M-28 30C-12 23 2 27 15 20S38 8 50 13', 'data-national-tier': 2}),
+    node('path', {class: 'farm-national-channel', d: 'M-56 3C-39-2-27 3-12-3S18-19 37-17', 'data-national-tier': 3}),
   );
   const planned = node('g', {class: 'farm-planned-works', 'aria-hidden': 'true'});
   planned.append(
@@ -88,6 +92,12 @@ export function buildFarmScene(node, countryId) {
     path(node, 'farm-survey-line', 'M-34 20C-17 15-2 20 16 13S40 4 51 10'),
   );
   material.append(planned);
+  const nationalProject = node('g', {class: 'farm-national-project', 'aria-hidden': 'true'});
+  nationalProject.append(
+    path(node, 'farm-national-trench', 'M-51-17C-35-12-23-17-8-11S18-1 31-7'),
+    path(node, 'farm-national-trench-edge', 'M-50-14C-34-9-22-14-7-8S19 2 32-4'),
+  );
+  material.append(nationalProject);
   scene.append(material);
   return scene;
 }
@@ -101,6 +111,11 @@ export function updateFarmScene(target, landscape) {
   const plannedLevel = Number.isInteger(infrastructure.siteProject?.level)
     ? Math.max(0, Math.min(3, infrastructure.siteProject.level))
     : level;
+  const irrigationCountry = IRRIGATION_COUNTRIES.includes(landscape.countryId);
+  const nationalLevel = irrigationCountry && Number.isInteger(infrastructure.nationalLevel)
+    ? Math.max(0, Math.min(3, infrastructure.nationalLevel))
+    : 0;
+  const nationalBuilding = irrigationCountry && Boolean(infrastructure.nationalProject);
   target.setAttribute('data-farm-phase', phase);
   target.setAttribute('data-farm-severity', String(landscape.severity ?? 0));
   target.setAttribute('data-recovery-elapsed', String(landscape.recoveryElapsed ?? 0));
@@ -109,6 +124,8 @@ export function updateFarmScene(target, landscape) {
   target.setAttribute('data-planned-level', String(plannedLevel));
   target.setAttribute('data-farm-irrigated', String(infrastructure.irrigated === true));
   target.setAttribute('data-farm-expanded', String(infrastructure.expanded === true));
+  target.setAttribute('data-national-farm-level', String(nationalLevel));
+  target.setAttribute('data-national-irrigation-building', String(nationalBuilding));
   const base = target.querySelector('.farm-landscape-base');
   if (base) base.setAttribute('href', FARM_LANDSCAPE_ASSETS[phase]);
   return target;

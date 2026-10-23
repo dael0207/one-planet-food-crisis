@@ -94,7 +94,33 @@ test('Given a pending upgrade When scene updates Then unfinished soil works show
   assert.equal(scene.getAttribute('data-farm-level'), '1');
   assert.equal(scene.getAttribute('data-farm-building'), 'true');
   assert.equal(scene.getAttribute('data-planned-level'), '2');
+  assert.equal(scene.getAttribute('data-national-irrigation-building'), 'false');
   assert.equal(scene.querySelector('.farm-survey-line').getAttribute('d').includes('M-38-27 43 26'), false);
+});
+
+test('Given actual national irrigation When Lumen builds and completes Then trenches precede completed water channels', () => {
+  const scene = buildFarmScene(make, 'lumen');
+  updateFarmScene(scene, landscape({infrastructure: {...landscape().infrastructure, nationalLevel: 0, nationalProject: {dueTurn: 3}, nationalDueTurn: 3}}));
+  assert.equal(scene.getAttribute('data-national-irrigation-building'), 'true');
+  assert.equal(scene.getAttribute('data-national-farm-level'), '0');
+  assert.equal(scene.getAttribute('data-farm-building'), 'false');
+  assert.ok(scene.querySelector('.farm-national-trench'));
+  assert.equal(descendants(scene).filter((node) => node.getAttribute('class')?.includes('farm-national-channel')).length, 3);
+
+  updateFarmScene(scene, landscape({infrastructure: {...landscape().infrastructure, nationalLevel: 1, nationalProject: null, irrigated: true}}));
+  assert.equal(scene.getAttribute('data-national-irrigation-building'), 'false');
+  assert.equal(scene.getAttribute('data-national-farm-level'), '1');
+});
+
+test('Given nonagricultural national investment When farm art updates Then it never fabricates irrigation', () => {
+  const altia = buildFarmScene(make, 'altia');
+  updateFarmScene(altia, landscape({countryId: 'altia', infrastructure: {...landscape().infrastructure, nationalLevel: 3, nationalProject: {dueTurn: 4}, irrigated: true}}));
+  assert.equal(altia.getAttribute('data-national-irrigation-building'), 'false');
+  assert.equal(altia.getAttribute('data-national-farm-level'), '0');
+
+  const solis = buildFarmScene(make, 'solis');
+  updateFarmScene(solis, landscape({countryId: 'solis', infrastructure: {...landscape().infrastructure, nationalLevel: 2, nationalProject: null, irrigated: true}}));
+  assert.equal(solis.getAttribute('data-national-farm-level'), '2');
 });
 
 test('Given identical climate history When only food stock falls Then the farm bitmap phase does not become drought', () => {
@@ -166,6 +192,8 @@ test('Given farm climate art When styles are inspected Then food stock does not 
   assert.match(css, /data-recovery-elapsed="3"/);
   assert.match(css, /data-farm-phase="drought"\] \.farm-expansion/);
   assert.match(css, /data-recovery-elapsed="1"\] \.farm-expansion/);
+  assert.match(css, /data-national-irrigation-building="true"/);
+  assert.match(css, /data-national-farm-level="3"/);
   assert.match(css, /\.farm-parcel/);
   assert.match(css, /pointer-events:\s*none/);
 });

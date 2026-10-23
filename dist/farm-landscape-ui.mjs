@@ -1,6 +1,7 @@
 import {farmLandscape} from './farm-landscape.mjs?v=30';
 import {quarterDate} from './calendar.mjs?v=30';
 import {escape} from './render.mjs?v=30';
+import {PROFILES} from './nation-profiles.mjs?v=30';
 
 const date=turn=>{const value=quarterDate(Math.max(0,turn-1));return `${value.year}년 ${value.quarter}분기`;};
 const signed=value=>`${value>0?'+':value<0?'−':''}${Math.abs(value)}`;
@@ -12,10 +13,13 @@ export function farmStatusLabel(landscape){
 }
 
 function development(landscape,state){
- const {siteLevel,siteProject,siteDueTurn,nationalLevel}=landscape.infrastructure;
+ const {siteLevel,siteProject,siteDueTurn,nationalLevel,nationalProject,nationalDueTurn}=landscape.infrastructure;
  const level=siteLevel===null?'지역 농경지 단계 미확인':`경작지 ${siteLevel}/3단계`;
- if(siteProject)return `${level} · ${siteProject.level}단계 공사 · ${Math.max(0,siteDueTurn-state.turn)}분기 뒤 완공`;
- return `${level}${nationalLevel>0?` · 국가 생산 시설 ${nationalLevel}단계`:''}`;
+ const parts=[siteProject?`${level} · ${siteProject.level}단계 공사 · ${Math.max(0,siteDueTurn-state.turn)}분기 뒤 완공`:level];
+ const name=PROFILES[landscape.countryId].facilityName;
+ if(nationalProject)parts.push(`${name} ${nationalLevel+1}단계 공사 · ${Math.max(0,nationalDueTurn-state.turn)}분기 뒤 완공`);
+ else if(nationalLevel>0)parts.push(`${name} ${nationalLevel}단계`);
+ return parts.join(' · ');
 }
 
 export function renderFarmLandscape(state,countryId){

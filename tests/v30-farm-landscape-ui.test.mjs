@@ -37,3 +37,10 @@ test('completed recovery is announced once and seasonal crop loss does not claim
  assert.match(renderFarmLandscape(seasonal,'cera'),/가뭄 흔적 없음/);
  assert.doesNotMatch(renderFarmLandscape(seasonal,'cera'),/작황 안정/);
 });
+
+test('national production works keep their real name and do not become local farm expansion',()=>{
+ const state=advanceTurn(createGame('lumen'),'invest');
+ const html=renderFarmLandscape(state,'lumen');
+ assert.match(html,/관개 시설 1단계 공사/);assert.match(html,/2분기 뒤 완공/);
+ assert.match(html,/경작지 0\/3단계/);
+});
