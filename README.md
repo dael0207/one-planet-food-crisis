@@ -49,7 +49,16 @@ npm test
 
 ## 배포와 소스
 
-`main`에 푸시하면 GitHub Actions가 전체 테스트를 실행하고 통과한 `dist/`만 GitHub Pages에 배포합니다. Actions에서 배포 상태를 확인할 수 있습니다. 게임은 빌드가 필요 없는 HTML/CSS/ES 모듈이며 외부 API 키 없이 실행됩니다.
+`main`에 푸시하면 GitHub Actions가 전체 테스트를 실행하고 통과한 `dist/`만 GitHub Pages에 배포합니다. Actions에서 배포 상태를 확인할 수 있습니다. 브라우저는 준비 확인용 로더와 미리 생성한 단일 게임 파일을 읽으며 외부 API 키 없이 실행됩니다. 실행과 테스트에는 별도 패키지 설치가 필요 없습니다.
+
+개발자가 `dist/*.mjs` 소스를 수정했다면 기존 esbuild 0.28.2의 `lib/main.js` 경로를 지정해 게임 파일을 다시 생성하세요. 자동 설치나 프로젝트 의존성 추가는 하지 않습니다.
+
+```sh
+node scripts/build-game.mjs --esbuild-api /path/to/esbuild/lib/main.js
+npm test
+```
+
+`build/game-bundle.json`은 86개 소스의 줄바꿈을 정규화한 해시와 출력 해시를 기록합니다. 테스트가 오래된 게임 파일의 배포를 막습니다. 공개 저장소에는 생성된 게임 파일이 함께 있어 소스를 내려받은 뒤 바로 실행할 수 있습니다.
 
 - `dist/`: 게임과 지도 자산
 - `tests/`: 시뮬레이션·저장·화면 회귀 테스트

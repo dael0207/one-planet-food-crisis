@@ -1,0 +1,358 @@
+{
+  "compiler": "esbuild",
+  "version": "0.28.2",
+  "format": "iife",
+  "target": "es2022",
+  "sourceEncoding": "utf8-lf",
+  "output": {
+    "file": "dist/game.bundle.js",
+    "bytes": 612875,
+    "sha256": "b75b4d260b226b1f9a9512fe51f5941956ba52b89d5cbe661aefebc3530f3e86"
+  },
+  "inputs": [
+    {
+      "file": "dist/app.mjs",
+      "sha256": "7ed017c1f7bbb2aacdee9a364bc07d51119a3b428e878f91f8ef56a33667d565"
+    },
+    {
+      "file": "dist/atlas-art.mjs",
+      "sha256": "514246ac6367ad99d45dd8435092683384d658ff5c31fe0fb7b0009b9a9c62cd"
+    },
+    {
+      "file": "dist/atlas-relief.mjs",
+      "sha256": "a38d684902702cec5d322c5cc92a88529df312fd3788e47486fe4a601638ff02"
+    },
+    {
+      "file": "dist/atlas-state.mjs",
+      "sha256": "d253da3b97e6ca6692d24cf338cd5e910c40de89b326e45008984c81399da175"
+    },
+    {
+      "file": "dist/cabinet-agendas.mjs",
+      "sha256": "8b1969f4b8d5e9fe161e5eba2740107db6d284667205bf493fbfd94fc6597503"
+    },
+    {
+      "file": "dist/cabinet-ui.mjs",
+      "sha256": "a6791777dd81e99d4b8b3fa0f0c19345b0c60a56ce0763c28730e47bf4537b4e"
+    },
+    {
+      "file": "dist/calendar.mjs",
+      "sha256": "b8d4f3534bb50b0f081518c7aaaee03993bd426003caec10d63dc783273a5c61"
+    },
+    {
+      "file": "dist/chronicle-model.mjs",
+      "sha256": "055389caf04dcff72efa382df4f67498c00ae6ba93430e9368410eacc5e7730c"
+    },
+    {
+      "file": "dist/chronicle-ui.mjs",
+      "sha256": "f7e3a9562ae40cfafcef0cbb54c9a7a2d524a29ade713d3ce4426c1351d7852f"
+    },
+    {
+      "file": "dist/command-ui.mjs",
+      "sha256": "b9e7053c591cbb636c4f6501362d6ffd26d08386721ca9b563eda27d9700e386"
+    },
+    {
+      "file": "dist/conflict-ui.mjs",
+      "sha256": "955f37b8b02b145d68cea2e2e6b17e829c846a6ad057eea4a02a7213d4cd0351"
+    },
+    {
+      "file": "dist/construction-benefits.mjs",
+      "sha256": "9ff4c41d09ef1cb248db0be287949825ee2e13cdd744face85b2670005752a49"
+    },
+    {
+      "file": "dist/continent-geometry.mjs",
+      "sha256": "1c3bc87bbdefbe30d838b2034ad0a585744e38a25769f50454321f81a4caa9db"
+    },
+    {
+      "file": "dist/country-data.mjs",
+      "sha256": "9fc9cfded152b2a1ce8d5d63fa925baec508574e8d4d4c13d3ac3d038399615c"
+    },
+    {
+      "file": "dist/country-picker.mjs",
+      "sha256": "7c78012b223cf8db489e5ee40f2411bc2f333ef808df8e5ed423e0837a9ec091"
+    },
+    {
+      "file": "dist/development-ui.mjs",
+      "sha256": "fbc19a6b637012b171f3beda7d0596cca167d43c5a1ee31d874785f570ab4c13"
+    },
+    {
+      "file": "dist/diplomacy-ui.mjs",
+      "sha256": "4739fe8cdb398103bc08663a1edd0dafea855acf680a478a14b23ed1403989fe"
+    },
+    {
+      "file": "dist/engine.mjs",
+      "sha256": "7419b995a9af6e12582b0a52962b932f27d70810fed57441fc0f331af07c0210"
+    },
+    {
+      "file": "dist/experience.mjs",
+      "sha256": "da181f899e9868cfd71372b4d81d8321e850050cd04f6c801fa4bc1d91b88a31"
+    },
+    {
+      "file": "dist/farm-landscape-ui.mjs",
+      "sha256": "fedb1d42809c0e786b4158fc2f384e34bc7c5b5062908c093ac9d93e0cc85537"
+    },
+    {
+      "file": "dist/farm-landscape.mjs",
+      "sha256": "1cce1e441c49a1cca654240a3ee2589b7367ca412cc8eb41b23e43cbfe191819"
+    },
+    {
+      "file": "dist/farm-map.mjs",
+      "sha256": "020bbf9867683339461286fa3ff81bac66dff8c5434ff2e02223f1dc18c3728e"
+    },
+    {
+      "file": "dist/flow.mjs",
+      "sha256": "339c0b46e518bd83772026472b927aed658965f0f11037c488a8822f5e4f2bc5"
+    },
+    {
+      "file": "dist/foreign-diplomacy.mjs",
+      "sha256": "83123fe5f58a8bc57f47550dae9ae41c5fc40bd17be68ab32b7718e79f7b287e"
+    },
+    {
+      "file": "dist/foreign-goals.mjs",
+      "sha256": "5feb2b087135b90ce69e14d79c1a539f25d0a31a52e8013ae33de6fe43725093"
+    },
+    {
+      "file": "dist/foreign-sites-commerce.mjs",
+      "sha256": "b0c4b673e1e7ddc5b463d0f4f11ea337fe7cd726f53fe8c2b6dd23a438376310"
+    },
+    {
+      "file": "dist/foreign-sites-ui.mjs",
+      "sha256": "7b0a71e9807a59eac2c1bb5439a405e45098c9367f25262fc947c95aebc80ed6"
+    },
+    {
+      "file": "dist/foreign-sites.mjs",
+      "sha256": "e4be8afc6f87577b2a7badf2e0cd98ef92f45ef89f066838322ebaaeb9fd823a"
+    },
+    {
+      "file": "dist/foreign-strategy-ui.mjs",
+      "sha256": "f85188f6b4c2ff8f54ffbcf08fc444aea7d7376bd788eb34124bb7141e094c7a"
+    },
+    {
+      "file": "dist/foreign-strategy.mjs",
+      "sha256": "82e3625f18263ea75c002af07b5e850ce23cd5c365e61adbe86ae44425d6510e"
+    },
+    {
+      "file": "dist/goal-conflicts.mjs",
+      "sha256": "86b2f0124ed0f44bc6a71a54dae43ac1d1e7084175a26c959151021b1ce6dddd"
+    },
+    {
+      "file": "dist/goal-relations.mjs",
+      "sha256": "ac16f6c0a5a49e4594205c10ad56b138ece851763242e366fce09326cd92d8be"
+    },
+    {
+      "file": "dist/help-ui.mjs",
+      "sha256": "851274701fa4f95771fcd34ff90a16ba2fb5fa194d3548896e28ffe81bf5aee8"
+    },
+    {
+      "file": "dist/joint-investments-ui.mjs",
+      "sha256": "007247690fa295bad6de8fa252a818c831f3848e443b3a491cf3cec858903d48"
+    },
+    {
+      "file": "dist/joint-investments.mjs",
+      "sha256": "a8ad18856bd41ae9293ca867528f6acd2e860008116ff0b1d61aefaf084950cc"
+    },
+    {
+      "file": "dist/map-art.mjs",
+      "sha256": "1e27a72be9206c4c0d7c5512f80f4076be3005d921680885e212cfa44ba73662"
+    },
+    {
+      "file": "dist/map-camera.mjs",
+      "sha256": "63d483c1326483427c626a96947827f7ffd495563b03b046182314f1cb667bba"
+    },
+    {
+      "file": "dist/map-consequences.mjs",
+      "sha256": "6a3b421f2cb536a6d7a7ca7dd9a356d8c2866ab028723fa5b6773ab81fc3dc07"
+    },
+    {
+      "file": "dist/map-geometry.mjs",
+      "sha256": "9765b7774f4462b0f2e0f029fa87d1695a01e689c47eeb21d60733fd9c105afb"
+    },
+    {
+      "file": "dist/map-network-ui.mjs",
+      "sha256": "86f90d48efc9d5558fa745a13bce60de70b5b3d9f9aca092851a1ce5e57b95b1"
+    },
+    {
+      "file": "dist/map-network.mjs",
+      "sha256": "4ae06f384600fba0f076ba5fda859f3fc359e19c208ddf3417b7326e36e235b9"
+    },
+    {
+      "file": "dist/map-sites.mjs",
+      "sha256": "2a9b369f5d4a4a299f41cd36396bb7efa9b6379cb339d6f1dae4f1de2d73ed55"
+    },
+    {
+      "file": "dist/map.mjs",
+      "sha256": "075400da8a51e4925f2d5872d135d979c883e85724cf6c44c544542e49ecf5bf"
+    },
+    {
+      "file": "dist/mediation-controller.mjs",
+      "sha256": "82eb21c42827b2a4c39d9506e094b4618474a1712dba677ae3e8ad618c8aa7df"
+    },
+    {
+      "file": "dist/mediation-insight.mjs",
+      "sha256": "53a5d0816247538917458321c60977bba4b5cd17da4e4b88fff3498fb33335fa"
+    },
+    {
+      "file": "dist/mediation-ui.mjs",
+      "sha256": "46095b90d11c1d3869704331246149d4e245d152b6651412e31be39a3583d125"
+    },
+    {
+      "file": "dist/mediation.mjs",
+      "sha256": "2a0074f0020e39a52cc11b970b2b1c10773e836654933133a274389e49e1f6c7"
+    },
+    {
+      "file": "dist/nation-profiles.mjs",
+      "sha256": "b173d34144b9cf17b2cb0be2e07975f8e362d65b60b00cb141aa6a147c9adf45"
+    },
+    {
+      "file": "dist/negotiation-insight.mjs",
+      "sha256": "377ee9d8fba3865c07e9ca2cf6c948daddeba302ac911944486d7980f38ee59e"
+    },
+    {
+      "file": "dist/negotiation-ui.mjs",
+      "sha256": "ac1e7a8d60d5f4d45f59ecdc3885e6878ed4c57338e00b754034e8880284fbf1"
+    },
+    {
+      "file": "dist/negotiations.mjs",
+      "sha256": "97eef6c01a13680ae06ecfa994f8076a1be52c42839b023b881e63fa0fcd4698"
+    },
+    {
+      "file": "dist/network-ui.mjs",
+      "sha256": "4aa3f0a26101bb46aebfd251a4c0de11340bb5fef3cac9758acad1aa25ce09d0"
+    },
+    {
+      "file": "dist/objectives-data.mjs",
+      "sha256": "9482430840fa82e5382980f736375609c1e35c0854018274f15c6926298fc132"
+    },
+    {
+      "file": "dist/objectives-ui.mjs",
+      "sha256": "29a0b90bfc75d2485eb6627b296e7c350e71d6cd2867e75d2033c0cfa1e84db9"
+    },
+    {
+      "file": "dist/objectives.mjs",
+      "sha256": "5b6430a9455442ece09bac825b8896c7594a1107a4442598d0130698df4549bd"
+    },
+    {
+      "file": "dist/operations-ui.mjs",
+      "sha256": "793c6b50f7441cd5aa391f34b38c264dcd85446854013a51dc6f95a01384aee6"
+    },
+    {
+      "file": "dist/orders-ui.mjs",
+      "sha256": "148579d9c69dfd6d866c974d1483577b125a02e28f021fd704e34c6a531f2766"
+    },
+    {
+      "file": "dist/peace-compliance-model.mjs",
+      "sha256": "ca6153769bf5e71513a5ca160e68b92eef7890594df5d44e26c439258b72f323"
+    },
+    {
+      "file": "dist/peace-compliance-ui.mjs",
+      "sha256": "8cdb4fb2c1eb3d14c244966f8e40572da9c29dc8f0eb9453b85d48cb49fd6956"
+    },
+    {
+      "file": "dist/peace-compliance.mjs",
+      "sha256": "9e548969d12ab5457e8f7801ed7863edb0a5993a0e2b682b0033b07454870ad9"
+    },
+    {
+      "file": "dist/peace-offer-ui.mjs",
+      "sha256": "a075b3fedc4813da95f12334dd32d008846f25da050101542459011b48e0eaf5"
+    },
+    {
+      "file": "dist/peace-offers.mjs",
+      "sha256": "1c12914d2660363d399261520433be8d6cce4a576d44d0d094febd5be5b17858"
+    },
+    {
+      "file": "dist/peace-response-map.mjs",
+      "sha256": "f424bb2304031e006dfa87b35a36fba2d0febbc8c6d0590af3d644ee4eb86ba6"
+    },
+    {
+      "file": "dist/peace-response-model.mjs",
+      "sha256": "ae6710b31317976aa6b72722a20c48eb76e1edc4ca0df3f6b1b3eda4705f9611"
+    },
+    {
+      "file": "dist/peace-response-ui.mjs",
+      "sha256": "5ed249d61e7be19f693106ce9583702ddd844912aef0fb7c158d6ed0529f1496"
+    },
+    {
+      "file": "dist/peace-response.mjs",
+      "sha256": "8234399c3ba3f685bdd309d1c3c0ed47a756ccf4cc79214ef50d064cf6c30361"
+    },
+    {
+      "file": "dist/policies.mjs",
+      "sha256": "9fc3837e32cb9010ff2db62f9662e27baafe297c103cead84fe9843418bbcdab"
+    },
+    {
+      "file": "dist/policy-tradeoffs.mjs",
+      "sha256": "1d39b697a1ddfbc54e71b26f32c3a474fa10dc8f80a0de2c10186286f82fd011"
+    },
+    {
+      "file": "dist/project-state.mjs",
+      "sha256": "19872180f5283f6a0390d3204271f35ce448b05d2defaa7f07c6f7aa816b9edd"
+    },
+    {
+      "file": "dist/quarter-priority.mjs",
+      "sha256": "e0c0437c2f895f6091fbf5d829dc7c5592d374e616386d0b7d8e54420d304c11"
+    },
+    {
+      "file": "dist/render.mjs",
+      "sha256": "840c926e00065b06aead1fed53b69553aed29774332ce489f90df6a049a52710"
+    },
+    {
+      "file": "dist/result-causes.mjs",
+      "sha256": "f5f1064ad9b7f0a0f5326387e46e2c9737ae9d105dc33561dae71b4df445011a"
+    },
+    {
+      "file": "dist/room-map-ui.mjs",
+      "sha256": "8c011755c89e94fadb3dfdb145e2ffed405f8cc96448674db53514ab78e4dcb5"
+    },
+    {
+      "file": "dist/scenarios.mjs",
+      "sha256": "636e647bfd7b86b5564ae9725c90508b905b68bce2e11d9be269efa743199d76"
+    },
+    {
+      "file": "dist/site-controller.mjs",
+      "sha256": "02f603e245145781ab4b106893d5386acbb5d96b5af0fe496a4db031401c1248"
+    },
+    {
+      "file": "dist/site-operations.mjs",
+      "sha256": "6060f252214b38a18f171ab7e227e9ed643e207b7d82236df62cee4243bc8187"
+    },
+    {
+      "file": "dist/site-ui.mjs",
+      "sha256": "527f5ffe1118cab1bab4da16a6bd15e24d7df71c8a139b546b33f8b475add6ab"
+    },
+    {
+      "file": "dist/storage.mjs",
+      "sha256": "63bf6129fc08c8943bbcedd6307147d33d874c9d75994ced6d75f7570fd8ce47"
+    },
+    {
+      "file": "dist/treaties.mjs",
+      "sha256": "f547bbad5bde8337dc39400a83d091952fcf8e96138c95f205069e01aa4ff4f9"
+    },
+    {
+      "file": "dist/treaty-effects.mjs",
+      "sha256": "16417c409e2e61b39d093a6da3bae7e9feec8ecfc6209d8a2e30a1bce8a49108"
+    },
+    {
+      "file": "dist/treaty-execution.mjs",
+      "sha256": "bb1ae443b5edd5527f51aaa7ef93a464d9f36ebd4f9b314483b0a5782123368f"
+    },
+    {
+      "file": "dist/treaty-insight.mjs",
+      "sha256": "5a284dec4ee3355700b80a5f9ea406a68fe8f670e517a21d9593f96b2de68612"
+    },
+    {
+      "file": "dist/treaty-ui.mjs",
+      "sha256": "44560dfff406e07ca3ac195766bef740394aa52ea5f36c6a626c496c44beabbd"
+    },
+    {
+      "file": "dist/world-diplomacy.mjs",
+      "sha256": "7e67940c1def786d0392d5262476592fd04b996621eeb69677227e0b7875752b"
+    },
+    {
+      "file": "dist/world-goals-ui.mjs",
+      "sha256": "40eebf72eaa0e852f8ef1d28595403bd4b59d379ca4156e9cc048ecfef29e02d"
+    },
+    {
+      "file": "dist/world.mjs",
+      "sha256": "f391ee9dcd92bcc1e6d5b351195ac0bd2b1c7c23943947abbad4a60673f901d9"
+    }
+  ]
+}
