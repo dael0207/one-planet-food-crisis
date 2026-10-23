@@ -6,8 +6,8 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 638187,
-    "sha256": "e1b31a6eef654d674772db003ef1fc1f2ee0051f0e5c04c938b87ec08c7c1777"
+    "bytes": 638561,
+    "sha256": "eeb0baa8017c3b11b37ec8e64f37f1221b52e521db9190e4bd06738a84145b97"
   },
   "inputs": [
     {
@@ -52,7 +52,7 @@
     },
     {
       "file": "dist/command-preview.mjs",
-      "sha256": "bd70a50921afd7c5c7516881b229a97673f939bb7112f2a37bcec96031860b38"
+      "sha256": "c343dd3f8e58e319595700aecf9d28ee30f03fd2358c4ce7d403cfb760300f23"
     },
     {
       "file": "dist/command-ui.mjs",
@@ -164,7 +164,7 @@
     },
     {
       "file": "dist/map-attention-ui.mjs",
-      "sha256": "be9b7e4cd4cac627cd489653da2aed8d1b4259e4fff3fc1e17680f059bd1f3e3"
+      "sha256": "6ec6fb571198a4303c7eac271fec16521d97e02ba718a9e969240bdc85d8556d"
     },
     {
       "file": "dist/map-attention.mjs",

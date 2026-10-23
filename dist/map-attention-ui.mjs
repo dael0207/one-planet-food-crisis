@@ -8,7 +8,7 @@ const NS='http://www.w3.org/2000/svg';
 const ICONS={alert:'M12 3 2 21h20L12 3Zm0 6v5m0 3v1',build:'m4 20 10-10m-5-6 3-2 10 10-2 3-5-5-3 3-5-5 3-3-1-1Z',check:'m4 12 5 5L20 6',reply:'M4 5h16v12H9l-5 4V5Zm4 4h8m-8 4h5',arrow:'M4 12h16m-6-6 6 6-6 6'};
 const icon=name=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICONS[name]??ICONS.arrow}"/></svg>`;
 const attributes=pin=>`data-action="${escape(pin.action)}"${pin.changeId?` data-change-id="${escape(pin.changeId)}"`:''}`;
-const pinValue=value=>escape(value).replace(/유지 대비 ([+−-]?\d+)/g,'유지&nbsp;대비&nbsp;$1');
+const pinValue=value=>escape(value).replace(/유지 대비 ([+−-]?\d+)/g,'유지&nbsp;대비&nbsp;$1').replace(/(식량|국고|관계) ([+−-]\d+)/g,'$1&nbsp;$2');
 
 export function renderMapPin(pin){
  return `<button type="button" class="map-attention-pin" data-signal-id="${escape(pin.id)}" data-tone="${escape(pin.tone)}" ${attributes(pin)} aria-label="${escape(pin.label)} · ${escape(pin.value)} · ${pin.action==='inspect-priority'?'대응 검토':pin.tone==='preview'?'명령 확인':'결과 확인'}">${icon(pin.icon)}<span><strong>${escape(pin.label)}</strong><b>${pinValue(pin.value)}</b></span></button>`;

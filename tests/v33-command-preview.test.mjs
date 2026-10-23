@@ -5,10 +5,22 @@ import {performance} from 'node:perf_hooks';
 import {COUNTRY_IDS,advanceTurn,createGame,getAction,jointCommand,pendingPeaceOffers,peaceReplyCommand} from '../dist/engine.mjs';
 import {commandPreview} from '../dist/command-preview.mjs';
 import {proposalCommand} from '../dist/negotiations.mjs';
+import {treatyCommand} from '../dist/treaties.mjs';
 
 const quiet={networkStartTurn:999,policyStartTurn:1,objectiveStartTurn:999,worldGoalStartTurn:999,conflictStartTurn:999,mediationStartTurn:999,peaceOfferStartTurn:999,peaceComplianceStartTurn:999,peaceResponseStartTurn:999,foreignSiteStartTurn:999,jointStartTurn:999,foreignStrategyStartTurn:999};
 const run=(state,count,command='maintain')=>{for(let turn=0;turn<count;turn++)state=advanceTurn(state,command);return state;};
 const offered=()=>run(createGame('lumen',{foreignSiteStartTurn:999}),4);
+
+test('zero-effect foreign outcomes retain the addressed nation and authoritative response',()=>{
+ const state=createGame('lumen'),command=treatyCommand({targetId:'cera',kind:'trade_buy',food:8,money:1,duration:12});
+ assert.equal(getAction(state,command).treatyPreview.response,'reject');
+ const treaty=commandPreview(state,command);
+ assert.equal(treaty.pins[0].countryId,'cera');assert.match(treaty.pins[0].value,/거절 예상/);
+ const counter=advanceTurn(createGame('lumen',quiet),'propose:cera:buy:3:3'),record=counter.negotiations.at(-1);
+ assert.equal(record.status,'countered');counter.relations['cera:lumen']=0;
+ const reply=commandPreview(counter,`reply:${record.id}:decline`);
+ assert.equal(reply.pins[0].countryId,'cera');assert.match(reply.pins[0].value,/거절 예정/);
+});
 
 test('all six countries receive exact immutable quarter forecasts from the canonical engine',()=>{
  for(const playerId of COUNTRY_IDS){
@@ -107,7 +119,7 @@ test('declining a canonical peace offer keeps the offering nation visible despit
  const model=commandPreview(state,command);
 
  // Then
- assert.deepEqual(model.pins[0],{id:`preview:peace-reply:${offer.id}`,countryId:offer.fromId,siteKind:null,label:state.countries[offer.fromId].name,value:'평화 제안 거절 예정 · 직접 변화 없음',tone:'preview',icon:'reply',action:'focus-order',changeId:null});
+ assert.deepEqual(model.pins[0],{id:`preview:response:${offer.fromId}`,countryId:offer.fromId,siteKind:null,label:state.countries[offer.fromId].name,value:'평화 제안 거절 예정 · 직접 변화 없음',tone:'preview',icon:'reply',action:'focus-order',changeId:null});
  assert.ok(model.pins.length<=2);
  assert.deepEqual(model.metrics.map(metric=>metric.commandEffect),[0,0]);
 });

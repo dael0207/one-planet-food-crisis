@@ -55,7 +55,7 @@ function targetIds(state,action){
  const mediationRecord=action.mediation?.recordId&&state.mediations?.find(item=>item.id===action.mediation.recordId);
  const conflictId=action.mediationPreview?.draft?.conflictId??mediationRecord?.conflictId??action.conflictChoice?.conflictId;
  const conflict=conflictId&&state.goalConflicts?.find(item=>item.id===conflictId);
- const targets=[action.site?.sellerId,action.jointInvestment?.targetId,action.proposal?.targetId,action.treatyDraft?.targetId,action.targetId,offer?.fromId,treaty?.targetId,request?.fromId,conflict?.initiatorId,conflict?.targetId];
+ const targets=[action.site?.sellerId,action.jointInvestment?.targetId,action.proposal?.targetId,action.treatyDraft?.targetId,action.targetId,offer?.fromId,treaty?.targetId,request?.fromId,action.peaceCompliancePreview?.violatorId,conflict?.initiatorId,conflict?.targetId];
  if(action.negotiationId)targets.push(state.negotiations?.find(item=>item.id===action.negotiationId)?.targetId);
  return targets.filter((id,index)=>id&&targets.indexOf(id)===index);
 }
@@ -85,10 +85,12 @@ function foreignPin(state,action,selected,baseline){
 }
 
 function responsePin(state,action){
- if(action.peaceReply?.kind!=='decline')return null;
- const offer=state.peaceOffers?.find(item=>item.id===action.peaceReply.offerId);
- if(!offer?.fromId||!COUNTRIES[offer.fromId])return null;
- return pinBase(`preview:peace-reply:${offer.id}`,offer.fromId,null,COUNTRIES[offer.fromId].name,'평화 제안 거절 예정 · 직접 변화 없음','reply');
+ const target=targetIds(state,action).find(id=>id!==state.playerId&&COUNTRIES[id]);
+ if(!target)return null;
+ const outcome=action.treatyPreview?.response??action.preview?.response??action.mediationPreview?.outcome;
+ const outcomes={accept:'수락 예상',accepted:'합의 예상',reject:'거절 예상',rejected:'거절 예상',counter:'역제안 예상',countered:'역제안 예상',escalated:'갈등 확대 예상'};
+ const value=action.peaceReply?.kind==='decline'?'평화 제안 거절 예정 · 직접 변화 없음':outcomes[outcome]??`${action.name} 예정`;
+ return pinBase(`preview:response:${target}`,target,null,COUNTRIES[target].name,value,'reply');
 }
 
 function playerFoodPin(state,selected){
@@ -101,10 +103,9 @@ export function commandPreview(state,command){
  const playerId=state.playerId??'lumen',action=getAction({...state,playerId},command),player=state.countries?.[playerId];
  if(!action||!player||player.treasury<action.cost||player.food<(action.foodCost??0))return null;
  const selected=advanceTurn(structuredClone(state),command),baseline=advanceTurn(structuredClone(state),'maintain');
- const primary=facilityPin(state,action,selected,baseline),response=responsePin(state,action),foreign=foreignPin(state,action,selected,baseline);
+ const primary=facilityPin(state,action,selected,baseline),foreign=foreignPin(state,action,selected,baseline)??responsePin(state,action);
  const pins=[];
  if(primary)pins.push(primary);
- if(response)pins.push(response);
  if(foreign&&(!primary||foreign.countryId!==primary.countryId||foreign.siteKind!==primary.siteKind))pins.push(foreign);
  if(pins.length<2)pins.push(playerFoodPin(state,selected));
  return {mode:'preview',heading:action.name,actionLabel:'선택한 명령',commandId:command,notice:'현재 조건 모의계산 · 실행 전',pins:pins.slice(0,2),metrics:metricModel(state,selected,baseline)};
