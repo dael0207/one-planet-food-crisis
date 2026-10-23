@@ -9,6 +9,7 @@ const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 test('published classic bundle and every current source match the checked build receipt',async()=>{
  const receipt=JSON.parse(await readFile(new URL('build/game-bundle.json',root),'utf8'));
  assert.equal(receipt.compiler,'esbuild');assert.equal(receipt.version,'0.28.2');assert.equal(receipt.format,'iife');
+ assert.equal(receipt.target,'es2022');assert.equal(receipt.output.file,'dist/game.bundle.js');
  const files=(await readdir(new URL('dist/',root))).filter(file=>file.endsWith('.mjs')).map(file=>'dist/'+file).sort();
  assert.deepEqual(receipt.inputs.map(input=>input.file).sort(),files);
  assert.equal(receipt.sourceEncoding,'utf8-lf');

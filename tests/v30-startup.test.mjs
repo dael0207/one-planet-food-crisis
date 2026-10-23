@@ -110,7 +110,7 @@ test('success settles once and ignores a later native error callback',async()=>{
 test('index retains the external classic startup boundary and accessible initial state',async()=>{
  const html=await readFile(new URL('../dist/index.html',import.meta.url),'utf8');
  assert.match(html,/<link rel="stylesheet" href="startup\.css\?v=\d+">/);
- assert.match(html,/<script defer src="startup\.js\?v=\d+"><\/script>/);
+ assert.match(html,/<script defer src="startup\.js\?v=32"><\/script>/);
  assert.doesNotMatch(html,/<script type="module" src="app\.mjs/);
  assert.match(html,/<body class="room-game boot-pending" aria-busy="true">/);
  assert.match(html,/id="boot-message"[^>]*>상황실을 여는 중…</);
