@@ -5,9 +5,18 @@ export const FARM_LANDSCAPE_ASSETS = Object.freeze({
   expansion: 'farm-expansion-v30.webp',
 });
 
-const FARM_INSETS = Object.freeze({
-  lumen: 'translate(4 -8)', nord: 'translate(-4 4)', cera: 'translate(-6 -8)',
-  altia: 'translate(0 6)', marin: 'translate(6 -12)', solis: 'translate(0 -4)',
+const FARM_MATERIAL_TRANSFORMS = Object.freeze({
+  lumen: 'translate(4 -8)',
+  nord: 'translate(-4 4) rotate(6) scale(.9 .92)',
+  cera: 'translate(-6 -8) rotate(3) scale(1.07 .88)',
+  altia: 'translate(0 6) rotate(-5) scale(-.9 .82)',
+  marin: 'translate(6 -12) rotate(-7) scale(.86 1.04)',
+  solis: 'translate(0 -4) rotate(7) scale(-.94 .9)',
+});
+const FARM_EXPANSION_TRANSFORMS = Object.freeze({
+  lumen: '', nord: 'translate(-2 1) rotate(-4)', cera: 'translate(2 -1) rotate(5)',
+  altia: 'translate(1 0) rotate(-3)', marin: 'translate(-2 -1) rotate(-7)',
+  solis: 'translate(2 1) rotate(6)',
 });
 const FARM_PHASES = Object.freeze(['healthy', 'drought', 'recovering']);
 const IRRIGATION_COUNTRIES = Object.freeze(['lumen', 'solis']);
@@ -24,7 +33,7 @@ export function buildFarmScene(node, countryId) {
     'data-country': countryId,
     'aria-hidden': 'true',
   });
-  const material = node('g', {class: 'farm-landscape-material', transform: FARM_INSETS[countryId] ?? ''});
+  const material = node('g', {class: 'farm-landscape-material', transform: FARM_MATERIAL_TRANSFORMS[countryId] ?? ''});
   material.append(node('image', {
     class: 'farm-landscape-base',
     href: FARM_LANDSCAPE_ASSETS.healthy,
@@ -34,16 +43,8 @@ export function buildFarmScene(node, countryId) {
     height: 72,
     preserveAspectRatio: 'xMidYMid meet',
   }));
-  material.append(
-    node('image', {
-      class: 'farm-recovery-layer',
-      href: FARM_LANDSCAPE_ASSETS.healthy,
-      x: -50,
-      y: -36,
-      width: 100,
-      height: 72,
-      preserveAspectRatio: 'xMidYMid meet',
-    }),
+  const expansion = node('g', {class: 'farm-expansion-cluster', transform: FARM_EXPANSION_TRANSFORMS[countryId] ?? ''});
+  expansion.append(
     node('image', {
       class: 'farm-growth farm-expansion',
       href: FARM_LANDSCAPE_ASSETS.expansion,
@@ -74,6 +75,18 @@ export function buildFarmScene(node, countryId) {
       preserveAspectRatio: 'xMidYMid meet',
       'data-farm-tier': 3,
     }),
+  );
+  material.append(
+    node('image', {
+      class: 'farm-recovery-layer',
+      href: FARM_LANDSCAPE_ASSETS.healthy,
+      x: -50,
+      y: -36,
+      width: 100,
+      height: 72,
+      preserveAspectRatio: 'xMidYMid meet',
+    }),
+    expansion,
     path(node, 'farm-growth farm-parcel', 'M-48 9C-36 3-24 4-13 10L-18 24C-29 27-42 24-52 18Z', 1),
     path(node, 'farm-growth farm-irrigation', 'M-43 15C-31 12-22 14-15 19M-38 20C-30 18-24 19-18 22', 1),
     path(node, 'farm-growth farm-parcel', 'M15-25C27-27 42-23 52-16L47-5C35-8 24-6 13-10Z', 2),

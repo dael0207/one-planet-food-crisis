@@ -77,12 +77,36 @@ test('Given climate phases When farm scenes render Then each uses its real trans
   }
 });
 
+test('Given six countries When farm scenes build Then geography has stable distinct silhouettes while Lumen stays unchanged', () => {
+  const layouts = COUNTRY_IDS.map((countryId) => {
+    const scene = buildFarmScene(make, countryId);
+    return [
+      scene.querySelector('.farm-landscape-material').getAttribute('transform'),
+      scene.querySelector('.farm-expansion-cluster').getAttribute('transform'),
+    ];
+  });
+  assert.deepEqual(layouts[0], ['translate(4 -8)', '']);
+  assert.equal(new Set(layouts.map((layout) => layout.join('|'))).size, 6);
+});
+
+test('Given one country across climate phases When its asset updates Then geometry never shuffles', () => {
+  const scene = buildFarmScene(make, 'altia');
+  const material = scene.querySelector('.farm-landscape-material');
+  const expansion = scene.querySelector('.farm-expansion-cluster');
+  const geometry = [material.getAttribute('transform'), expansion.getAttribute('transform')];
+  for (const phase of ['healthy', 'drought', 'recovering']) {
+    updateFarmScene(scene, landscape({countryId: 'altia', phase}));
+    assert.deepEqual([material.getAttribute('transform'), expansion.getAttribute('transform')], geometry);
+    assert.equal(scene.querySelector('.farm-landscape-base').getAttribute('href'), FARM_LANDSCAPE_ASSETS[phase]);
+  }
+});
+
 test('Given completed farm levels When scene updates Then parcels, canals and service paths accumulate by actual level', () => {
   const scene = buildFarmScene(make, 'cera');
   updateFarmScene(scene, landscape({countryId: 'cera', infrastructure: {...landscape().infrastructure, siteLevel: 3, irrigated: true, expanded: true}}));
   assert.equal(scene.getAttribute('data-farm-level'), '3');
   assert.equal(descendants(scene).filter((node) => node.getAttribute('class')?.includes('farm-parcel')).length, 3);
-  assert.equal(descendants(scene).filter((node) => node.getAttribute('class')?.includes('farm-expansion')).length, 3);
+  assert.equal(descendants(scene).filter((node) => node.tag === 'image' && node.getAttribute('class')?.split(/\s+/).includes('farm-expansion')).length, 3);
   assert.ok(scene.querySelector('.farm-irrigation'));
   assert.ok(scene.querySelector('.farm-service-path'));
   assert.equal(scene.querySelector('.farm-planned-works').getAttribute('aria-hidden'), 'true');
