@@ -6,8 +6,8 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 623999,
-    "sha256": "d5ecaf094667136cfa8b2eadf1d32de93c13ca747167de12d61d764b5a9f6f07"
+    "bytes": 624095,
+    "sha256": "e61af747bbfcfbe5084b028b80d7cd4a693f8e1e722b3d4a70dfa188ddffeb31"
   },
   "inputs": [
     {
@@ -244,7 +244,7 @@
     },
     {
       "file": "dist/orders-ui.mjs",
-      "sha256": "148579d9c69dfd6d866c974d1483577b125a02e28f021fd704e34c6a531f2766"
+      "sha256": "29c679bed081691836e0c99a413c8f34324e3059633a3645864ea9e2bb403b70"
     },
     {
       "file": "dist/peace-compliance-model.mjs",
@@ -304,7 +304,7 @@
     },
     {
       "file": "dist/result-causes.mjs",
-      "sha256": "f5f1064ad9b7f0a0f5326387e46e2c9737ae9d105dc33561dae71b4df445011a"
+      "sha256": "29b32352985553e0d45e1fc706ca5844453a37a45ed861d470207311993f848f"
     },
     {
       "file": "dist/room-map-ui.mjs",

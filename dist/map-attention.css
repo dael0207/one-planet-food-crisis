@@ -1,4 +1,5 @@
 .map-attention-header{border-bottom:1px solid var(--stroke-default);background:var(--surface-inset)}
+.room-game .chronicle-empty h2{text-wrap:balance}
 .atlas-stage:has(.map-attention-header:not([hidden])) .mobile-command{display:none}
 .map-attention-task{display:flex;align-items:center;gap:var(--s3);width:100%;min-height:56px;padding:var(--s2) var(--s3);border:0;border-left:3px solid var(--signal-color);background:transparent;color:var(--content-raise);text-align:left}
 [data-tone="danger"]{--signal-color:var(--intent-error)}

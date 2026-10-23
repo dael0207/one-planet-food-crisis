@@ -1,6 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {layoutMapPins,renderMapAttentionHeader,renderMapPin} from '../dist/map-attention-ui.mjs';
+import {createGame,advanceTurn} from '../dist/engine.mjs';
+import {renderDecision} from '../dist/experience.mjs';
+import {renderResultCauses} from '../dist/result-causes.mjs';
+
+test('policy comparison maximum and maintenance cost stay with their numbers in narrow layouts',()=>{
+ const opening=renderDecision(createGame('lumen'));
+ assert.match(opening,/최대(?:&nbsp;|\u00a0)\+6/);
+ const started=renderResultCauses(advanceTurn(createGame('lumen'),'site:farm:upgrade'));
+ assert.match(started,/유지비(?:&nbsp;|\u00a0)1억/);
+});
 
 test('phone map pins remain readable within bounds and do not overlap at nearby facilities',()=>{
  const anchors=[{x:96,y:95},{x:103,y:107}],box={width:360,height:248},sizes=[{width:124,height:48},{width:124,height:48}];
