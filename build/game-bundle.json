@@ -6,8 +6,8 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 653989,
-    "sha256": "bdad1e623447a4b8245564fb5c91f6e7cccd2b7dbcc3d3b85dcdf6e9a4906a81"
+    "bytes": 654518,
+    "sha256": "f146529456edeaee817d540156c8bdbf7819a45946bfd6bf7ed5a17185a56dba"
   },
   "inputs": [
     {
@@ -116,7 +116,7 @@
     },
     {
       "file": "dist/forecast-comparison.mjs",
-      "sha256": "c8ae56bef2fddd4f2fb354f62c36d89e20fa93611b164e3b885882e3045a40da"
+      "sha256": "5d621e7c8dd6abd4f58ba5ab3f49dd964d72f25afe8aa77234748c2110ce0bcd"
     },
     {
       "file": "dist/foreign-diplomacy.mjs",

@@ -1,10 +1,10 @@
-import {COUNTRIES,COUNTRY_IDS,PROFILES,SITE_DEFS} from './engine.mjs?v=31';
+import {COUNTRIES,COUNTRY_IDS,PROFILES,SITE_DEFS,SITE_KINDS} from './engine.mjs?v=31';
 
 const relationKey=(a,b)=>[a,b].sort().join(':');
 const number=value=>Number.isFinite(value)?value:null;
 const validId=id=>COUNTRY_IDS.includes(id);
 const compactPart=part=>part&&typeof part.label==='string'&&Number.isFinite(part.value)?{label:part.label.slice(0,80),value:part.value}:null;
-const validFacility=item=>item&&validId(item.countryId)&&(item.siteKind==='national'||SITE_DEFS[item.siteKind])&&['started','completed'].includes(item.status)&&Number.isSafeInteger(item.dueTurn);
+const validFacility=item=>item&&validId(item.countryId)&&(item.siteKind==='national'||SITE_KINDS.includes(item.siteKind))&&['started','completed'].includes(item.status)&&Number.isSafeInteger(item.dueTurn);
 const clone=value=>structuredClone(value);
 const array=value=>Array.isArray(value)?value:[];
 
@@ -76,15 +76,25 @@ export function forecastComparison(state){
  }
  const reasons=[];
  const expectedGroups=categoryTotals(expected.foodBreakdown),actualGroups=categoryTotals(last.foodBreakdown);
+ let foodEvidence=0;
  for(const name of new Set([...Object.keys(expectedGroups),...Object.keys(actualGroups)])){
   const forecast=sum(expectedGroups[name]),actual=sum(actualGroups[name]),delta=actual-forecast;
-  if(delta)reasons.push(`${name}: 예상 ${signed(forecast)} → 실제 ${signed(actual)} (${signed(delta)}).`);
+  if(delta){foodEvidence+=delta;reasons.push(`${name}: 예상 ${signed(forecast)} → 실제 ${signed(actual)} (${signed(delta)}).`);}
  }
- if(last.actionCost!==expected.actionCost)reasons.push(`명령 비용이 예상 ${expected.actionCost}억, 실제 ${last.actionCost}억으로 달랐습니다.`);
+ const costEvidence=expected.actionCost-last.actionCost;
+ if(costEvidence)reasons.push(`명령 비용이 예상 ${expected.actionCost}억, 실제 ${last.actionCost}억으로 달랐습니다.`);
  const actualOutcomes=(last.worldActions??[]).filter(item=>(item.countryId===state.playerId||item.targetId===state.playerId)&&['trade','agreement','delivery','fulfilled','suspended','breach','sanction'].includes(item.type)).map(item=>({source:String(item.source??''),type:String(item.type??''),countryId:item.countryId??null,targetId:item.targetId??null,food:Number(item.food)||0,money:Number(item.money)||0})).slice(0,12);
  if(JSON.stringify(actualOutcomes)!==JSON.stringify(expected.outcomes))reasons.push('무역·협정 이행 기록이 실행 전 예상과 달랐습니다.');
+ for(const row of rows){
+  if(row.difference===0)continue;
+  const evidence=row.key==='food'?foodEvidence:row.key==='treasury'?costEvidence:0;
+  const residual=typeof row.difference==='number'?row.difference-evidence:null;
+  if(residual===0)continue;
+  const forecast=typeof row.expected==='number'?`${row.expected}${row.unit}`:row.expected,actual=typeof row.actual==='number'?`${row.actual}${row.unit}`:row.actual;
+  const remainder=evidence&&residual!==null?` 중 ${signed(residual)}${row.unit}`:'';
+  reasons.push(`${row.label}: 예상 ${forecast} → 실제 ${actual} 차이${remainder}의 원인은 기록에서 확인되지 않았습니다.`);
+ }
  const different=rows.some(row=>row.difference!==0)||reasons.length>0;
- if(different&&!reasons.length)reasons.push('기록된 원인만으로 차이가 확인되지 않았습니다. 상세 분기 기록을 확인하세요.');
  return {status:different?'different':'matched',summary:different?'예상과 실제가 달랐습니다.':'예상대로',rows,reasons,snapshot:clone(snapshot)};
 }
 

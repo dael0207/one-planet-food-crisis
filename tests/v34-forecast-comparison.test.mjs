@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 
 import {COUNTRY_IDS,advanceTurn,createGame} from '../dist/engine.mjs';
 import {commandPreview} from '../dist/command-preview.mjs';
-import {attachForecast,forecastComparison,forecastSnapshot} from '../dist/forecast-comparison.mjs';
+import {attachForecast,forecastComparison,forecastSnapshot,validForecastSnapshot} from '../dist/forecast-comparison.mjs';
 import {renderForecastComparison} from '../dist/forecast-comparison-ui.mjs';
 import {renderOutcome} from '../dist/experience.mjs';
 import {loadGame,saveGame} from '../dist/storage.mjs';
@@ -88,6 +88,18 @@ test('changed command cost is attributed while an unsupported treasury gap stays
  assert.match(unknown.reasons.join(' '),/확인되지 않았/);
 });
 
+test('known food evidence never hides an unrelated unexplained treasury or relation difference',()=>{
+ const state=createGame('lumen',quiet),preview=commandPreview(state,'balanced'),snapshot=forecastSnapshot(preview,state,'balanced');
+ snapshot.projection.metrics.food+=3;
+ snapshot.projection.foodBreakdown=snapshot.projection.foodBreakdown.map((part,index)=>index===0?{...part,value:part.value+3}:part);
+ snapshot.projection.metrics.treasury+=2;
+ snapshot.projection.relations=[{countryId:'nord',after:(snapshot.projection.relations.find(item=>item.countryId==='nord')?.after??state.relations['lumen:nord'])+2}];
+ const model=forecastComparison(attachForecast(advanceTurn(state,'balanced'),snapshot)),copy=model.reasons.join(' ');
+ assert.match(copy,/기후·수확: 예상 [−+]?\d+ → 실제 [−+]?\d+ \(−3\)\./);
+ assert.match(copy,/국고: 예상 \d+억 → 실제 \d+억 차이의 원인은 기록에서 확인되지 않았습니다\./);
+ assert.match(copy,/노르드 관계: 예상 \d+ → 실제 \d+ 차이의 원인은 기록에서 확인되지 않았습니다\./);
+});
+
 test('deferred site construction compares the displayed start status without claiming completion',()=>{
  const state=createGame('lumen',quiet),next=executeWithDisplayedForecast(state,'site:farm:upgrade');
  const model=forecastComparison(next),facility=model.rows.find(row=>row.key.startsWith('facility:'));
@@ -170,4 +182,22 @@ test('validated snapshots survive reload per country while legacy, malformed, sw
  root.games.lumen.lastForecast={playerId:'lumen',commandId:'maintain',sourceTurn:0,resultTurn:1,projection:{metrics:{food:57,treasury:63},actionCost:0,foodBreakdown:'bad',relations:{},foreign:1,facilities:false,outcomes:'bad'}};
  values.set('one-planet-food-crisis-v4',JSON.stringify(root));
  assert.equal(loadGame('lumen').status,'restored');
+});
+
+test('prototype property names cannot become forged facility kinds in a restored optional forecast',()=>{
+ const state=createGame('lumen'),preview=commandPreview(state,'maintain'),snapshot=forecastSnapshot(preview,state,'maintain');
+ snapshot.projection.facilities=['__proto__','constructor','toString'].map(siteKind=>({countryId:'lumen',siteKind,status:'started',dueTurn:2}));
+ const safe=validForecastSnapshot(snapshot,{playerId:'lumen',commandId:'maintain',resultTurn:1});
+ assert.deepEqual(safe.projection.facilities,[]);
+
+ const next=attachForecast(advanceTurn(state,'maintain'),forecastSnapshot(preview,state,'maintain'));
+ saveGame(next,{phase:'result',step:0});
+ const root=JSON.parse(values.get('one-planet-food-crisis-v4'));
+ root.games.lumen.lastForecast.projection.facilities=snapshot.projection.facilities;
+ values.set('one-planet-food-crisis-v4',JSON.stringify(root));
+ const loaded=loadGame('lumen');
+ assert.equal(loaded.status,'restored');
+ assert.equal(loaded.state.turn,1);
+ assert.deepEqual(loaded.state.history.at(-1).forecast.projection.facilities,[]);
+ assert.doesNotMatch(renderForecastComparison(loaded.state),/undefined|\[object Object\]|__proto__|constructor|toString/);
 });
