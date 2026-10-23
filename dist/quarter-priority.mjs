@@ -1,7 +1,7 @@
-import {COUNTRIES,PROFILES,SITE_DEFS,getAction} from './engine.mjs?v=30';
-import {getObjectiveView,OBJECTIVE_PLANS} from './objectives.mjs?v=30';
-import {getScenario} from './scenarios.mjs?v=30';
-import {nationalProjects,siteProjects} from './project-state.mjs?v=30';
+import {COUNTRIES,PROFILES,SITE_DEFS,getAction} from './engine.mjs?v=31';
+import {getObjectiveView,OBJECTIVE_PLANS} from './objectives.mjs?v=31';
+import {getScenario} from './scenarios.mjs?v=31';
+import {nationalProjects,siteProjects} from './project-state.mjs?v=31';
 
 const safe=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const affordable=(state,commandId)=>{

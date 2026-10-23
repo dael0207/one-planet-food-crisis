@@ -1,5 +1,5 @@
-import { GEOGRAPHY } from './continent-geometry.mjs';
-export { CONTINENT_PATH, GEOGRAPHY, NATIONAL_BORDERS } from './continent-geometry.mjs';
+import { GEOGRAPHY } from './continent-geometry.mjs?v=31';
+export { CONTINENT_PATH, GEOGRAPHY, NATIONAL_BORDERS } from './continent-geometry.mjs?v=31';
 
 const ACTION_LABELS = { trade: '교역', aid: '긴급 지원', peace_response_aid: '공동 대응 지원', investment: '시설 투자', invest: '시설 투자', technology: '기술 협력' };
 const LUMEN_EXPORT_TARGETS = ['nord', 'marin', 'solis'];

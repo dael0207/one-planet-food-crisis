@@ -1,4 +1,4 @@
-import {previewTreaty} from './treaties.mjs?v=30';
+import {previewTreaty} from './treaties.mjs?v=31';
 
 const change=(before,after)=>({before,after,delta:after-before});
 

@@ -1,7 +1,7 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {OBJECTIVE_PLANS,OBJECTIVE_POLICIES} from './objectives-data.mjs?v=30';
-import {advanceObjectives,createObjectives,getObjectiveView} from './objectives.mjs?v=30';
-import {tradeBlocked} from './goal-conflicts.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {OBJECTIVE_PLANS,OBJECTIVE_POLICIES} from './objectives-data.mjs?v=31';
+import {advanceObjectives,createObjectives,getObjectiveView} from './objectives.mjs?v=31';
+import {tradeBlocked} from './goal-conflicts.mjs?v=31';
 
 const BASIC={
  lumen:{balanced:{name:'교역 신뢰 강화',cost:4}},

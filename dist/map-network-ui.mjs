@@ -1,6 +1,6 @@
-import { COUNTRY_IDS, COUNTRIES } from './country-data.mjs?v=30';
-import { GEOGRAPHY } from './map-geometry.mjs?v=30';
-import { mapTreatyChanges, mapTreatyLinks } from './map-network.mjs?v=30';
+import { COUNTRY_IDS, COUNTRIES } from './country-data.mjs?v=31';
+import { GEOGRAPHY } from './map-geometry.mjs?v=31';
+import { mapTreatyChanges, mapTreatyLinks } from './map-network.mjs?v=31';
 
 const NS = 'http://www.w3.org/2000/svg';
 const LIVE = new Set(['active', 'new']);

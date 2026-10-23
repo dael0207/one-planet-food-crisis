@@ -1,7 +1,7 @@
-import {nationalProjects,siteProjects} from './project-state.mjs?v=30';
-import { PROFILES, getPolicies, getAction, eventForTurn, COUNTRIES, currentAgenda } from './engine.mjs?v=30';
+import {nationalProjects,siteProjects} from './project-state.mjs?v=31';
+import { PROFILES, getPolicies, getAction, eventForTurn, COUNTRIES, currentAgenda } from './engine.mjs?v=31';
 
-import {getObjectiveView} from './objectives.mjs?v=30';
+import {getObjectiveView} from './objectives.mjs?v=31';
 
 const seasons = ['봄', '여름', '가을', '겨울'];
 const NATIONAL_CHOICES = {

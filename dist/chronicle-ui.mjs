@@ -1,5 +1,5 @@
-import {SITE_DEFS} from './site-operations.mjs?v=30';
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
+import {SITE_DEFS} from './site-operations.mjs?v=31';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
 
 const METRICS={food:['식량','점'],treasury:['국고','억'],price:['생활물가','지수']};
 const PAGE_SIZE=8,MAX_CHART_POINTS=120;

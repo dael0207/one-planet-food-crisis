@@ -1,8 +1,8 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {escape,signed} from './render.mjs?v=30';
-import {previewTreaty,treatyCommand,activeTreaties,getReliability} from './treaties.mjs?v=30';
-import {treatyComparison,treatyResponseDistance} from './treaty-insight.mjs?v=30';
-import {quarterDate} from './calendar.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {escape,signed} from './render.mjs?v=31';
+import {previewTreaty,treatyCommand,activeTreaties,getReliability} from './treaties.mjs?v=31';
+import {treatyComparison,treatyResponseDistance} from './treaty-insight.mjs?v=31';
+import {quarterDate} from './calendar.mjs?v=31';
 
 const KINDS={trade_buy:'식량 장기 수입 협정',trade_sell:'식량 장기 수출 협정',alliance:'식량 상호지원 동맹'};
 const STATUS={active:'이행 중',completed:'정상 완료',broken:'자발적 파기',cancelled:'상대국 종료',rejected:'체결 거절'};

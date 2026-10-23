@@ -1,8 +1,8 @@
-import {COUNTRIES,COUNTRY_IDS,getAction} from './engine.mjs?v=30';
-import {escape,signed} from './render.mjs?v=30';
-import {getRelation,pendingCounters,previewProposal,relationLabel} from './negotiations.mjs?v=30';
-import {proposalComparison,responseDistance} from './negotiation-insight.mjs?v=30';
-import {quarterDate} from './calendar.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS,getAction} from './engine.mjs?v=31';
+import {escape,signed} from './render.mjs?v=31';
+import {getRelation,pendingCounters,previewProposal,relationLabel} from './negotiations.mjs?v=31';
+import {proposalComparison,responseDistance} from './negotiation-insight.mjs?v=31';
+import {quarterDate} from './calendar.mjs?v=31';
 
 const KIND_LABELS={buy:'식량 구매',sell:'식량 판매',aid_out:'지원 보내기',aid_in:'지원 요청'};
 const RESPONSE_LABELS={accept:'수락 예상',counter:'역제안 예상',reject:'거절 예상'};

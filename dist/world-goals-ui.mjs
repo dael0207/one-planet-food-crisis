@@ -1,8 +1,8 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {foreignGoalView} from './foreign-goals.mjs?v=30';
-import {goalRelations} from './goal-relations.mjs?v=30';
-import {escape} from './render.mjs?v=30';
-import {renderForeignStrategy} from './foreign-strategy-ui.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {foreignGoalView} from './foreign-goals.mjs?v=31';
+import {goalRelations} from './goal-relations.mjs?v=31';
+import {escape} from './render.mjs?v=31';
+import {renderForeignStrategy} from './foreign-strategy-ui.mjs?v=31';
 
 const foreignIds=state=>COUNTRY_IDS.filter(id=>id!==state?.playerId);
 const activated=state=>Number.isSafeInteger(state?.worldGoalStartTurn)&&state.turn>=state.worldGoalStartTurn;

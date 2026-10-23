@@ -1,4 +1,4 @@
-import {PROFILES} from './nation-profiles.mjs?v=30';
+import {PROFILES} from './nation-profiles.mjs?v=31';
 
 const shared=[
  {id:'subsidy',name:'생활비 보조금',tag:'즉시 지원',cost:12,description:'가계의 식료품 구매 부담을 덜어줍니다.',forecast:'국고 −12 · 물가 부담 감소 · 지지도 상승'},

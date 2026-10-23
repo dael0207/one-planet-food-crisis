@@ -1,5 +1,5 @@
-import {PROFILES} from './engine.mjs?v=30';
-import {escape,signed} from './render.mjs?v=30';
+import {PROFILES} from './engine.mjs?v=31';
+import {escape,signed} from './render.mjs?v=31';
 
 const MAX_LEVEL=3;
 const isOwn=(project,playerId)=>Boolean(project)&&(!project.type||project.type==='facility')&&(!project.countryId||project.countryId===playerId);

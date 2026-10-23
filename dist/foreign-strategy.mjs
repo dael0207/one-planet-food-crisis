@@ -1,4 +1,4 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
 
 const MODES={
  food:{label:'식량 안정'},fiscal:{label:'재정 회복'},resilience:{label:'공급 자립'},trade:{label:'교역 확대'},development:{label:'장기 개발'},

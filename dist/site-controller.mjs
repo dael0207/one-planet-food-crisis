@@ -1,9 +1,9 @@
-import {SITE_KINDS,siteView} from './site-operations.mjs?v=30';
-import {updateMapSites} from './map-sites.mjs?v=30';
-import {createMapCamera} from './map-camera.mjs?v=30';
-import {renderSiteSelector,renderSitePanel,siteOrder} from './site-ui.mjs?v=30';
-import {jointCommand,previewJointInvestment} from './joint-investments.mjs?v=30';
-import {renderJointPreview} from './joint-investments-ui.mjs?v=30';
+import {SITE_KINDS,siteView} from './site-operations.mjs?v=31';
+import {updateMapSites} from './map-sites.mjs?v=31';
+import {createMapCamera} from './map-camera.mjs?v=31';
+import {renderSiteSelector,renderSitePanel,siteOrder} from './site-ui.mjs?v=31';
+import {jointCommand,previewJointInvestment} from './joint-investments.mjs?v=31';
+import {renderJointPreview} from './joint-investments-ui.mjs?v=31';
 
 export function createSiteController(context){
  let selection=null,operation=null,camera=null,cameraPlayer=context.state().playerId,lastCountry=cameraPlayer;

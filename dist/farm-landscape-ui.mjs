@@ -1,7 +1,7 @@
-import {farmLandscape} from './farm-landscape.mjs?v=30';
-import {quarterDate} from './calendar.mjs?v=30';
-import {escape} from './render.mjs?v=30';
-import {PROFILES} from './nation-profiles.mjs?v=30';
+import {farmLandscape} from './farm-landscape.mjs?v=31';
+import {quarterDate} from './calendar.mjs?v=31';
+import {escape} from './render.mjs?v=31';
+import {PROFILES} from './nation-profiles.mjs?v=31';
 
 const date=turn=>{const value=quarterDate(Math.max(0,turn-1));return `${value.year}년 ${value.quarter}분기`;};
 const signed=value=>`${value>0?'+':value<0?'−':''}${Math.abs(value)}`;

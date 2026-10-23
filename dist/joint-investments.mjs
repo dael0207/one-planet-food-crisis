@@ -1,7 +1,7 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {tradeBlocked} from './goal-conflicts.mjs?v=30';
-import {createForeignSites} from './foreign-sites.mjs?v=30';
-import {getRelation} from './negotiations.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {tradeBlocked} from './goal-conflicts.mjs?v=31';
+import {createForeignSites} from './foreign-sites.mjs?v=31';
+import {getRelation} from './negotiations.mjs?v=31';
 
 const KINDS=['port','farm'];
 const CAPITALS=[12,20,28];

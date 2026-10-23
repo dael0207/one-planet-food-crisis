@@ -1,5 +1,5 @@
-import {COUNTRY_IDS} from './country-data.mjs?v=30';
-import {PROFILES} from './nation-profiles.mjs?v=30';
+import {COUNTRY_IDS} from './country-data.mjs?v=31';
+import {PROFILES} from './nation-profiles.mjs?v=31';
 
 const policy=(country,stage,name,tag,cost,description,forecast,goalEffects)=>({
  id:`mandate_${country}_${stage}`,name,tag,cost,foodCost:0,description,forecast,goalEffects,

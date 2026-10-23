@@ -1,7 +1,7 @@
-import {renderTreatyHistory} from './treaty-ui.mjs?v=30';
-import {renderNegotiationHistory} from './negotiation-ui.mjs?v=30';
-import {COUNTRIES,getAction} from './engine.mjs?v=30';
-import {escape} from './render.mjs?v=30';
+import {renderTreatyHistory} from './treaty-ui.mjs?v=31';
+import {renderNegotiationHistory} from './negotiation-ui.mjs?v=31';
+import {COUNTRIES,getAction} from './engine.mjs?v=31';
+import {escape} from './render.mjs?v=31';
 const countryName=id=>COUNTRIES[id]?.name??'국제사회';
 export const pendingRequests=state=>state.requests.filter(request=>request.status==='pending'&&request.expiresTurn>state.turn);
 const typeLabel={aid:'긴급 지원 요청',trade:'교역 협상',technology:'기술 협력'};

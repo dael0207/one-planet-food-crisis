@@ -1,7 +1,7 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {tradeBlocked} from './goal-conflicts.mjs?v=30';
-import {foreignSiteDevelopment,foreignSiteEvent,foreignSitesActive} from './foreign-sites.mjs?v=30';
-import {SITE_DEFS} from './site-operations.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {tradeBlocked} from './goal-conflicts.mjs?v=31';
+import {foreignSiteDevelopment,foreignSiteEvent,foreignSitesActive} from './foreign-sites.mjs?v=31';
+import {SITE_DEFS} from './site-operations.mjs?v=31';
 
 const PLANS={lumen:['farm','port','city'],nord:['city','port','farm'],cera:['port','farm','city'],altia:['city','farm','port'],marin:['port','city','farm'],solis:['farm','city','port']};
 const COSTS={city:level=>10+4*level,port:level=>14+5*level,farm:level=>12+4*level};

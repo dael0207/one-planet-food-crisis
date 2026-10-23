@@ -1,8 +1,8 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {goalPairAffinity,goalRelations} from './goal-relations.mjs?v=30';
-import {reliefActive} from './mediation.mjs?v=30';
-import {peaceComplianceMarketContext,peaceComplianceTradeBlocked} from './peace-compliance.mjs?v=30';
-import {peaceResponseMarketContext,peaceResponsePairContext,peaceResponseTradeBlocked} from './peace-response-model.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {goalPairAffinity,goalRelations} from './goal-relations.mjs?v=31';
+import {reliefActive} from './mediation.mjs?v=31';
+import {peaceComplianceMarketContext,peaceComplianceTradeBlocked} from './peace-compliance.mjs?v=31';
+import {peaceResponseMarketContext,peaceResponsePairContext,peaceResponseTradeBlocked} from './peace-response-model.mjs?v=31';
 
 const STANCES=['sanction','response','neutral'];
 const pairKey=(a,b)=>[a,b].sort().join(':');

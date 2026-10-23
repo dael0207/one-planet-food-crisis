@@ -1,7 +1,7 @@
-import {COUNTRY_IDS,COUNTRIES} from './country-data.mjs?v=30';
-import {clamp} from './world-diplomacy.mjs?v=30';
-import {tradeBlocked} from './goal-conflicts.mjs?v=30';
-export {initialRequest,requestAction,applyRequest,applyAgreements,updateRequests} from './world-diplomacy.mjs?v=30';
+import {COUNTRY_IDS,COUNTRIES} from './country-data.mjs?v=31';
+import {clamp} from './world-diplomacy.mjs?v=31';
+import {tradeBlocked} from './goal-conflicts.mjs?v=31';
+export {initialRequest,requestAction,applyRequest,applyAgreements,updateRequests} from './world-diplomacy.mjs?v=31';
 
 const production={lumen:23,nord:7,cera:17,altia:10,marin:10,solis:10};
 

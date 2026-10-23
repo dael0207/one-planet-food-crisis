@@ -1,7 +1,7 @@
-import {getAction} from './engine.mjs?v=30';
-import {getDomesticOrders} from './scenarios.mjs?v=30';
-import {escape} from './render.mjs?v=30';
-import {policyTradeoffs} from './policy-tradeoffs.mjs?v=30';
+import {getAction} from './engine.mjs?v=31';
+import {getDomesticOrders} from './scenarios.mjs?v=31';
+import {escape} from './render.mjs?v=31';
+import {policyTradeoffs} from './policy-tradeoffs.mjs?v=31';
 
 function orderRow(state,option,selected,index){
  const action=getAction(state,option.id),player=state.countries[state.playerId];

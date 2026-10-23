@@ -1,7 +1,7 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {SITE_DEFS,SITE_KINDS} from './site-operations.mjs?v=30';
-import {escape,signed} from './render.mjs?v=30';
-import {quarterDate} from './calendar.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {SITE_DEFS,SITE_KINDS} from './site-operations.mjs?v=31';
+import {escape,signed} from './render.mjs?v=31';
+import {quarterDate} from './calendar.mjs?v=31';
 
 export function renderForeignSiteInfo(state,view){
  const unknown=view.level===null;

@@ -1,9 +1,9 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {getRelation,relationLabel} from './negotiations.mjs?v=30';
-import {breakTreaty,ensureTreatyState} from './treaty-effects.mjs?v=30';
-import {executeTreaties} from './treaty-execution.mjs?v=30';
-import {marketContext} from './foreign-diplomacy.mjs?v=30';
-import {tradeBlocked} from './goal-conflicts.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {getRelation,relationLabel} from './negotiations.mjs?v=31';
+import {breakTreaty,ensureTreatyState} from './treaty-effects.mjs?v=31';
+import {executeTreaties} from './treaty-execution.mjs?v=31';
+import {marketContext} from './foreign-diplomacy.mjs?v=31';
+import {tradeBlocked} from './goal-conflicts.mjs?v=31';
 
 const KINDS=['trade_buy','trade_sell','alliance'],DURATIONS=[4,8,12];
 export const getReliability=(state,id)=>Math.max(0,Math.min(100,Math.round(state.reliability?.[id]??70)));

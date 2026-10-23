@@ -1,6 +1,6 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {goalPairAffinity} from './goal-relations.mjs?v=30';
-import {getRelation} from './negotiations.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {goalPairAffinity} from './goal-relations.mjs?v=31';
+import {getRelation} from './negotiations.mjs?v=31';
 
 export const ACCORD_ID=/^peace-accord-[a-z0-9-]+-\d+$/;
 export const TERMS={goals:['relief','peace'],conditions:['mutual','target'],food:[0,4,8],money:[0,6,12]};

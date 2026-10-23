@@ -1,6 +1,6 @@
-import {COUNTRIES} from './country-data.mjs?v=30';
-import {completeTreaty,punishBreach,rewardFulfillment,treatyEvent} from './treaty-effects.mjs?v=30';
-import {tradeBlocked} from './goal-conflicts.mjs?v=30';
+import {COUNTRIES} from './country-data.mjs?v=31';
+import {completeTreaty,punishBreach,rewardFulfillment,treatyEvent} from './treaty-effects.mjs?v=31';
+import {tradeBlocked} from './goal-conflicts.mjs?v=31';
 
 const transfer=(seller,buyer,food,money)=>{
  const stock=Math.min(food,Math.max(0,seller.food-20),Math.max(0,100-buyer.food));let delivered=stock;

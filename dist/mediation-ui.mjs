@@ -1,10 +1,10 @@
-import {COUNTRIES} from './country-data.mjs?v=30';
-import {mediationAction,mediationCommand,pendingMediationCounters,previewMediation} from './mediation.mjs?v=30';
-import {peaceCounterCommand,peaceOfferAction} from './peace-offers.mjs?v=30';
-import {peaceComplianceCommand,peaceCompliancePreview} from './peace-compliance.mjs?v=30';
-import {quarterDate} from './calendar.mjs?v=30';
-import {escape} from './render.mjs?v=30';
-import {renderConsent,renderPeaceChange,renderPeaceLevers} from './mediation-insight.mjs?v=30';
+import {COUNTRIES} from './country-data.mjs?v=31';
+import {mediationAction,mediationCommand,pendingMediationCounters,previewMediation} from './mediation.mjs?v=31';
+import {peaceCounterCommand,peaceOfferAction} from './peace-offers.mjs?v=31';
+import {peaceComplianceCommand,peaceCompliancePreview} from './peace-compliance.mjs?v=31';
+import {quarterDate} from './calendar.mjs?v=31';
+import {escape} from './render.mjs?v=31';
+import {renderConsent,renderPeaceChange,renderPeaceLevers} from './mediation-insight.mjs?v=31';
 
 const OUTCOMES={accepted:'합의 가능',countered:'역제안 예상',rejected:'거절 예상',escalated:'갈등 확대 위험'};
 const RESULTS={accepted:'합의 성립',countered:'역제안 도착',rejected:'협상 결렬',escalated:'갈등 확대',expired:'회신 기한 종료',cancelled:'분쟁 종료로 회신 취소'};

@@ -1,5 +1,5 @@
-import {COUNTRIES} from './country-data.mjs?v=30';
-import {OBJECTIVE_PLANS} from './objectives-data.mjs?v=30';
+import {COUNTRIES} from './country-data.mjs?v=31';
+import {OBJECTIVE_PLANS} from './objectives-data.mjs?v=31';
 
 const EXPORTERS=['lumen','cera'];
 const IMPORTERS=['nord','marin','solis'];

@@ -1,7 +1,7 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {adjustRelation} from './negotiations.mjs?v=30';
-import {goalRequest} from './goal-relations.mjs?v=30';
-import {tradeBlocked} from './goal-conflicts.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {adjustRelation} from './negotiations.mjs?v=31';
+import {goalRequest} from './goal-relations.mjs?v=31';
+import {tradeBlocked} from './goal-conflicts.mjs?v=31';
 export const clamp=(value,min=0,max=100)=>Math.max(min,Math.min(max,Math.round(value)));
 
 const openingPartner={lumen:'altia',nord:'cera',cera:'altia',altia:'cera',marin:'cera',solis:'marin'};

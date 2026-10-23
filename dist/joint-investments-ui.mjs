@@ -1,8 +1,8 @@
-import {COUNTRIES} from './country-data.mjs?v=30';
-import {SITE_DEFS} from './site-operations.mjs?v=30';
-import {previewJointInvestment} from './joint-investments.mjs?v=30';
-import {escape,signed} from './render.mjs?v=30';
-import {quarterDate} from './calendar.mjs?v=30';
+import {COUNTRIES} from './country-data.mjs?v=31';
+import {SITE_DEFS} from './site-operations.mjs?v=31';
+import {previewJointInvestment} from './joint-investments.mjs?v=31';
+import {escape,signed} from './render.mjs?v=31';
+import {quarterDate} from './calendar.mjs?v=31';
 
 export const JOINT_STATUS={building:'공동 건설',active:'공동 배분',suspended:'공급 중단',completed:'계약 종료',withdrawn:'투자 철회'};
 export const jointAt=(state,countryId,kind)=>(state.jointInvestments??[]).filter(item=>item.targetId===countryId&&item.kind===kind).at(-1)??null;

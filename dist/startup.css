@@ -1,0 +1,6 @@
+[data-boot-lock][inert]{visibility:hidden}
+#boot-status{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:center;gap:var(--s4);min-height:44px;padding:var(--s2) var(--s4);text-align:center;color:var(--content-default);background:var(--surface-raise);border-bottom:1px solid var(--stroke-default)}
+#boot-status[hidden]{display:none}
+#boot-message{font-size:var(--t-base)}
+#boot-retry{justify-self:center;min-height:44px;padding:var(--s3) var(--s6);border:1px solid var(--stroke-default);border-radius:2px;background:var(--surface-hover);color:var(--content-raise)}
+#boot-retry:focus-visible{outline:2px solid var(--intent-accent);outline-offset:2px}

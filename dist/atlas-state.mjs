@@ -1,6 +1,6 @@
-import { COUNTRY_IDS } from './country-data.mjs?v=30';
-import { mapCountryResult } from './room-map-ui.mjs?v=30';
-import {SITE_KINDS,siteView} from './site-operations.mjs?v=30';
+import { COUNTRY_IDS } from './country-data.mjs?v=31';
+import { mapCountryResult } from './room-map-ui.mjs?v=31';
+import {SITE_KINDS,siteView} from './site-operations.mjs?v=31';
 
 const NS = 'http://www.w3.org/2000/svg';
 const numeric = (value, fallback = 0) => Number.isFinite(Number(value)) ? Number(value) : fallback;

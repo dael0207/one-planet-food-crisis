@@ -1,5 +1,5 @@
-import {getObjectiveView,getObjectivePlan,unlockedPolicies} from './objectives.mjs?v=30';
-import {escape} from './render.mjs?v=30';
+import {getObjectiveView,getObjectivePlan,unlockedPolicies} from './objectives.mjs?v=31';
+import {escape} from './render.mjs?v=31';
 
 export function renderObjectiveRail(state){
  const view=getObjectiveView(state),plan=getObjectivePlan(state.playerId);

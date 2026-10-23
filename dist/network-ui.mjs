@@ -1,7 +1,7 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {escape,signed} from './render.mjs?v=30';
-import {foreignMarketSummary} from './foreign-diplomacy.mjs?v=30';
-import {renderWorldGoals} from './world-goals-ui.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {escape,signed} from './render.mjs?v=31';
+import {foreignMarketSummary} from './foreign-diplomacy.mjs?v=31';
+import {renderWorldGoals} from './world-goals-ui.mjs?v=31';
 
 const KINDS={trade_sell:'장기 무역 협정',trade_buy:'장기 무역 협정',alliance:'식량 상호지원 동맹'};
 const STATUS={active:'이행 중',completed:'기간 완료',broken:'자발적 파기',cancelled:'상대국 종료',rejected:'체결 거절'};

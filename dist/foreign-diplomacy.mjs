@@ -1,8 +1,8 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {goalMarketContext,goalPairAffinity} from './goal-relations.mjs?v=30';
-import {conflictMarketContext,tradeBlocked} from './goal-conflicts.mjs?v=30';
-import {peaceResponseTradeBlocked} from './peace-response-model.mjs?v=30';
-import {foreignStrategyContext} from './foreign-strategy.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {goalMarketContext,goalPairAffinity} from './goal-relations.mjs?v=31';
+import {conflictMarketContext,tradeBlocked} from './goal-conflicts.mjs?v=31';
+import {peaceResponseTradeBlocked} from './peace-response-model.mjs?v=31';
+import {foreignStrategyContext} from './foreign-strategy.mjs?v=31';
 
 const relationKey=(a,b)=>[a,b].sort().join(':');
 const relation=(state,a,b)=>a===b?100:state.relations?.[relationKey(a,b)]??50;

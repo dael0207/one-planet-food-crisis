@@ -1,5 +1,5 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {tradeBlocked} from './goal-conflicts.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {tradeBlocked} from './goal-conflicts.mjs?v=31';
 
 export const SITE_KINDS=Object.freeze(['city','port','farm']);
 export const SITE_DEFS=Object.freeze({

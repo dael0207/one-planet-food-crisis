@@ -1,5 +1,5 @@
-import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=30';
-import {adjustRelation,getRelation} from './negotiations.mjs?v=30';
+import {COUNTRIES,COUNTRY_IDS} from './country-data.mjs?v=31';
+import {adjustRelation,getRelation} from './negotiations.mjs?v=31';
 
 const clamp=value=>Math.max(0,Math.min(100,Math.round(value)));
 export const ensureTreatyState=state=>{

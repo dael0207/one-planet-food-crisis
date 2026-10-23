@@ -1,5 +1,5 @@
-import {COUNTRY_IDS,EVENTS,eventForTurn} from './country-data.mjs?v=30';
-import {siteView} from './site-operations.mjs?v=30';
+import {COUNTRY_IDS,EVENTS,eventForTurn} from './country-data.mjs?v=31';
+import {siteView} from './site-operations.mjs?v=31';
 
 const RECOVERY_QUARTERS=4;
 const DROUGHT_WORDS=/가뭄|비가 오지|저수지가 마르|강수량이 줄|위기의 여름/;

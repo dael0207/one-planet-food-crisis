@@ -1,9 +1,9 @@
-import {COUNTRIES,getAction} from './engine.mjs?v=30';
-import {SITE_KINDS,SITE_DEFS,siteView} from './site-operations.mjs?v=30';
-import {escape} from './render.mjs?v=30';
-import {renderForeignSiteInfo} from './foreign-sites-ui.mjs?v=30';
-import {renderJointSection} from './joint-investments-ui.mjs?v=30';
-import {renderFarmLandscape} from './farm-landscape-ui.mjs?v=30';
+import {COUNTRIES,getAction} from './engine.mjs?v=31';
+import {SITE_KINDS,SITE_DEFS,siteView} from './site-operations.mjs?v=31';
+import {escape} from './render.mjs?v=31';
+import {renderForeignSiteInfo} from './foreign-sites-ui.mjs?v=31';
+import {renderJointSection} from './joint-investments-ui.mjs?v=31';
+import {renderFarmLandscape} from './farm-landscape-ui.mjs?v=31';
 
 const disabledReason=(state,view,phase,operation,action)=>{
  if(!view.owned)return '외국 시설은 직접 운영할 수 없습니다.';
