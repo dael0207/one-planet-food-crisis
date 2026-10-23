@@ -55,7 +55,7 @@ function buildTarget(model) {
   target.append(svgNode('circle', {class: 'map-site-ring', r: 17}));
   if (kind !== 'farm') target.append(buildMapSiteScene(svgNode, kind, countryId));
   target.append(svgNode('circle', {class: 'map-site-focus', r: 25}));
-  const labelAbove = point.y > 560 || kind === 'farm' && point.y > 450;
+  const labelAbove = point.y > 560 || kind === 'farm' && (point.y > 450 || countryId === 'lumen' || countryId === 'cera');
   const labelY = kind === 'farm' ? labelAbove ? -51 : 50 : labelAbove ? -36 : 35;
   const statusY = kind === 'farm' ? labelAbove ? -40 : 61 : labelAbove ? -24 : 46;
   target.append(svgNode('text', {class: 'map-site-label', y: labelY, 'text-anchor': 'middle'}, SITE_LABELS[kind]), svgNode('text', {class: 'map-site-status', y: statusY, 'text-anchor': 'middle'}),svgNode('text',{class:'map-site-joint',y:-32,'text-anchor':'middle','aria-hidden':'true'}));
