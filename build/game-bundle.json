@@ -6,8 +6,8 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 638561,
-    "sha256": "eeb0baa8017c3b11b37ec8e64f37f1221b52e521db9190e4bd06738a84145b97"
+    "bytes": 638659,
+    "sha256": "08fc2d81a1443215c89810364727c08a0e8a0445dcd672c374c5b80b177039c6"
   },
   "inputs": [
     {
@@ -48,7 +48,7 @@
     },
     {
       "file": "dist/command-preview-ui.mjs",
-      "sha256": "da12a6e2ca96a1cf4710e8fbfcb4abc8fde38c83c268b5d1902ba733cb0d69f6"
+      "sha256": "fd0db05b644a3b6b375e4dbf173106c10526d5313ed379b57a2c733785e0fafb"
     },
     {
       "file": "dist/command-preview.mjs",
@@ -356,7 +356,7 @@
     },
     {
       "file": "dist/treaty-ui.mjs",
-      "sha256": "44560dfff406e07ca3ac195766bef740394aa52ea5f36c6a626c496c44beabbd"
+      "sha256": "413385b1770ab82f87cd2d3836b1b1d5f2c07ec7b671f56152d888eec95aad56"
     },
     {
       "file": "dist/world-diplomacy.mjs",

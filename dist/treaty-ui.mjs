@@ -61,7 +61,7 @@ function obligationDifference(kind,terms){
 function renderTreatyComparison(state,draft,previousDraft){
  const comparison=treatyComparison(state,draft,previousDraft);
  if(!comparison)return '';
- return `<div class="treaty-comparison" data-treaty-comparison><strong>이전 조건과 비교</strong><p>준비도 ${comparison.score.before} → ${comparison.score.after} (${deltaText(comparison.score.delta,'점')}) · ${RESPONSE[comparison.response.before]} → ${RESPONSE[comparison.response.after]}</p><p>기간 ${comparison.terms.duration.before} → ${comparison.terms.duration.after}분기 (${deltaText(comparison.terms.duration.delta,'분기')})</p><p>${obligationDifference(draft.kind,comparison.terms)}</p></div>`;
+ return `<div class="treaty-comparison" data-treaty-comparison><strong>이전 조건과 비교</strong><p>준비도 ${comparison.score.before} → ${comparison.score.after} (${deltaText(comparison.score.delta,'점')}) · ${RESPONSE[comparison.response.before].replaceAll(' ','&nbsp;')} → ${RESPONSE[comparison.response.after].replaceAll(' ','&nbsp;')}</p><p>기간 ${comparison.terms.duration.before} → ${comparison.terms.duration.after}분기 (${deltaText(comparison.terms.duration.delta,'분기')})</p><p>${obligationDifference(draft.kind,comparison.terms)}</p></div>`;
 }
 
 export function renderTreatyPreview(state,input={},previousDraft=null){
