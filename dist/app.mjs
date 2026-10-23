@@ -28,6 +28,7 @@ import {quarterPriority,renderQuarterPriority} from './quarter-priority.mjs?v=31
 import {mapConsequences,renderMapConsequences,updateMapConsequences} from './map-consequences.mjs?v=31';
 import {createMapAttention} from './map-attention-ui.mjs?v=31';
 import {renderCommandReview} from './command-preview-ui.mjs?v=31';
+import {attachForecast,forecastSnapshot} from './forecast-comparison.mjs?v=34';
 const get=id=>document.getElementById(id);
 const loaded=loadGame();
 let state=loaded.state,flow=loaded.flow,requestId=loaded.requestId,selected=null,country=loaded.state.playerId;
@@ -200,7 +201,7 @@ function commitDecision(command){
  const action=getAction(state,command),player=state.countries[state.playerId];
  if(!action||action.cost>player.treasury||(action.foodCost??0)>player.food)return;
  if(activePreviewCommand()!==command){clearDrafts();selected=null;requestId=null;pendingCommand=command;render();focusMapOutcome();return;}
- try{state=advanceTurn(state,command);chronicleOptions={...chronicleOptions,turn:state.turn,page:0};flow=beginReview();selected=null;requestId=null;clearDrafts();country=state.playerId;inspecting=false;persist();get('migration-notice').textContent='';render();focusMapOutcome();get('announcement').textContent=`${state.turn}분기 결과. ${state.history.at(-1).headline}`;}
+ try{const snapshot=forecastSnapshot(mapAttention?.getPreview(),state,command);state=attachForecast(advanceTurn(state,command),snapshot);chronicleOptions={...chronicleOptions,turn:state.turn,page:0};flow=beginReview();selected=null;requestId=null;clearDrafts();country=state.playerId;inspecting=false;persist();get('migration-notice').textContent='';render();focusMapOutcome();get('announcement').textContent=`${state.turn}분기 결과. ${state.history.at(-1).headline}`;}
  catch(error){const target=get('mediation-preview')??get('treaty-preview')??get('proposal-preview')??get('forecast')??get('announcement');target.textContent=error instanceof Error?error.message:'대응을 실행할 수 없습니다.';}
 }
 get('decision-content').addEventListener('submit',event=>{

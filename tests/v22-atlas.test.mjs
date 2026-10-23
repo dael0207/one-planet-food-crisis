@@ -101,7 +101,7 @@ test('V22 preserves all live countries, labels, state overlays and route inserti
   }
   for(const id of IDS){
     const terrain=all.find(item=>item.attributes['clip-path']===`url(#atlas-clip-${id})`);
-    assert.ok(terrain.children.some(item=>item.tag==='image'&&item.attributes.href==='terrain-relief-v22.webp'));
+    assert.ok(terrain.children.some(item=>item.tag==='image'&&item.attributes.href==='terrain-relief-v34.webp'));
   }
   const countryIndex = svg.children.findIndex((item) => item.attributes.id === 'map-country-layer');
   const facilityIndex = svg.children.findIndex((item) => item.attributes.id === 'map-frontier-layer');

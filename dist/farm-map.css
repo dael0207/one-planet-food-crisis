@@ -3,7 +3,7 @@
 
 .farm-landscape-base,
 .farm-expansion {
-  filter: saturate(.78) brightness(.82) contrast(1.08) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+  filter: saturate(.72) brightness(.78) contrast(1.1);
 }
 
 .farm-growth,
@@ -41,22 +41,22 @@
 
 .farm-expansion { opacity: .86; }
 .farm-landscape[data-farm-phase="drought"] .farm-expansion {
-  filter: saturate(.22) sepia(.55) hue-rotate(-14deg) brightness(.66) contrast(1.12) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+  filter: saturate(.22) sepia(.55) hue-rotate(-14deg) brightness(.66) contrast(1.12);
   opacity: .68;
 }
 
 .farm-landscape[data-farm-phase="recovering"][data-recovery-elapsed="1"] .farm-expansion {
-  filter: saturate(.3) sepia(.42) hue-rotate(-10deg) brightness(.7) contrast(1.1) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+  filter: saturate(.3) sepia(.42) hue-rotate(-10deg) brightness(.7) contrast(1.1);
   opacity: .72;
 }
 
 .farm-landscape[data-farm-phase="recovering"][data-recovery-elapsed="2"] .farm-expansion {
-  filter: saturate(.48) sepia(.24) brightness(.75) contrast(1.08) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+  filter: saturate(.48) sepia(.24) brightness(.75) contrast(1.08);
   opacity: .78;
 }
 
 .farm-landscape[data-farm-phase="recovering"][data-recovery-elapsed="3"] .farm-expansion {
-  filter: saturate(.66) sepia(.1) brightness(.8) contrast(1.08) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+  filter: saturate(.66) sepia(.1) brightness(.8) contrast(1.08);
   opacity: .84;
 }
 .farm-landscape[data-farm-phase="drought"][data-farm-severity="1"] .farm-climate-scar[data-farm-tier="1"],
@@ -112,5 +112,5 @@
 .farm-survey-line { opacity: .72; stroke-dasharray: 3 3; }
 
 .farm-landscape[data-selected="true"] .farm-landscape-base {
-  filter: saturate(.9) brightness(.9) contrast(1.08) drop-shadow(0 2px 2px color-mix(in srgb, var(--surface-inset) 65%, transparent));
+  filter: saturate(.88) brightness(.86) contrast(1.12);
 }

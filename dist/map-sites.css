@@ -8,16 +8,16 @@
 
 .map-site-raster {
   opacity: .84;
-  transform: scale(.78);
+  transform: scale(.94);
   transform-box: fill-box;
   transform-origin: center;
-  filter: saturate(.7) brightness(.82) contrast(1.06) drop-shadow(0 2px 2px rgb(0 0 0 / .35));
+  filter: saturate(.68) brightness(.78) contrast(1.1);
 }
-.map-site-target[data-level="unknown"] .map-site-raster { opacity: .65; transform: scale(.78); filter: saturate(.4) brightness(.74) contrast(1.02); }
-.map-site-target[data-level="0"] .map-site-raster { opacity: .78; transform: scale(.72); }
-.map-site-target[data-level="1"] .map-site-raster { opacity: .86; transform: scale(.82); }
-.map-site-target[data-level="2"] .map-site-raster { opacity: .93; transform: scale(.91); }
-.map-site-target[data-level="3"] .map-site-raster { opacity: 1; transform: scale(1); }
+.map-site-target[data-level="unknown"] .map-site-raster { opacity: .58; filter: saturate(.28) brightness(.64) contrast(1.04); }
+.map-site-target[data-level="0"] .map-site-raster { opacity: .68; filter: saturate(.42) brightness(.68) contrast(1.08); }
+.map-site-target[data-level="1"] .map-site-raster { opacity: .82; }
+.map-site-target[data-level="2"] .map-site-raster { opacity: .92; filter: saturate(.76) brightness(.82) contrast(1.1); }
+.map-site-target[data-level="3"] .map-site-raster { opacity: 1; filter: saturate(.84) brightness(.86) contrast(1.12); }
 
 .map-site-detail, .map-national-detail, .map-site-worksite { display: none; }
 .map-site-target[data-level="1"] .map-site-detail[data-site-tier="1"],
@@ -43,7 +43,7 @@
 .map-site-target[data-stage="construction"] .map-site-worksite,
 .map-site-target[data-stage="started"] .map-site-worksite,
 .map-site-target[data-national-construction="true"] .map-site-worksite { display: inline; }
-.map-site-target:is([data-stage="building"], [data-stage="construction"], [data-stage="started"]) .map-site-raster { opacity: .55; filter: saturate(.45) brightness(.72); }
+.map-site-target:is([data-stage="building"], [data-stage="construction"], [data-stage="started"]) .map-site-raster { opacity: .58; filter: saturate(.38) brightness(.66) contrast(1.08); }
 .map-site-workyard { fill: color-mix(in srgb, var(--intent-notice) 15%, transparent) !important; stroke-dasharray: 2 2; }
 .map-site-workcrane { stroke: var(--intent-notice) !important; }
 

@@ -19,6 +19,7 @@ import {renderResultCauses} from './result-causes.mjs?v=31';
 import {renderCabinetFollowthrough} from './cabinet-ui.mjs?v=31';
 import {renderStrategyResults} from './foreign-strategy-ui.mjs?v=31';
 import {renderFarmResult} from './farm-landscape-ui.mjs?v=31';
+import {renderForecastComparison} from './forecast-comparison-ui.mjs?v=34';
 const metrics=[['food','식량 안정'],['price','생활물가'],['treasury','국고'],['trust','외교 신뢰']];
 export function renderPhase(state,flow){
  const date=quarterDate(flow.phase==='decision'?state.turn:state.turn-1),calendar=`${date.year}년 ${date.quarter}분기`;
@@ -96,6 +97,7 @@ export function renderOutcome(state,_step,_country=state.playerId){
  const nextDate=quarterDate(state.turn),date=quarterDate(state.turn-1);
  const investments=`${renderDevelopment(state)}${renderJointResults(state)}${renderSiteResults(state)}${renderForeignSiteResults(state)}`;
  return `<div class="quarterly-report" data-console="result"><div class="dispatch-heading"><span class="console-step" data-stage="result">02 · 결과 확인</span><strong data-calendar-year="${date.year}" data-calendar-quarter="${date.quarter}">${date.year}년 ${date.quarter}분기 마감</strong></div><h2 id="decision-title" tabindex="-1">${headingMarkup(last.actionLabel)}</h2>
+ ${renderForecastComparison(state)}
  ${renderResultCauses(state)}
  ${renderFarmResult(state)}
  ${renderCabinetFollowthrough(state)}

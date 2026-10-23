@@ -111,5 +111,5 @@ export function createMapAttention(svg,header,layer){
   }
   syncShortcut();
   place();
- },place};
+ },getPreview(){return model.mode==='preview'?structuredClone(model):null;},place};
 }

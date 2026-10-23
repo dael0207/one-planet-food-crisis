@@ -108,7 +108,8 @@ test('render contract uses a separate keyboard-operable top layer with 44-unit h
   assert.match(source, /data-food-status/);
   assert.match(css, /\.map-site-target:focus-visible \.map-site-ring/);
   assert.match(css, /\.map-site-ring,[\s\S]*fill: none/s);
-  assert.match(css, /\.map-site-raster\s*\{[\s\S]*drop-shadow/s);
+  assert.match(css, /\.map-site-raster\s*\{[\s\S]*filter:\s*saturate\([^}]+contrast\(/s);
+  assert.doesNotMatch(css, /\.map-site-raster\s*\{[^}]*drop-shadow/s);
   assert.match(css, /\.map-site-workcrane/);
   assert.match(css, /data-camera-zoom="2"[\s\S]*\.map-state-summary[\s\S]*display: none !important/);
 });

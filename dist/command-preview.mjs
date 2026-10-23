@@ -98,6 +98,43 @@ function playerFoodPin(state,selected){
  return pinBase(`preview:food:${playerId}`,playerId,null,'분기 식량',`식량 ${before} → ${after} 예상`,'arrow');
 }
 
+const compactBreakdown=record=>(record?.foodBreakdown??[]).map(part=>({label:String(part.label??''),value:Number(part.value)||0}));
+const compactFacilities=record=>{
+ const rows=[];
+ for(const item of record?.development?.started??[])rows.push({countryId:record.playerId,siteKind:'national',status:'started',dueTurn:item.dueTurn});
+ for(const item of record?.development?.completed??[])rows.push({countryId:record.playerId,siteKind:'national',status:'completed',dueTurn:item.dueTurn});
+ for(const item of record?.siteDevelopment?.started??[])rows.push({countryId:item.countryId,siteKind:item.siteKind,status:'started',dueTurn:item.dueTurn});
+ for(const item of record?.siteDevelopment?.completed??[])rows.push({countryId:item.countryId,siteKind:item.siteKind,status:'completed',dueTurn:item.dueTurn});
+ for(const item of record?.jointInvestmentEvents??[]){
+  if(item.type==='started'&&item.targetId&&item.kind)rows.push({countryId:item.targetId,siteKind:item.kind,status:'started',dueTurn:item.dueTurn});
+ }
+ return rows.slice(0,2);
+};
+const compactOutcomes=(record,playerId)=>(record?.worldActions??[]).filter(item=>(item.countryId===playerId||item.targetId===playerId)&&['trade','agreement','delivery','fulfilled','suspended','breach','sanction'].includes(item.type)).map(item=>({source:String(item.source??''),type:String(item.type??''),countryId:item.countryId??null,targetId:item.targetId??null,food:Number(item.food)||0,money:Number(item.money)||0})).slice(0,12);
+function projectionModel(state,action,selected,baseline,pins){
+ const playerId=state.playerId??'lumen',record=selected.history.at(-1);
+ const facilities=compactFacilities(record);
+ if(action.jointInvestment&&action.jointPreview?.outcome==='accepted'){
+  const contract=(selected.jointInvestments??[]).find(item=>item.targetId===action.jointInvestment.targetId&&item.kind===action.jointInvestment.kind&&item.status==='building');
+  if(contract)facilities.unshift({countryId:contract.targetId,siteKind:contract.kind,status:'started',dueTurn:contract.dueTurn});
+ }
+ const displayedCountries=[...new Set(pins.map(pin=>pin.countryId).filter(id=>id&&id!==playerId))];
+ const foreign=displayedCountries.map(countryId=>{
+  const metrics=METRICS.filter(([key])=>selected.countries[countryId][key]!==baseline.countries[countryId][key]).map(([key])=>({key,value:selected.countries[countryId][key]}));
+  const key=relationKey(playerId,countryId),relation=(selected.relations?.[key]??50)!==(baseline.relations?.[key]??50)?selected.relations?.[key]??50:null;
+  return {countryId,metrics,relation};
+ }).filter(item=>item.metrics.length||item.relation!==null);
+ return {
+  metrics:{food:selected.countries[playerId].food,treasury:selected.countries[playerId].treasury},
+  actionCost:Number(action.cost)||0,
+  foodBreakdown:compactBreakdown(record),
+  relations:(record?.policyRelationEffects??[]).filter(item=>displayedCountries.includes(item.countryId)).map(item=>({countryId:item.countryId,after:item.after})).slice(0,2),
+  foreign:foreign.slice(0,2),
+  facilities:facilities.slice(0,2),
+  outcomes:compactOutcomes(record,playerId)
+ };
+}
+
 export function commandPreview(state,command){
  if(!state||typeof command!=='string'||!command)return null;
  const playerId=state.playerId??'lumen',action=getAction({...state,playerId},command),player=state.countries?.[playerId];
@@ -108,5 +145,6 @@ export function commandPreview(state,command){
  if(primary)pins.push(primary);
  if(foreign&&(!primary||foreign.countryId!==primary.countryId||foreign.siteKind!==primary.siteKind))pins.push(foreign);
  if(pins.length<2)pins.push(playerFoodPin(state,selected));
- return {mode:'preview',heading:action.name,actionLabel:'선택한 명령',commandId:command,notice:'현재 조건 모의계산 · 실행 전',pins:pins.slice(0,2),metrics:metricModel(state,selected,baseline)};
+ const visiblePins=pins.slice(0,2);
+ return {mode:'preview',heading:action.name,actionLabel:'선택한 명령',commandId:command,context:{playerId,sourceTurn:state.turn},notice:'현재 조건 모의계산 · 실행 전',pins:visiblePins,metrics:metricModel(state,selected,baseline),projection:projectionModel(state,action,selected,baseline,visiblePins)};
 }

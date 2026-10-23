@@ -15,8 +15,8 @@ class Node {
 const make = (tag, attributes = {}) => new Node(tag, attributes);
 const descendants = (root) => root.children.flatMap((child) => [child, ...descendants(child)]);
 
-test('V28 uses three real transparent map scene assets as decorative SVG images', async () => {
-  assert.deepEqual(MAP_SITE_ASSETS, {city: 'map-city-v28.webp', port: 'map-port-v28.webp', farm: 'map-farm-v28.webp'});
+test('V34 uses three real transparent orthographic map scene assets as decorative SVG images', async () => {
+  assert.deepEqual(MAP_SITE_ASSETS, {city: 'map-city-v34.webp', port: 'map-port-v34.webp', farm: 'farm-healthy-v34.webp'});
   for (const [kind, file] of Object.entries(MAP_SITE_ASSETS)) {
     await access(new URL(`../dist/${file}`, import.meta.url));
     const scene = buildMapSiteScene(make, kind);
@@ -25,7 +25,7 @@ test('V28 uses three real transparent map scene assets as decorative SVG images'
     assert.equal(scene.attributes.get('aria-hidden'), 'true');
     assert.equal(image.attributes.get('aria-hidden'), undefined);
     assert.equal(image.attributes.get('preserveAspectRatio'), 'xMidYMid meet');
-    assert.ok(Number(image.attributes.get('width')) >= 70 && Number(image.attributes.get('width')) <= 76);
+    assert.ok(Number(image.attributes.get('width')) >= 70 && Number(image.attributes.get('width')) <= 88);
   }
 });
 

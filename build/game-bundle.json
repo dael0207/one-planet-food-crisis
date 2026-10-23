@@ -6,17 +6,17 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 638659,
-    "sha256": "08fc2d81a1443215c89810364727c08a0e8a0445dcd672c374c5b80b177039c6"
+    "bytes": 653989,
+    "sha256": "bdad1e623447a4b8245564fb5c91f6e7cccd2b7dbcc3d3b85dcdf6e9a4906a81"
   },
   "inputs": [
     {
       "file": "dist/app.mjs",
-      "sha256": "8905d8aeb2ca3faa92fbdf03decb6692a051e8870360fe24ed0ead9a04b9eaf1"
+      "sha256": "c16759ae12623251e2806bce91590daa72695a407ff8c5653a46444d315ac5f5"
     },
     {
       "file": "dist/atlas-art.mjs",
-      "sha256": "514246ac6367ad99d45dd8435092683384d658ff5c31fe0fb7b0009b9a9c62cd"
+      "sha256": "129460382011cb1fc31683b3381c2d325b364e7c36d68623d02efac10308512a"
     },
     {
       "file": "dist/atlas-relief.mjs",
@@ -52,7 +52,7 @@
     },
     {
       "file": "dist/command-preview.mjs",
-      "sha256": "c343dd3f8e58e319595700aecf9d28ee30f03fd2358c4ce7d403cfb760300f23"
+      "sha256": "07b66d6568237fa718b1a9e3a63fd758240a0e173635e7097402a29de4540e39"
     },
     {
       "file": "dist/command-ui.mjs",
@@ -92,7 +92,7 @@
     },
     {
       "file": "dist/experience.mjs",
-      "sha256": "34098e157c763c2bef43a61a929dbce90dc486344c77c5d778c9c70ddef63672"
+      "sha256": "88c2d861dab1293d5aba56a8694552018a6307ab28c8c2f6ed975f28f953302f"
     },
     {
       "file": "dist/farm-landscape-ui.mjs",
@@ -104,11 +104,19 @@
     },
     {
       "file": "dist/farm-map.mjs",
-      "sha256": "020bbf9867683339461286fa3ff81bac66dff8c5434ff2e02223f1dc18c3728e"
+      "sha256": "cbebb592340145d9f2e91e312f9ac9d5f6e208146bac202bf0a09344c4ce3001"
     },
     {
       "file": "dist/flow.mjs",
       "sha256": "339c0b46e518bd83772026472b927aed658965f0f11037c488a8822f5e4f2bc5"
+    },
+    {
+      "file": "dist/forecast-comparison-ui.mjs",
+      "sha256": "a8219becd499a9cf3e87d2c3bb5c8ba2a4bcfa2373365e89039146af64c2477b"
+    },
+    {
+      "file": "dist/forecast-comparison.mjs",
+      "sha256": "c8ae56bef2fddd4f2fb354f62c36d89e20fa93611b164e3b885882e3045a40da"
     },
     {
       "file": "dist/foreign-diplomacy.mjs",
@@ -160,11 +168,11 @@
     },
     {
       "file": "dist/map-art.mjs",
-      "sha256": "1e27a72be9206c4c0d7c5512f80f4076be3005d921680885e212cfa44ba73662"
+      "sha256": "e9db70fa1ba97a630b50ee2274e4768ec8a64e4040eaf21cd6a3146fee120dd3"
     },
     {
       "file": "dist/map-attention-ui.mjs",
-      "sha256": "6ec6fb571198a4303c7eac271fec16521d97e02ba718a9e969240bdc85d8556d"
+      "sha256": "45b09df74114f86da87e3d27b12278eb2dae70e0b03ba77d83f8d99e7dabf070"
     },
     {
       "file": "dist/map-attention.mjs",
@@ -336,7 +344,7 @@
     },
     {
       "file": "dist/storage.mjs",
-      "sha256": "63bf6129fc08c8943bbcedd6307147d33d874c9d75994ced6d75f7570fd8ce47"
+      "sha256": "e765e943bd6a2ac0ec92fda007d9f2474b2ef0efb246a4b68becd4d973f65818"
     },
     {
       "file": "dist/treaties.mjs",

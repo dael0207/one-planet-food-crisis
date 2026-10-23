@@ -1,4 +1,5 @@
 import {createGame,advanceTurn,getAction,COUNTRY_IDS} from './engine.mjs?v=31';
+import {attachForecast,validForecastSnapshot} from './forecast-comparison.mjs?v=34';
 const KEY='one-planet-food-crisis-v4';
 const fresh=(status,id='lumen')=>({state:createGame(id),flow:{phase:'decision',step:0},requestId:null,status});
 const validId=id=>COUNTRY_IDS.includes(id);
@@ -34,8 +35,10 @@ function decode(saved,id,legacy=false){
  if(!Number.isSafeInteger(jointStartTurn)||jointStartTurn<1||jointStartTurn>saved.actions.length+1)return fresh('invalid',id);
  const foreignStrategyStartTurn=saved.foreignStrategyStartTurn??saved.actions.length+1;
  if(!Number.isSafeInteger(foreignStrategyStartTurn)||foreignStrategyStartTurn<1||foreignStrategyStartTurn>saved.actions.length+1)return fresh('invalid',id);
- const state=replay(saved.actions,id,networkStartTurn,policyStartTurn,objectiveStartTurn,worldGoalStartTurn,conflictStartTurn,mediationStartTurn,peaceOfferStartTurn,peaceComplianceStartTurn,peaceResponseStartTurn,foreignSiteStartTurn,jointStartTurn,foreignStrategyStartTurn);
+ let state=replay(saved.actions,id,networkStartTurn,policyStartTurn,objectiveStartTurn,worldGoalStartTurn,conflictStartTurn,mediationStartTurn,peaceOfferStartTurn,peaceComplianceStartTurn,peaceResponseStartTurn,foreignSiteStartTurn,jointStartTurn,foreignStrategyStartTurn);
  if(!state)return fresh('invalid',id);
+ const last=state.history.at(-1),forecast=validForecastSnapshot(saved.lastForecast,{playerId:id,commandId:last?.policyId,resultTurn:state.turn});
+ if(forecast)state=attachForecast(state,forecast);
  const phase=legacy&&saved.phase==='ending'?'decision':saved.phase;
  if(!['decision','result'].includes(phase)||!Number.isInteger(saved.step)||saved.step<0||saved.step>3||phase==='result'&&!state.turn)return fresh('invalid',id);
  const flow={phase,step:phase==='decision'?0:saved.step};
@@ -74,7 +77,8 @@ export function saveGame(state,flow={phase:'decision',step:0},requestId=null){
   let root;try{root=readRoot();}catch{root=null;}
   const games={...root?.games};
   if(!games.lumen){try{const legacy=legacySlot();if(legacy)games.lumen=legacy;}catch{}}
- games[state.playerId??'lumen']={playerId:state.playerId??'lumen',actions:state.commands,networkStartTurn:state.networkStartTurn??state.turn+1,policyStartTurn:state.policyStartTurn??state.turn+1,objectiveStartTurn:state.objectiveStartTurn??state.turn+1,worldGoalStartTurn:state.worldGoalStartTurn??state.turn+1,conflictStartTurn:state.conflictStartTurn??state.turn+1,mediationStartTurn:state.mediationStartTurn??state.turn+1,peaceOfferStartTurn:state.peaceOfferStartTurn??state.turn+1,peaceComplianceStartTurn:state.peaceComplianceStartTurn??state.turn+1,peaceResponseStartTurn:state.peaceResponseStartTurn??state.turn+1,foreignSiteStartTurn:state.foreignSiteStartTurn??state.turn+1,jointStartTurn:state.jointStartTurn??state.turn+1,foreignStrategyStartTurn:state.foreignStrategyStartTurn??state.turn+1,phase:flow.phase,step:flow.step,requestId};
+ const last=state.history?.at(-1),lastForecast=validForecastSnapshot(last?.forecast,{playerId:state.playerId,commandId:last?.policyId,resultTurn:state.turn});
+ games[state.playerId??'lumen']={playerId:state.playerId??'lumen',actions:state.commands,networkStartTurn:state.networkStartTurn??state.turn+1,policyStartTurn:state.policyStartTurn??state.turn+1,objectiveStartTurn:state.objectiveStartTurn??state.turn+1,worldGoalStartTurn:state.worldGoalStartTurn??state.turn+1,conflictStartTurn:state.conflictStartTurn??state.turn+1,mediationStartTurn:state.mediationStartTurn??state.turn+1,peaceOfferStartTurn:state.peaceOfferStartTurn??state.turn+1,peaceComplianceStartTurn:state.peaceComplianceStartTurn??state.turn+1,peaceResponseStartTurn:state.peaceResponseStartTurn??state.turn+1,foreignSiteStartTurn:state.foreignSiteStartTurn??state.turn+1,jointStartTurn:state.jointStartTurn??state.turn+1,foreignStrategyStartTurn:state.foreignStrategyStartTurn??state.turn+1,phase:flow.phase,step:flow.step,requestId,...(lastForecast?{lastForecast}: {})};
   localStorage.setItem(KEY,JSON.stringify({version:4,activePlayerId:state.playerId??'lumen',games}));return true;
  }catch{return false;}
 }

@@ -1,8 +1,8 @@
 export const FARM_LANDSCAPE_ASSETS = Object.freeze({
-  healthy: 'farm-healthy-v30.webp',
-  drought: 'farm-drought-v30.webp',
-  recovering: 'farm-recovering-v30.webp',
-  expansion: 'farm-expansion-v30.webp',
+  healthy: 'farm-healthy-v34.webp',
+  drought: 'farm-drought-v34.webp',
+  recovering: 'farm-recovering-v34.webp',
+  expansion: 'farm-expansion-v34.webp',
 });
 
 const FARM_MATERIAL_TRANSFORMS = Object.freeze({
@@ -37,10 +37,10 @@ export function buildFarmScene(node, countryId) {
   material.append(node('image', {
     class: 'farm-landscape-base',
     href: FARM_LANDSCAPE_ASSETS.healthy,
-    x: -50,
-    y: -36,
-    width: 100,
-    height: 72,
+    x: -46,
+    y: -42,
+    width: 92,
+    height: 84,
     preserveAspectRatio: 'xMidYMid meet',
   }));
   const expansion = node('g', {class: 'farm-expansion-cluster', transform: FARM_EXPANSION_TRANSFORMS[countryId] ?? ''});
@@ -80,10 +80,10 @@ export function buildFarmScene(node, countryId) {
     node('image', {
       class: 'farm-recovery-layer',
       href: FARM_LANDSCAPE_ASSETS.healthy,
-      x: -50,
-      y: -36,
-      width: 100,
-      height: 72,
+      x: -46,
+      y: -42,
+      width: 92,
+      height: 84,
       preserveAspectRatio: 'xMidYMid meet',
     }),
     expansion,

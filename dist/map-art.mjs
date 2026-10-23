@@ -1,15 +1,15 @@
 export const MAP_SITE_ASSETS = Object.freeze({
-  city: 'map-city-v28.webp',
-  port: 'map-port-v28.webp',
-  farm: 'map-farm-v28.webp',
+  city: 'map-city-v34.webp',
+  port: 'map-port-v34.webp',
+  farm: 'farm-healthy-v34.webp',
 });
 
 export const PORT_ROTATIONS = Object.freeze({lumen: 180, nord: -90, cera: 0, altia: 90, marin: 90, solis: 0});
 
 const FRAME = Object.freeze({
-  city: {x: -35, y: -27, width: 70, height: 54},
-  port: {x: -38, y: -29, width: 76, height: 57},
-  farm: {x: -37, y: -27, width: 74, height: 54},
+  city: {x: -39, y: -27, width: 78, height: 54},
+  port: {x: -44, y: -22, width: 88, height: 44},
+  farm: {x: -35, y: -28, width: 70, height: 56},
 });
 
 const path = (node, className, d, tier = null) => node('path', {

@@ -4,7 +4,7 @@
 .continent-outline { fill:var(--surface-hover);stroke:var(--content-secondary);stroke-width:1;stroke-linejoin:round;vector-effect:non-scaling-stroke; }
 .room-game .atlas-stage .world-map .land > .map-country-shape { stroke:none;stroke-dasharray:none;transition:none;fill:color-mix(in oklch,var(--atlas-biome) 20%,var(--surface-hover)); }
 .room-game .atlas-stage .world-map .land[data-food-status="critical"] > .map-country-shape { fill:color-mix(in oklch,var(--intent-error) 24%,var(--surface-hover)); }
-.room-game .atlas-stage .world-map .land .atlas-material { opacity:.83;filter:saturate(.6) brightness(.86) contrast(1.06); }
+.room-game .atlas-stage .world-map .land .atlas-material { opacity:.88;filter:saturate(.66) brightness(.82) contrast(1.08); }
 .country-focus-ring { fill:none;stroke:none;pointer-events:none;vector-effect:non-scaling-stroke; }
 .land.is-focused .country-focus-ring,.land:focus-visible .country-focus-ring { stroke:var(--intent-accent);stroke-width:1.6; }
 .land:hover .country-focus-ring { stroke:var(--content-secondary);stroke-width:1; }
@@ -15,9 +15,9 @@
 .room-game .atlas-stage .world-map .land .map-land-food { font-size:14px; }
 .room-game .atlas-stage .world-map .land .map-facility-label { font-size:11px;fill:var(--content-secondary);stroke:var(--surface-inset);stroke-width:3;paint-order:stroke fill; }
 .room-game .atlas-stage .map-state-summary { font-size:11px;fill:var(--content-default); }
-.atlas-stage .atlas-terrain .atlas-relief { opacity:.08; }
-.atlas-stage .atlas-terrain :is(.atlas-contour,.atlas-ridge) { opacity:.12; }
-.atlas-stage .atlas-terrain .atlas-farm { opacity:.2; }
+.atlas-stage .atlas-terrain .atlas-relief { opacity:.06; }
+.atlas-stage .atlas-terrain :is(.atlas-contour,.atlas-ridge) { opacity:.09; }
+.atlas-stage .atlas-terrain .atlas-farm { opacity:.15; }
 .atlas-stage .atlas-toolbar { min-height:44px; }
 .atlas-toolbar>div { display:flex;align-items:center; }
 .map-state-legend { display:flex;flex-wrap:wrap;gap:var(--s3);padding:var(--s2) var(--s3);border-top:1px solid var(--stroke-default);font-size:var(--t-xs);color:var(--content-secondary); }

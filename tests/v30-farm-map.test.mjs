@@ -61,8 +61,8 @@ const landscape = (overrides = {}) => ({
 
 test('Given climate phases When farm scenes render Then each uses its real transparent landscape asset', async () => {
   assert.deepEqual(FARM_LANDSCAPE_ASSETS, {
-    healthy: 'farm-healthy-v30.webp', drought: 'farm-drought-v30.webp', recovering: 'farm-recovering-v30.webp',
-    expansion: 'farm-expansion-v30.webp',
+    healthy: 'farm-healthy-v34.webp', drought: 'farm-drought-v34.webp', recovering: 'farm-recovering-v34.webp',
+    expansion: 'farm-expansion-v34.webp',
   });
   await access(new URL(`../dist/${FARM_LANDSCAPE_ASSETS.expansion}`, import.meta.url));
   for (const [phase, file] of Object.entries(FARM_LANDSCAPE_ASSETS).filter(([key]) => key !== 'expansion')) {
@@ -71,8 +71,8 @@ test('Given climate phases When farm scenes render Then each uses its real trans
     updateFarmScene(scene, landscape({phase}));
     const base = scene.querySelector('.farm-landscape-base');
     assert.equal(base.getAttribute('href'), file);
-    assert.equal(base.getAttribute('width'), '100');
-    assert.equal(base.getAttribute('height'), '72');
+    assert.equal(base.getAttribute('width'), '92');
+    assert.equal(base.getAttribute('height'), '84');
     assert.equal(scene.getAttribute('aria-hidden'), 'true');
   }
 });

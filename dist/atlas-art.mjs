@@ -41,7 +41,7 @@ function addOcean(svg) {
 function addTerrain(parent, id) {
   const feature = ATLAS_FEATURES[id];
   const terrain = n('g', { class: `atlas-terrain is-${feature.biome}`, 'clip-path': `url(#atlas-clip-${id})`, 'aria-hidden': 'true' });
-  terrain.append(n('image', {href:'terrain-relief-v22.webp',x:-GEOGRAPHY[id].x,y:-GEOGRAPHY[id].y,width:900,height:620,preserveAspectRatio:'xMidYMid slice',class:'atlas-material'}));
+  terrain.append(n('image', {href:'terrain-relief-v34.webp',x:-GEOGRAPHY[id].x,y:-GEOGRAPHY[id].y,width:900,height:620,preserveAspectRatio:'xMidYMid slice',class:'atlas-material'}));
   paths(terrain, feature.relief, 'atlas-relief');
   paths(terrain, feature.contours, 'atlas-contour');
   paths(terrain, feature.ridges, 'atlas-ridge');
