@@ -6,13 +6,13 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 624168,
-    "sha256": "e847591b73a5f1908cbff48b32264859450e30ff53ab5d7ddc44e44a7fe4eee8"
+    "bytes": 636704,
+    "sha256": "aafb8793527cc1c979ab14538dae5e1198e16e1b1cfc5d04f4a072f5f7177e17"
   },
   "inputs": [
     {
       "file": "dist/app.mjs",
-      "sha256": "f791d131a6d117f9a7c01c09089f5d2b474119ec21eb3aa12ab783f30b059394"
+      "sha256": "8905d8aeb2ca3faa92fbdf03decb6692a051e8870360fe24ed0ead9a04b9eaf1"
     },
     {
       "file": "dist/atlas-art.mjs",
@@ -45,6 +45,14 @@
     {
       "file": "dist/chronicle-ui.mjs",
       "sha256": "f7e3a9562ae40cfafcef0cbb54c9a7a2d524a29ade713d3ce4426c1351d7852f"
+    },
+    {
+      "file": "dist/command-preview-ui.mjs",
+      "sha256": "7ad2e8271495c8b1260082c556d9f0204445482ab099142e44b1e9ef4b8514be"
+    },
+    {
+      "file": "dist/command-preview.mjs",
+      "sha256": "f28b24178995dacbae8b071e6a1f026c4f6e8e03121963697155717179a3dad5"
     },
     {
       "file": "dist/command-ui.mjs",
@@ -156,7 +164,7 @@
     },
     {
       "file": "dist/map-attention-ui.mjs",
-      "sha256": "c19b9227730d26aebcb613f7a2a61fdf1ec0c88929e31ee4701d2020fe422cd5"
+      "sha256": "be9b7e4cd4cac627cd489653da2aed8d1b4259e4fff3fc1e17680f059bd1f3e3"
     },
     {
       "file": "dist/map-attention.mjs",
@@ -192,7 +200,7 @@
     },
     {
       "file": "dist/mediation-controller.mjs",
-      "sha256": "82eb21c42827b2a4c39d9506e094b4618474a1712dba677ae3e8ad618c8aa7df"
+      "sha256": "ca56695b3ab855b3986fa5be5f4f46c7848cbf4f242a8b2bcba12df8da2be7e2"
     },
     {
       "file": "dist/mediation-insight.mjs",
@@ -316,7 +324,7 @@
     },
     {
       "file": "dist/site-controller.mjs",
-      "sha256": "89ef019a2dba03dc2630ca20e996d91a4a1762103d8652692c354bdcec269c5d"
+      "sha256": "215b12d4e479ca4dc7a9271a9d8c0a0ae690214495964215a7f358b6460cd469"
     },
     {
       "file": "dist/site-operations.mjs",

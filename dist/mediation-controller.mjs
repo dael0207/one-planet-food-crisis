@@ -5,7 +5,7 @@ import {mediationDraftFromForm,renderMediationComparison,renderMediationForm,ren
 import {renderPeaceOfferReview} from './peace-offer-ui.mjs?v=31';
 import {renderPeaceAccordReview,renderPeaceSanctionReview} from './peace-compliance-ui.mjs?v=31';
 
-export function createMediationController({state,resolveAction,decisionContent,clearCompeting,rerender,commit,focus}){
+export function createMediationController({state,resolveAction,decisionContent,clearCompeting,rerender,commit,focus,preview}){
  let draft=null,previousDraft=null,offerId=null,accordId=null,sanctionId=null;
  const currentState=()=>state();
  const command=()=>draft?.accordId?peaceComplianceCommand(draft.accordId,'renegotiate',draft):draft?.offerId?peaceCounterCommand(draft):mediationCommand(draft);
@@ -20,9 +20,11 @@ export function createMediationController({state,resolveAction,decisionContent,c
   if(leversOpen)decisionContent().querySelector('.peace-levers').open=true;
   const submit=decisionContent().querySelector('#send-mediation');submit.disabled=!allowed;
   submit.firstChild.textContent=allowed?(draft.accordId?'수정안을 보내고 한 분기 진행 ':draft.offerId?'변경 조건을 역제안하고 한 분기 진행 ':'이 조건을 제시하고 한 분기 진행 '):(draft.offerId||draft.accordId)&&!action?'한 가지 이상 조건을 변경하세요 ':'조건 또는 보유 자원을 확인하세요 ';
+  preview?.(command());
  }
  return {
   clear(){draft=null;previousDraft=null;offerId=null;accordId=null;sanctionId=null;},
+  previewCommand(){return draft?command():sanctionId?peaceComplianceCommand(sanctionId,'sanction'):null;},
   isOpen(){return Boolean(draft||offerId||accordId||sanctionId);},
   render(){return draft?renderMediationForm(currentState(),draft,previousDraft):offerId?renderPeaceOfferReview(currentState(),offerId):sanctionId?renderPeaceSanctionReview(currentState(),sanctionId):renderPeaceAccordReview(currentState(),accordId);},
   open(conflictId){clearCompeting();this.clear();draft={conflictId,goal:'relief',condition:'mutual',food:4,money:6};rerender();focus();},

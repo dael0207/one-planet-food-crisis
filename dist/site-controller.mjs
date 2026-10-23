@@ -9,6 +9,11 @@ export function createSiteController(context){
  let selection=null,operation=null,camera=null,cameraPlayer=context.state().playerId,lastCountry=cameraPlayer;
  let jointDraft=null;
  const clear=()=>{selection=null;operation=null;jointDraft=null;};
+ const previewCommand=()=>{
+  if(jointDraft){const preview=previewJointInvestment(context.state(),jointDraft);return preview.valid&&preview.eligible&&preview.affordable?jointCommand(jointDraft):null;}
+  const order=siteOrder(context.state(),selection,context.phase(),operation);
+  return order?.action&&!order.reason?order.command:null;
+ };
  const render=()=>renderSitePanel(context.state(),selection,context.phase(),operation,jointDraft);
  function dispatch(action,data){
   if(action==='open-facility'){
@@ -36,6 +41,7 @@ export function createSiteController(context){
    const preview=previewJointInvestment(context.state(),jointDraft);
    document.getElementById('joint-preview').innerHTML=renderJointPreview(context.state(),jointDraft);
    document.getElementById('joint-submit').disabled=!(preview.valid&&preview.eligible&&preview.affordable);
+   context.preview?.(previewCommand());
    return true;
   }
   if(!event.target.closest('#site-form'))return false;
@@ -48,6 +54,7 @@ export function createSiteController(context){
   status.textContent=available?`${order.action.name} · 국고 −${order.action.cost}억 · 1분기 진행`:order?.reason??'실행할 명령을 선택하세요.';
   status.hidden=false;
   for(const label of document.querySelectorAll('.site-order'))label.classList.toggle('is-selected',label.querySelector('input').value===operation);
+  context.preview?.(previewCommand());
   return true;
  }
  function submit(event){
@@ -69,5 +76,5 @@ export function createSiteController(context){
   if(country!==lastCountry&&!selection&&camera.view.zoom>1)camera.focusCountry(country);lastCountry=country;camera.update();
   document.getElementById('site-selector').innerHTML=renderSiteSelector(state,country,selection);
  }
- return {clear,updateMap,isOpen:()=>Boolean(selection),selection:()=>selection,render,dispatch,input,submit};
+ return {clear,previewCommand,updateMap,isOpen:()=>Boolean(selection),selection:()=>selection,render,dispatch,input,submit};
 }

@@ -1,0 +1,97 @@
+import {COUNTRIES,COUNTRY_IDS,PROFILES,SITE_DEFS,advanceTurn,getAction} from './engine.mjs?v=31';
+
+const METRICS=[['food','식량'],['treasury','국고']];
+const COUNTRY_METRICS=[['food','식량'],['treasury','국고'],['price','생활물가'],['approval','지지도'],['trust','신뢰']];
+const relationKey=(a,b)=>[a,b].sort().join(':');
+const signed=value=>`${value>0?'+':value<0?'−':''}${Math.abs(value)}`;
+const pinBase=(id,countryId,siteKind,label,value,icon)=>({id,countryId,siteKind,label,value,tone:'preview',icon,action:'focus-order',changeId:null});
+
+function metricModel(state,selected,baseline){
+ const playerId=state.playerId??'lumen';
+ return METRICS.map(([key,label])=>{
+  const before=state.countries[playerId][key],after=selected.countries[playerId][key];
+  return {key,label,before,after,delta:after-before,commandEffect:after-baseline.countries[playerId][key]};
+ });
+}
+
+function strongestPlayerMetric(state,selected,baseline,kind){
+ const playerId=state.playerId??'lumen',preferred=kind==='city'?'price':'food';
+ return COUNTRY_METRICS.map(([key,label])=>({key,label,before:state.countries[playerId][key],after:selected.countries[playerId][key],effect:selected.countries[playerId][key]-baseline.countries[playerId][key]}))
+  .filter(item=>item.effect!==0)
+  .sort((a,b)=>(b.key===preferred)-(a.key===preferred)||Math.abs(b.effect)-Math.abs(a.effect))[0]??{key:'food',label:'식량',before:state.countries[playerId].food,after:selected.countries[playerId].food,effect:0};
+}
+
+function facilityPin(state,action,selected,baseline){
+ const playerId=state.playerId??'lumen';
+ if(action.jointInvestment){
+  const {targetId,kind}=action.jointInvestment,accepted=action.jointPreview?.outcome==='accepted';
+  const remaining=accepted?Math.max(0,(action.jointPreview?.dueTurn??selected.turn)-(state.turn+1)):0;
+  const value=accepted?`착공 예정 · ${remaining}분기 뒤`:'협상 결과 거절 예상 · 투자금 지출 없음';
+  return pinBase(`preview:joint:${targetId}:${kind}`,targetId,kind,SITE_DEFS[kind].name,value,accepted?'build':'reply');
+ }
+ if(action.site){
+  const {kind,operation}=action.site,label=SITE_DEFS[kind].name;
+  if(operation==='upgrade'){
+   const project=selected.history.at(-1)?.siteDevelopment?.started?.find(item=>item.countryId===playerId&&item.siteKind===kind);
+   const remaining=Math.max(0,(project?.dueTurn??selected.turn)-selected.turn);
+   return pinBase(`preview:site:${playerId}:${kind}`,playerId,kind,label,`착공 예정 · ${remaining}분기 뒤`,'build');
+  }
+  const metric=strongestPlayerMetric(state,selected,baseline,kind);
+  return pinBase(`preview:site:${playerId}:${kind}`,playerId,kind,label,`${metric.label} ${metric.before} → ${metric.after} 예상${metric.effect?` · 유지 대비 ${signed(metric.effect)}`:''}`,'arrow');
+ }
+ const project=selected.history.at(-1)?.development?.started?.find(item=>item.countryId===playerId);
+ const baselineProjects=baseline.history.at(-1)?.development?.started??[];
+ if(project&&!baselineProjects.some(item=>item.countryId===project.countryId&&item.dueTurn===project.dueTurn)){
+  const remaining=Math.max(0,(project?.dueTurn??selected.turn)-selected.turn);
+  return pinBase(`preview:project:${playerId}`,playerId,null,PROFILES[playerId].facilityName,`착공 예정 · ${remaining}분기 뒤`,'build');
+ }
+ return null;
+}
+
+function targetIds(state,action){
+ const targets=[action.site?.sellerId,action.jointInvestment?.targetId,action.proposal?.targetId,action.targetId];
+ if(action.negotiationId)targets.push(state.negotiations?.find(item=>item.id===action.negotiationId)?.targetId);
+ return targets.filter((id,index)=>id&&targets.indexOf(id)===index);
+}
+
+function foreignPin(state,action,selected,baseline){
+ const playerId=state.playerId??'lumen',targets=targetIds(state,action);
+ const candidates=COUNTRY_IDS.filter(id=>id!==playerId).map(countryId=>{
+  const resources=METRICS.map(([key,label])=>({key,label,before:state.countries[countryId][key],after:selected.countries[countryId][key],effect:selected.countries[countryId][key]-baseline.countries[countryId][key]})).filter(item=>item.effect!==0);
+  const key=relationKey(playerId,countryId),relation={before:state.relations?.[key]??50,after:selected.relations?.[key]??50,effect:(selected.relations?.[key]??50)-(baseline.relations?.[key]??50)};
+  const other=COUNTRY_METRICS.slice(2).map(([metric,label])=>({metric,label,before:state.countries[countryId][metric],after:selected.countries[countryId][metric],effect:selected.countries[countryId][metric]-baseline.countries[countryId][metric]})).filter(item=>item.effect!==0);
+  const effectScore=resources.reduce((sum,item)=>sum+Math.abs(item.effect),0)+Math.abs(relation.effect)+other.reduce((sum,item)=>sum+Math.abs(item.effect),0);
+  const score=effectScore+(effectScore&&targets.includes(countryId)?1000:0);
+  return {countryId,resources,relation,other,score};
+ }).filter(item=>item.score>0).sort((a,b)=>b.score-a.score||a.countryId.localeCompare(b.countryId));
+ const candidate=candidates[0];
+ if(!candidate)return null;
+ const name=COUNTRIES[candidate.countryId].name;
+ if(candidate.resources.length){
+  const value=candidate.resources.map(item=>`${item.label} ${item.before} → ${item.after} 예상`).join(' · ');
+  return pinBase(`preview:country:${candidate.countryId}`,candidate.countryId,null,name,value,'arrow');
+ }
+ if(candidate.relation.effect){
+  return pinBase(`preview:relation:${candidate.countryId}`,candidate.countryId,null,`${name} 관계`,`관계 ${candidate.relation.before} → ${candidate.relation.after} 예상 · 유지 대비 ${signed(candidate.relation.effect)}`,'reply');
+ }
+ const metric=candidate.other[0];
+ return pinBase(`preview:country:${candidate.countryId}:${metric.metric}`,candidate.countryId,null,name,`${metric.label} ${metric.before} → ${metric.after} 예상 · 유지 대비 ${signed(metric.effect)}`,'arrow');
+}
+
+function playerFoodPin(state,selected){
+ const playerId=state.playerId??'lumen',before=state.countries[playerId].food,after=selected.countries[playerId].food;
+ return pinBase(`preview:food:${playerId}`,playerId,null,'분기 식량',`식량 ${before} → ${after} 예상`,'arrow');
+}
+
+export function commandPreview(state,command){
+ if(!state||typeof command!=='string'||!command)return null;
+ const playerId=state.playerId??'lumen',action=getAction({...state,playerId},command),player=state.countries?.[playerId];
+ if(!action||!player||player.treasury<action.cost||player.food<(action.foodCost??0))return null;
+ const selected=advanceTurn(structuredClone(state),command),baseline=advanceTurn(structuredClone(state),'maintain');
+ const primary=facilityPin(state,action,selected,baseline),foreign=foreignPin(state,action,selected,baseline);
+ const pins=[];
+ if(primary)pins.push(primary);
+ if(foreign&&(!primary||foreign.countryId!==primary.countryId||foreign.siteKind!==primary.siteKind))pins.push(foreign);
+ if(pins.length<2)pins.push(playerFoodPin(state,selected));
+ return {mode:'preview',heading:action.name,actionLabel:'선택한 명령',commandId:command,notice:'현재 조건 모의계산 · 실행 전',pins:pins.slice(0,2),metrics:metricModel(state,selected,baseline)};
+}

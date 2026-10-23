@@ -27,6 +27,7 @@ import {createSiteController} from './site-controller.mjs?v=31';
 import {quarterPriority,renderQuarterPriority} from './quarter-priority.mjs?v=31';
 import {mapConsequences,renderMapConsequences,updateMapConsequences} from './map-consequences.mjs?v=31';
 import {createMapAttention} from './map-attention-ui.mjs?v=31';
+import {renderCommandReview} from './command-preview-ui.mjs?v=31';
 const get=id=>document.getElementById(id);
 const loaded=loadGame();
 let state=loaded.state,flow=loaded.flow,requestId=loaded.requestId,selected=null,country=loaded.state.playerId;
@@ -38,6 +39,7 @@ let mediation=null,site=null;
 let currentView='decision',inspecting=false;
 let mapMode='network',mapFilter='all';
 let mapAttention=null;
+let pendingCommand=null;
 let chronicleOptions={period:12,metric:'food',filter:'all',page:0};
 function renderRecords(){
  const model=buildChronicle(state);
@@ -65,8 +67,13 @@ function showView(view,focus=false){
   }));
  }else if(focus)focusView(view);
 }
-function clearCompetingDrafts(){site?.clear();proposalDraft=null;proposalPrevious=null;treatyDraft=null;treatyPrevious=null;breakReviewId=null;conflictReviewId=null;}
+function clearCompetingDrafts(){pendingCommand=null;site?.clear();proposalDraft=null;proposalPrevious=null;treatyDraft=null;treatyPrevious=null;breakReviewId=null;conflictReviewId=null;}
 function clearDrafts(){clearCompetingDrafts();mediation?.clear();}
+function activePreviewCommand(){
+ if(!canDecide(flow))return null;
+ return pendingCommand??site?.previewCommand()??mediation?.previewCommand()??(proposalDraft?proposalCommand(proposalDraft):treatyDraft?treatyCommand(treatyDraft):breakReviewId?`break:${breakReviewId}`:selected);
+}
+function updateMapPreview(){mapAttention?.update(state,flow.phase,activePreviewCommand());}
 function persist(){storageOk=saveGame(state,flow,requestId);}
 function render(){
  const reviewing=flow.phase==='result';
@@ -89,9 +96,9 @@ function render(){
  get('mission-label').textContent=get('mandate-rail').querySelector('.mandate-current > strong').textContent;
  get('country-tabs').innerHTML=renderCountryTabs(state,country);
  get('country-detail').innerHTML=renderCountry(state,country);
- get('decision-content').innerHTML=site?.isOpen()?site.render():reviewing?renderOutcome(state,flow.step,country):mediation?.isOpen()?mediation.render():conflictReviewId?renderConflictReview(state,conflictReviewId,selected):treatyDraft?renderTreatyForm(state,treatyDraft,treatyPrevious):breakReviewId?renderBreakReview(state,breakReviewId):proposalDraft?renderProposal(state,proposalDraft,proposalPrevious):renderDecision(state,selected,requestId);
+ get('decision-content').innerHTML=pendingCommand?renderCommandReview(state,pendingCommand):site?.isOpen()?site.render():reviewing?renderOutcome(state,flow.step,country):mediation?.isOpen()?mediation.render():conflictReviewId?renderConflictReview(state,conflictReviewId,selected):treatyDraft?renderTreatyForm(state,treatyDraft,treatyPrevious):breakReviewId?renderBreakReview(state,breakReviewId):proposalDraft?renderProposal(state,proposalDraft,proposalPrevious):renderDecision(state,selected,requestId);
  get('quarter-priority').innerHTML=renderQuarterPriority(state,flow.phase);
- get('quarter-priority').hidden=reviewing||Boolean(site?.isOpen()||mediation?.isOpen()||conflictReviewId||treatyDraft||breakReviewId||proposalDraft||requestId);
+ get('quarter-priority').hidden=reviewing||Boolean(pendingCommand||site?.isOpen()||mediation?.isOpen()||conflictReviewId||treatyDraft||breakReviewId||proposalDraft||requestId);
  get('diplomacy-inbox').innerHTML=renderConflictBrief(state,flow.phase)+renderInbox(state,flow,requestId)+renderOutbound(state,flow)+renderTreatyLedger(state,flow);
  const waiting=pendingRequests(state).length+(state.negotiations??[]).filter(record=>record.status==='countered'&&record.expiresTurn>state.turn).length+pendingMediationCounters(state).length+pendingPeaceOffers(state).length+pendingPeaceComplianceCount(state)+activeConflicts(state).filter(item=>conflictAction(state,`stance:${item.id}:neutral`)).length;
  get('dispatch-count').textContent=waiting?String(waiting):'';
@@ -105,7 +112,7 @@ function render(){
  site.updateMap(document.querySelector('.world-map'),country);
  updateMapConsequences(document.querySelector('.world-map'),state,flow.phase);
  if(!mapAttention)mapAttention=createMapAttention(document.querySelector('.world-map'),get('map-attention-header'),get('map-attention-layer'));
- mapAttention.update(state,flow.phase);
+ updateMapPreview();
  get('map-consequences').innerHTML=renderMapConsequences(state,flow.phase);
  get('country-intel').hidden=!inspecting;
  get('country-intel').innerHTML=inspecting?renderCountryIntel(state,country,flow.phase):'';
@@ -115,7 +122,7 @@ function render(){
  get('mobile-command').replaceChildren(task);const jump=document.createElement('button');jump.dataset.action='focus-order';jump.textContent=reviewing?'결과 보기 ↓':state.turn?'이번 명령 고르기 ↓':'첫 명령 고르기 ↓';get('mobile-command').append(jump);
  get('save-status').hidden=storageOk;
  get('save-status').textContent=storageOk?'':'저장할 수 없습니다. 창을 닫으면 진행을 잃을 수 있습니다.';
- if(canDecide(flow)&&!site?.isOpen()&&!proposalDraft&&!treatyDraft&&!breakReviewId&&!mediation?.isOpen())updateSelection();
+ if(canDecide(flow)&&!pendingCommand&&!site?.isOpen()&&!proposalDraft&&!treatyDraft&&!breakReviewId&&!mediation?.isOpen())updateSelection();
  showView(currentView);
 }
 function updateSelection(){
@@ -125,6 +132,7 @@ function updateSelection(){
  get('advance-button').disabled=!action||action.cost>state.countries[state.playerId].treasury||(action.foodCost??0)>state.countries[state.playerId].food;
  get('advance-button').textContent=action?`${action.name} 실행 · 1분기 진행 →`:'명령을 선택하세요';
  document.querySelectorAll('.policy').forEach(label=>label.classList.toggle('selected',label.querySelector('input').value===selected));
+ updateMapPreview();
 }
 function focusResult(){showView('decision');get('decision-title').focus({preventScroll:true});const target=window.matchMedia('(max-width:1099px)').matches?document.querySelector('.command-dock'):get('situation-room');target.scrollIntoView({block:'start',behavior:'instant'});}
 function focusMapOutcome(){showView('decision');document.querySelector('[data-camera-action="reset"]')?.click();get('map-attention-header').focus({preventScroll:true});get('map-attention-header').scrollIntoView({block:'start',behavior:'instant'});}
@@ -167,6 +175,7 @@ function updateProposal(event){
   get('proposal-terms').innerHTML=renderProposalTerms(proposalDraft);
   get('send-proposal').disabled=!getAction(state,proposalCommand(proposalDraft));
  }
+ updateMapPreview();
 }
 function updateTreaty(event){
  if(!treatyDraft||!event.target.closest('#treaty-form'))return;
@@ -181,17 +190,22 @@ function updateTreaty(event){
   get('treaty-terms').innerHTML=renderTreatyTerms(treatyDraft);
   get('send-treaty').disabled=!getAction(state,treatyCommand(treatyDraft));
  }
+ updateMapPreview();
 }
-mediation=createMediationController({state:()=>state,resolveAction:command=>getAction(state,command),decisionContent:()=>get('decision-content'),clearCompeting:()=>{clearCompetingDrafts();requestId=null;selected=null;},rerender:render,commit:commitDecision,focus:()=>{focusResult();get('decision-title').scrollIntoView({block:'start',behavior:'instant'});}});
+mediation=createMediationController({state:()=>state,resolveAction:command=>getAction(state,command),decisionContent:()=>get('decision-content'),clearCompeting:()=>{clearCompetingDrafts();requestId=null;selected=null;},rerender:render,commit:commitDecision,preview:updateMapPreview,focus:()=>{focusResult();get('decision-title').scrollIntoView({block:'start',behavior:'instant'});}});
 get('decision-content').addEventListener('input',event=>{if(site.input(event)||mediation.input(event))return;if(treatyDraft)updateTreaty(event);else updateProposal(event);});
 get('decision-content').addEventListener('change',event=>{if(site.input(event)||mediation.input(event))return;if(treatyDraft){updateTreaty(event);return;}if(proposalDraft){updateProposal(event);return;}if(event.target instanceof HTMLInputElement){selected=event.target.value;updateSelection();}});
 function commitDecision(command){
  if(!canDecide(flow))return;
+ const action=getAction(state,command),player=state.countries[state.playerId];
+ if(!action||action.cost>player.treasury||(action.foodCost??0)>player.food)return;
+ if(activePreviewCommand()!==command){clearDrafts();selected=null;requestId=null;pendingCommand=command;render();focusMapOutcome();return;}
  try{state=advanceTurn(state,command);chronicleOptions={...chronicleOptions,turn:state.turn,page:0};flow=beginReview();selected=null;requestId=null;clearDrafts();country=state.playerId;inspecting=false;persist();get('migration-notice').textContent='';render();focusMapOutcome();get('announcement').textContent=`${state.turn}분기 결과. ${state.history.at(-1).headline}`;}
  catch(error){const target=get('mediation-preview')??get('treaty-preview')??get('proposal-preview')??get('forecast')??get('announcement');target.textContent=error instanceof Error?error.message:'대응을 실행할 수 없습니다.';}
 }
 get('decision-content').addEventListener('submit',event=>{
  event.preventDefault();
+ if(event.target.id==='command-review-form'){if(pendingCommand)commitDecision(pendingCommand);return;}
  if(site.submit(event)||mediation.submit(event))return;
  if(event.target.id==='conflict-form'){if(conflictReviewId&&conflictAction(state,selected))commitDecision(selected);return;}
  if(event.target.id==='treaty-form'){if(treatyDraft)commitDecision(treatyCommand(treatyDraft));return;}
@@ -203,6 +217,8 @@ document.addEventListener('click',event=>{
  const button=event.target.closest('[data-action]');if(!button)return;
  if(site.dispatch(button.dataset.action,button.dataset))return;
  switch(button.dataset.action){
+ case 'focus-map-preview':focusMapOutcome();break;
+ case 'clear-map-preview':if(!canDecide(flow))return;clearDrafts();selected=null;requestId=null;render();focusResult();break;
  case 'inspect-priority':inspectPriority();break;
  case 'focus-map-change':focusMapChange(button.dataset.changeId);break;
  case 'open-mediation':case 'accept-mediation-counter':case 'review-peace-offer':case 'counter-peace-offer':case 'peace-offer-reply':case 'review-peace-accord':case 'review-peace-sanction':case 'renegotiate-peace-accord':if(canDecide(flow))mediation.dispatch(button.dataset.action,button.dataset);break;
@@ -212,6 +228,7 @@ document.addEventListener('click',event=>{
   if(button.dataset.action==='map-filter'&&['all','trade','alliance'].includes(button.dataset.filter))mapFilter=button.dataset.filter;
   const selector=button.dataset.action==='map-mode'?`[data-action="map-mode"][data-mode="${mapMode}"]`:`[data-action="map-filter"][data-filter="${mapFilter}"]`;
   updateMap(state,{...flow,selectedCountry:country,mapMode,mapFilter});
+  updateMapPreview();
   document.querySelector(selector)?.focus({preventScroll:true});
   break;
  }
@@ -252,7 +269,7 @@ for(const container of [document.querySelector('.world-map'),get('country-tabs')
  container.addEventListener('click',event=>{if(event.target.closest('[data-site]'))return;const item=event.target.closest('[data-country]');if(item)inspect(item.dataset.country);});
  container.addEventListener('keydown',event=>{if(event.target.closest('[data-site]'))return;const item=event.target.closest('.land[data-country]');if(item&&['Enter',' '].includes(event.key)){event.preventDefault();inspect(item.dataset.country);}});
 }
-site=createSiteController({state:()=>state,phase:()=>flow.phase,clearCompeting:clearDrafts,select:selection=>{country=selection.countryId;inspecting=false;currentView='decision';requestId=null;selected=null;},rerender:render,focus:focusResult,commit:commitDecision});
+site=createSiteController({state:()=>state,phase:()=>flow.phase,clearCompeting:clearDrafts,select:selection=>{country=selection.countryId;inspecting=false;currentView='decision';requestId=null;selected=null;},rerender:render,focus:focusResult,commit:commitDecision,preview:updateMapPreview});
 let pickerChoice=state.playerId;
 function openCountryPicker(){persist();pickerChoice=state.playerId;get('modal').classList.add('country-picker-dialog');modal(countryPicker(pickerChoice,savedCountries()));}
 function closeModal(){get('modal').close();get('modal').classList.remove('country-picker-dialog');}

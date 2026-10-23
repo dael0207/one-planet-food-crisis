@@ -1,4 +1,5 @@
 import {mapAttention} from './map-attention.mjs?v=31';
+import {commandPreview} from './command-preview.mjs?v=33';
 import {GEOGRAPHY} from './map-geometry.mjs?v=31';
 import {sitePoint} from './map-sites.mjs?v=31';
 import {escape,signed} from './render.mjs?v=31';
@@ -7,9 +8,10 @@ const NS='http://www.w3.org/2000/svg';
 const ICONS={alert:'M12 3 2 21h20L12 3Zm0 6v5m0 3v1',build:'m4 20 10-10m-5-6 3-2 10 10-2 3-5-5-3 3-5-5 3-3-1-1Z',check:'m4 12 5 5L20 6',reply:'M4 5h16v12H9l-5 4V5Zm4 4h8m-8 4h5',arrow:'M4 12h16m-6-6 6 6-6 6'};
 const icon=name=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICONS[name]??ICONS.arrow}"/></svg>`;
 const attributes=pin=>`data-action="${escape(pin.action)}"${pin.changeId?` data-change-id="${escape(pin.changeId)}"`:''}`;
+const pinValue=value=>escape(value).replace(/유지 대비 ([+−-]?\d+)/g,'유지&nbsp;대비&nbsp;$1');
 
 export function renderMapPin(pin){
- return `<button type="button" class="map-attention-pin" data-signal-id="${escape(pin.id)}" data-tone="${escape(pin.tone)}" ${attributes(pin)} aria-label="${escape(pin.label)} · ${escape(pin.value)} · ${pin.action==='inspect-priority'?'대응 검토':'결과 확인'}">${icon(pin.icon)}<span><strong>${escape(pin.label)}</strong><b>${escape(pin.value)}</b></span></button>`;
+ return `<button type="button" class="map-attention-pin" data-signal-id="${escape(pin.id)}" data-tone="${escape(pin.tone)}" ${attributes(pin)} aria-label="${escape(pin.label)} · ${escape(pin.value)} · ${pin.action==='inspect-priority'?'대응 검토':pin.tone==='preview'?'명령 확인':'결과 확인'}">${icon(pin.icon)}<span><strong>${escape(pin.label)}</strong><b>${pinValue(pin.value)}</b></span></button>`;
 }
 
 export function renderMapAttentionHeader(model){
@@ -18,7 +20,20 @@ export function renderMapAttentionHeader(model){
   const pin=model.pins[0];
   return `<button type="button" class="map-attention-task" data-tone="${escape(pin?.tone??'neutral')}" data-action="inspect-priority">${icon(pin?.icon)}<span><small>지금 해결</small><strong>${escape(model.heading)}</strong></span><b>대응 검토 →</b></button>`;
  }
+ if(model.mode==='preview'){
+  return `<div class="map-attention-preview"><div><small>미리보기 · 실행 전</small><strong>${escape(model.heading)}</strong><span>${escape(model.notice??'현재 조건 모의계산 · 실행 전')} · 실제 결과 보장 아님</span></div><div class="map-attention-preview-actions"><button type="button" class="text-button" data-action="focus-order">명령으로 돌아가기 ↓</button><button type="button" class="text-button" data-action="clear-map-preview">선택 취소</button></div></div><div class="map-attention-totals map-attention-forecast"><span>분기 예상</span>${model.metrics.map(metric=>`<div data-total="${escape(metric.key)}"><span>${escape(metric.label)}</span><b>${metric.before} → ${metric.after}${metric.key==='treasury'?'억':''}</b><strong data-tone="preview">유지 대비 ${signed(metric.commandEffect)}</strong></div>`).join('')}</div>`;
+ }
  return `<div class="map-attention-result"><div><small>명령 완료</small><strong>${escape(model.heading)}</strong></div><button type="button" class="text-button" data-action="focus-order">결과 보기 ↗</button></div><div class="map-attention-totals"><span>분기 총변화</span>${model.metrics.map(metric=>`<div data-total="${metric.key}"><span>${escape(metric.label)}</span><b>${metric.before} → ${metric.after}${metric.key==='treasury'?'억':''}</b><strong data-tone="${metric.delta<0?'danger':metric.delta>0?'positive':'neutral'}">${signed(metric.delta)}</strong></div>`).join('')}</div>`;
+}
+
+export function renderMapPreviewShortcut(heading,headerVisible=false){
+ const label=headerVisible?'명령으로 돌아가기 ↓':'지도 미리보기 ↑',action=headerVisible?'focus-order':'focus-map-preview';
+ return `<button type="button" data-action="${action}"><span>${label}</span><strong>${escape(heading)}</strong></button>`;
+}
+
+export function resolveMapAttention(state,phase,commandId=null){
+ const preview=phase==='decision'&&commandId?commandPreview(state,commandId):null;
+ return preview??mapAttention(state,phase)??{pins:[],heading:'',mode:phase};
 }
 
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
@@ -43,6 +58,22 @@ export function layoutMapPins(anchors,box,sizes){
 export function createMapAttention(svg,header,layer){
  let model={pins:[]};
  const container=svg.closest('.map-container');
+ const shortcut=typeof document==='undefined'?null:document.getElementById('map-preview-shortcut');
+ let headerVisible=false;
+ const syncShortcut=()=>{
+  const active=model.mode==='preview'&&Boolean(model.heading);
+  if(typeof document!=='undefined')document.body?.classList.toggle('has-map-preview',active);
+  if(!shortcut)return;
+  shortcut.hidden=!active;
+  shortcut.innerHTML=active?renderMapPreviewShortcut(model.heading,headerVisible):'';
+ };
+ if(shortcut&&typeof IntersectionObserver!=='undefined'){
+  const observer=new IntersectionObserver(entries=>{
+   headerVisible=Boolean(entries[0]?.isIntersecting);
+   if(model.mode==='preview')syncShortcut();
+  });
+  observer.observe(header);
+ }
  function place(){
   const matrix=svg.getScreenCTM(),rect=container.getBoundingClientRect();
   if(!matrix||!rect.width||!rect.height)return;
@@ -67,8 +98,8 @@ export function createMapAttention(svg,header,layer){
  }
  const resize=new ResizeObserver(place);resize.observe(svg);
  const camera=new MutationObserver(place);camera.observe(svg,{attributes:true,attributeFilter:['viewBox']});
- return {update(state,phase){
-  model=mapAttention(state,phase)??{pins:[],heading:'',mode:phase};
+ return {update(state,phase,commandId=null){
+  model=resolveMapAttention(state,phase,commandId);
   header.innerHTML=renderMapAttentionHeader(model);
   header.hidden=!model.heading;
   layer.innerHTML=`<svg class="map-attention-leaders" aria-hidden="true"></svg>${model.pins.map(renderMapPin).join('')}`;
@@ -78,6 +109,7 @@ export function createMapAttention(svg,header,layer){
    const country=svg.querySelector(`.land[data-country="${pin.countryId}"]`);
    if(country)country.dataset.mapAttention=pin.tone;
   }
+  syncShortcut();
   place();
  },place};
 }
