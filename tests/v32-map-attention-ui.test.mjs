@@ -8,6 +8,7 @@ import {renderResultCauses} from '../dist/result-causes.mjs';
 test('policy comparison maximum and maintenance cost stay with their numbers in narrow layouts',()=>{
  const opening=renderDecision(createGame('lumen'));
  assert.match(opening,/최대(?:&nbsp;|\u00a0)\+6/);
+ assert.match(opening,/노르드(?:&nbsp;|\u00a0)관계(?:&nbsp;|\u00a0)최대(?:&nbsp;|\u00a0)\+6/);
  const started=renderResultCauses(advanceTurn(createGame('lumen'),'site:farm:upgrade'));
  assert.match(started,/유지비(?:&nbsp;|\u00a0)1억/);
 });

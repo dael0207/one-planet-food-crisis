@@ -6,8 +6,8 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 624095,
-    "sha256": "e61af747bbfcfbe5084b028b80d7cd4a693f8e1e722b3d4a70dfa188ddffeb31"
+    "bytes": 624168,
+    "sha256": "e847591b73a5f1908cbff48b32264859450e30ff53ab5d7ddc44e44a7fe4eee8"
   },
   "inputs": [
     {
@@ -244,7 +244,7 @@
     },
     {
       "file": "dist/orders-ui.mjs",
-      "sha256": "29c679bed081691836e0c99a413c8f34324e3059633a3645864ea9e2bb403b70"
+      "sha256": "9b007b19a444700303407af016841f0e28178d3c0532ec02c22f16c143be287f"
     },
     {
       "file": "dist/peace-compliance-model.mjs",
