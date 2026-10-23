@@ -91,5 +91,5 @@ export function quarterPriority(state){
 export function renderQuarterPriority(state,phase='decision'){
  if(phase!=='decision')return '';
  const priority=quarterPriority(state);
- return `<section class="quarter-priority" aria-labelledby="quarter-priority-title"><span class="quarter-priority-kicker">이번 분기 우선 과제</span><div><strong id="quarter-priority-title">${safe(priority.title)}</strong><p>${safe(priority.reason)}</p></div><button type="button" class="secondary-button" data-action="inspect-priority">${safe(priority.actionLabel)} <span aria-hidden="true">→</span></button></section>`;
+ return `<details class="quarter-priority" aria-labelledby="quarter-priority-title"><summary><span class="quarter-priority-kicker">우선 과제</span><strong id="quarter-priority-title">${safe(priority.title)}</strong></summary><p>${safe(priority.reason)}</p><button type="button" class="secondary-button" data-action="inspect-priority">${safe(priority.actionLabel)} <span aria-hidden="true">→</span></button></details>`;
 }

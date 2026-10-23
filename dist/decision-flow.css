@@ -3,6 +3,7 @@
 .atlas-tools>summary::before {content:'+';font:var(--t-lg) var(--font-mono);color:var(--content-muted);}
 .atlas-tools[open]>summary::before {content:'−';}
 .atlas-tools>summary>span {margin-inline-start:auto;color:var(--content-muted);}
+.atlas-tools>summary>h2 {margin:0;font-size:var(--t-sm);font-weight:500;line-height:1.4;}
 .atlas-tools .map-camera-controls {border-inline:0;border-block-end:0;}
 .atlas-tools summary:focus-visible {outline:2px solid var(--intent-accent);outline-offset:-2px;}
 .command-dock .result-reconciliation,.command-dock .result-investment-details {border:0;border-block:1px solid var(--stroke-default);margin:var(--s2) 0;background:transparent;}

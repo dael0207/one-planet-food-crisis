@@ -20,7 +20,7 @@ export function renderCountry(state,id){
  return `<div><h3>${c.name} <span class="eyebrow">${id===state.playerId?'YOUR COUNTRY':escape(COUNTRIES[id].roleLabel)}</span></h3><p>${escape(COUNTRIES[id].description)}</p>${id!==state.playerId?`<p class="bilateral-summary">${escape(COUNTRIES[state.playerId].name)}와의 양국 관계 <strong>${getRelation(state,state.playerId,id)} · ${escape(relationLabel(getRelation(state,state.playerId,id)))}</strong><small>국가 전반의 외교 신뢰와 별도 지표</small><small>약속 신뢰도 ${getReliability(state,id)} / 100</small></p>`:''}</div><div class="country-stats"><div class="country-stat"><span>식량 안정</span><b>${Math.round(c.food)}<small> / 100</small></b></div><div class="country-stat"><span>생활물가</span><b>${Math.round(c.price)}</b></div><div class="country-stat"><span>외교 신뢰</span><b>${Math.round(c.trust)}</b></div></div>`;
 }
 export function renderCountryTabs(state,selected){
- return COUNTRY_IDS.map(id=>`<button class="country-tab ${selected===id?'active':''}" data-country="${id}" aria-pressed="${selected===id}">${escape(state.countries[id].name)} <span>${id===state.playerId?'내 나라 · ':''}식량 ${state.countries[id].food}</span></button>`).join('');
+ return COUNTRY_IDS.map(id=>`<button class="country-tab ${selected===id?'active':''}" data-country="${id}" aria-pressed="${selected===id}" aria-label="${escape(state.countries[id].name)} · ${id===state.playerId?'내 나라 · ':''}식량 ${state.countries[id].food}">${escape(state.countries[id].name)}</button>`).join('');
 }
 export function renderReport(state){
  const last=state.history.at(-1);

@@ -10,7 +10,9 @@ test('player presentation follows each real country rather than Lumen',()=>{
   assert.ok(metrics.includes(`${state.countries[id].treasury}<span class="metric-unit">억`));
   assert.ok(renderCountry(state,id).includes('YOUR COUNTRY'));
   const other=COUNTRY_IDS.find(item=>item!==id);assert.ok(!renderCountry(state,other).includes('YOUR COUNTRY'));
-  assert.ok(renderCountryTabs(state,id).includes(`${COUNTRIES[id].name} <span>내 나라`));
+  const tabs=renderCountryTabs(state,id);
+  assert.ok(tabs.includes(`aria-label="${COUNTRIES[id].name} · 내 나라 · 식량 ${state.countries[id].food}"`));
+  assert.ok(tabs.includes(`>${COUNTRIES[id].name}</button>`));
   assert.ok(renderOngoing(state).includes(PROFILES[id].facilityName));
   state=advanceTurn(state,'maintain');
   assert.ok(renderOutcome(state,0).includes(`${COUNTRIES[id].name} · 이번 분기 최종 식량`));

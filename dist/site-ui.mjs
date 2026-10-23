@@ -34,9 +34,9 @@ function ownSitePanel(state,selection,phase,operation,view){
  const progress=view.project?'<div class="site-build-progress"><span>착공</span><progress max="2" value="'+Math.max(0,2-view.remaining)+'" aria-label="'+escape(view.name)+' 공사 진행"></progress><span>완공</span><small>완공 뒤부터 새 단계의 운영 효과가 발생합니다.</small></div>':'';
  if(phase!=='decision')return benefit+progress+'<p class="site-access-note">분기 결과를 확인한 뒤 다음 명령을 내릴 수 있습니다.</p><button type="button" class="secondary-button" data-action="close-facility">결과로 돌아가기 →</button>';
  const order=siteOrder(state,selection,phase,operation),available=Boolean(order?.action&&!order.reason);
- const status=available?escape(order.action.name)+' · 국고 −'+order.action.cost+'억 · 1분기 진행':escape(order?.reason||'선택·확대만으로는 시간과 자원이 소모되지 않습니다.');
+ const status=available?escape(order.action.name)+' · 국고 −'+order.action.cost+'억 · 1분기 진행':escape(order?.reason||'');
  const submit=available?escape(order.action.name)+' 실행 · 1분기 진행 →':'실행할 명령을 선택하세요';
- return benefit+progress+'<form id="site-form"><fieldset><legend>시설 명령 · 실행하면 1분기 진행</legend>'+orderRow(state,selection,phase,'upgrade',operation)+orderRow(state,selection,phase,'manage',operation)+'</fieldset><p id="site-order-status" class="site-order-status" role="status" aria-atomic="true">'+status+'</p><button type="submit" id="site-execute" class="primary-button"'+(available?'':' disabled')+'>'+submit+'</button></form>';
+ return benefit+progress+'<form id="site-form"><fieldset><legend class="sr-only">시설 명령 · 실행하면 1분기 진행</legend>'+orderRow(state,selection,phase,'upgrade',operation)+orderRow(state,selection,phase,'manage',operation)+'</fieldset><p id="site-order-status" class="site-order-status" role="status" aria-atomic="true"'+(status?'':' hidden')+'>'+status+'</p><button type="submit" id="site-execute" class="primary-button"'+(available?'':' disabled')+'>'+submit+'</button></form>';
 }
 export function renderSitePanel(state,selection,phase,operation=null,jointDraft=null){
  const view=selection&&siteView(state,selection.countryId,selection.kind);

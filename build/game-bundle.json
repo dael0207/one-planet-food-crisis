@@ -6,13 +6,13 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 612875,
-    "sha256": "b75b4d260b226b1f9a9512fe51f5941956ba52b89d5cbe661aefebc3530f3e86"
+    "bytes": 612829,
+    "sha256": "7895fc9ba1f29f6644d4c509cc200e9e2692f13e26e8f739c8c1b86dc02e0bbe"
   },
   "inputs": [
     {
       "file": "dist/app.mjs",
-      "sha256": "7ed017c1f7bbb2aacdee9a364bc07d51119a3b428e878f91f8ef56a33667d565"
+      "sha256": "24c24ad0ec92c79a1af7440a74c4c671f7d68ecab7b53793c159029ea8b012bd"
     },
     {
       "file": "dist/atlas-art.mjs",
@@ -48,7 +48,7 @@
     },
     {
       "file": "dist/command-ui.mjs",
-      "sha256": "b9e7053c591cbb636c4f6501362d6ffd26d08386721ca9b563eda27d9700e386"
+      "sha256": "345908922fa4d7e5b44c6aa53aa3089e11faa0aef2d5dda096ba36130835872b"
     },
     {
       "file": "dist/conflict-ui.mjs",
@@ -84,7 +84,7 @@
     },
     {
       "file": "dist/experience.mjs",
-      "sha256": "da181f899e9868cfd71372b4d81d8321e850050cd04f6c801fa4bc1d91b88a31"
+      "sha256": "34098e157c763c2bef43a61a929dbce90dc486344c77c5d778c9c70ddef63672"
     },
     {
       "file": "dist/farm-landscape-ui.mjs",
@@ -288,11 +288,11 @@
     },
     {
       "file": "dist/quarter-priority.mjs",
-      "sha256": "e0c0437c2f895f6091fbf5d829dc7c5592d374e616386d0b7d8e54420d304c11"
+      "sha256": "abfc8207ae860f85612a76dab9f7f7efd492350a3b2ac04840cc61399003d0dd"
     },
     {
       "file": "dist/render.mjs",
-      "sha256": "840c926e00065b06aead1fed53b69553aed29774332ce489f90df6a049a52710"
+      "sha256": "497a178b2958622bf60b2aff38dc8508565a79e6a16546cd51c8899551bbf6ee"
     },
     {
       "file": "dist/result-causes.mjs",
@@ -316,7 +316,7 @@
     },
     {
       "file": "dist/site-ui.mjs",
-      "sha256": "527f5ffe1118cab1bab4da16a6bd15e24d7df71c8a139b546b33f8b475add6ab"
+      "sha256": "62ebda59220425b069b1a59e5176cb3a806c5a8f173a40fffec4fa4271f8f614"
     },
     {
       "file": "dist/storage.mjs",

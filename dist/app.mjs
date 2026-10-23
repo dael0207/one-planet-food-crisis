@@ -109,13 +109,15 @@ function render(){
  get('situation-room').classList.toggle('is-result',reviewing);
  const task=document.createElement('strong');task.textContent=reviewing?state.history.at(-1).actionLabel:getScenario(state,requestId).title;
  get('mobile-command').replaceChildren(task);const jump=document.createElement('button');jump.dataset.action='focus-order';jump.textContent=reviewing?'결과 보기 ↓':state.turn?'이번 명령 고르기 ↓':'첫 명령 고르기 ↓';get('mobile-command').append(jump);
- get('save-status').textContent=storageOk?'이 단계까지 자동 저장됨 · 다음 방문에도 이어서 운영':'자동 저장 불가 · 현재 창에서 계속 플레이 가능';
+ get('save-status').hidden=storageOk;
+ get('save-status').textContent=storageOk?'':'저장할 수 없습니다. 창을 닫으면 진행을 잃을 수 있습니다.';
  if(canDecide(flow)&&!site?.isOpen()&&!proposalDraft&&!treatyDraft&&!breakReviewId&&!mediation?.isOpen())updateSelection();
  showView(currentView);
 }
 function updateSelection(){
  const action=getAction(state,selected);
- get('forecast').textContent=action?`예상 · ${action.forecast}`:'명령을 선택하세요.';
+ get('forecast').hidden=!action;
+ get('forecast').textContent=action?`예상 · ${action.forecast}`:'';
  get('advance-button').disabled=!action||action.cost>state.countries[state.playerId].treasury||(action.foodCost??0)>state.countries[state.playerId].food;
  get('advance-button').textContent=action?`${action.name} 실행 · 1분기 진행 →`:'명령을 선택하세요';
  document.querySelectorAll('.policy').forEach(label=>label.classList.toggle('selected',label.querySelector('input').value===selected));

@@ -7,31 +7,30 @@
   <meta name="theme-color" content="#101116">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23101116' d='M0 0h24v24H0z'/%3E%3Cg fill='none' stroke='%23e8e9ed'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 1v6m0 10v6M1 12h6m10 0h6'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css?v=31"><link rel="stylesheet" href="map.css?v=31"><link rel="stylesheet" href="experience.css?v=31"><link rel="stylesheet" href="world.css?v=31"><link rel="stylesheet" href="countries.css?v=31"><link rel="stylesheet" href="negotiation.css?v=31"><link rel="stylesheet" href="treaty.css?v=31"><link rel="stylesheet" href="network.css?v=31"><link rel="stylesheet" href="command.css?v=31"><link rel="stylesheet" href="map-network.css?v=31"><link rel="stylesheet" href="choice-effects.css?v=31"><link rel="stylesheet" href="development.css?v=31"><link rel="stylesheet" href="chronicle.css?v=31"><link rel="stylesheet" href="room.css?v=31"><link rel="stylesheet" href="atlas.css?v=31"><link rel="stylesheet" href="objectives.css?v=31"><link rel="stylesheet" href="world-goals.css?v=31"><link rel="stylesheet" href="conflict.css?v=31"><link rel="stylesheet" href="mediation.css?v=31">
-  <link rel="stylesheet" href="oxide.css?v=31"><link rel="stylesheet" href="oxide-map.css?v=31"><link rel="stylesheet" href="oxide-console.css?v=31"><link rel="stylesheet" href="oxide-secondary.css?v=31"><link rel="stylesheet" href="negotiation-insight.css?v=31"><link rel="stylesheet" href="mediation-insight.css?v=31"><link rel="stylesheet" href="atlas-state.css?v=31"><link rel="stylesheet" href="continent.css?v=31">
+  <link rel="stylesheet" href="oxide.css?v=33"><link rel="stylesheet" href="oxide-map.css?v=31"><link rel="stylesheet" href="oxide-console.css?v=31"><link rel="stylesheet" href="oxide-secondary.css?v=31"><link rel="stylesheet" href="negotiation-insight.css?v=31"><link rel="stylesheet" href="mediation-insight.css?v=31"><link rel="stylesheet" href="atlas-state.css?v=31"><link rel="stylesheet" href="continent.css?v=31">
   <link rel="stylesheet" href="site-ui.css?v=31"><link rel="stylesheet" href="map-sites.css?v=31"><link rel="stylesheet" href="map-camera.css?v=31">
   <link rel="stylesheet" href="joint-investments.css?v=31">
-  <link rel="stylesheet" href="result-causes.css?v=31"><link rel="stylesheet" href="quarter-priority.css?v=31"><link rel="stylesheet" href="map-consequences.css?v=31"><link rel="stylesheet" href="decision-flow.css?v=31">
+  <link rel="stylesheet" href="result-causes.css?v=31"><link rel="stylesheet" href="quarter-priority.css?v=33"><link rel="stylesheet" href="map-consequences.css?v=31"><link rel="stylesheet" href="decision-flow.css?v=33">
   <link rel="stylesheet" href="foreign-strategy.css?v=31">
   <link rel="stylesheet" href="farm-map.css?v=31"><link rel="stylesheet" href="farm-landscape.css?v=31">
-  <link rel="stylesheet" href="startup.css?v=31"><script defer src="startup.js?v=32"></script>
+  <link rel="stylesheet" href="startup.css?v=31"><script defer src="startup.js?v=33"></script>
 </head>
 <body class="room-game boot-pending" aria-busy="true">
 <div id="boot-status" role="status" aria-live="polite" aria-busy="true"><p id="boot-message">상황실을 여는 중…</p><button id="boot-retry" type="button" hidden>다시 연결</button></div>
-<header class="topbar"><a class="brand" href="./" aria-label="하나의 행성 홈"><svg class="brand-mark" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 1v6m0 10v6M1 12h6m10 0h6"/></svg>하나의 행성 <span class="brand-en">국정 관제실</span></a><div class="header-actions" data-boot-lock inert><button class="text-button" id="review-button">운영 기록</button><button class="text-button" id="help-button">도움말</button></div></header>
+<header class="topbar"><a class="brand" href="./" aria-label="하나의 행성 홈"><svg class="brand-mark" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 1v6m0 10v6M1 12h6m10 0h6"/></svg>하나의 행성</a><div class="header-actions" data-boot-lock inert><button class="text-button" id="help-button">도움말</button></div></header>
 <main class="shell" data-boot-lock inert>
-  <div class="national-bar"><section class="command-heading" aria-label="현재 운영 국가"><div><span class="eyebrow">국가 운영</span><h1 id="governed-name"></h1></div><div class="command-date"><span id="date">2031년 · 1분기</span><button id="country-select-button" class="text-button">나라 바꾸기 ↗</button></div></section>
+  <div class="national-bar"><section class="command-heading" aria-label="현재 운영 국가"><div><h1 id="governed-name"></h1></div><div class="command-date"><span id="date">2031년 · 1분기</span><button id="country-select-button" class="text-button">나라 바꾸기 ↗</button></div></section>
   <div class="sr-only"><p id="scenario-subtitle"></p><b id="turn-number"></b><div id="progress-bar"></div></div>
   <div id="migration-notice" class="migration-notice"></div><section id="quick-metrics" class="quick-metrics" aria-label="국가 자원"></section></div>
+  <p id="save-status" class="save-error" role="status" hidden></p>
   <nav class="command-nav" aria-label="운영 화면"><button data-action="show-view" data-view="decision" aria-current="page">상황실</button><button data-action="show-view" data-view="diplomacy">외교 <span id="dispatch-count"></span></button><button data-action="show-view" data-view="world">협정·세계</button><button data-action="show-view" data-view="records">운영 기록</button></nav>
   <details class="mission-console"><summary><span>장기 목표</span><strong id="mission-label">국가 목표</strong><span>진행 상황</span></summary><section id="mandate-rail" class="mandate-rail" aria-label="국가 장기 목표"></section></details>
   <div class="situation-room" id="situation-room">
     <section class="atlas-stage" aria-label="국정 상황실 지도">
-      <div class="atlas-toolbar"><div><h2>세계 지도</h2></div><span class="atlas-live">시설을 눌러 관리 · 국가를 눌러 외교</span></div>
-      <div id="mobile-command" class="mobile-command"></div><details class="atlas-tools"><summary>지도 도구 <span>표시·확대·이동</span></summary><div id="map-network-controls"></div><div id="map-camera-controls" class="map-camera-controls" aria-label="지도 확대와 이동"></div></details>
+      <div id="mobile-command" class="mobile-command"></div><details class="atlas-tools"><summary><h2>세계 지도</h2><span>확대·표시</span></summary><div id="map-network-controls"></div><div id="map-camera-controls" class="map-camera-controls" aria-label="지도 확대와 이동"></div><div class="map-state-legend" aria-label="지도 상태 범례"><span><i></i>식량 안정</span><span class="is-strained"><i></i>식량 긴장</span><span class="is-critical"><i></i>식량 위기</span><small>시설을 눌러 관리 · 국가를 눌러 외교<br>농지는 기후·회복과 투자 단계를, 숫자는 식량 비축을 보여줍니다.</small></div></details>
       <div id="conflict-brief"></div><div class="map-container"><svg class="world-map" viewBox="0 0 900 620" role="group" aria-label="여섯 나라의 협정망과 실제 교역 지도"></svg></div><div id="map-consequences"></div>
-      <div class="map-state-legend" aria-label="지도 상태 범례"><span><i></i>식량 안정</span><span class="is-strained"><i></i>식량 긴장</span><span class="is-critical"><i></i>식량 위기</span><small>농지는 기후·회복과 투자 단계를, 숫자는 식량 비축을 보여줍니다.</small></div>
       <div id="site-selector" class="site-selector"></div>
-      <div id="map-enforcement-summary" hidden></div><div id="map-brief" class="map-brief"></div><section id="operating-horizon" class="operating-horizon" aria-label="시설과 장기 약속"></section>
+      <div id="map-enforcement-summary" hidden></div><div id="map-brief" class="map-brief"></div>
       <div class="country-tabs" id="country-tabs" role="group" aria-label="국가 선택"></div>
       <div id="country-intel" class="country-intel"></div>
     </section>
@@ -41,12 +40,12 @@
     </aside>
   </div>
   <section id="diplomacy-view" hidden aria-label="외교"><div class="view-heading"><div><span class="eyebrow">외교부</span><h2>도착한 전문과 협상</h2></div><button class="text-button" data-action="show-view" data-view="decision">상황실로 돌아가기 ↑</button></div><div id="diplomacy-inbox"></div></section>
-  <section id="world-view" hidden aria-label="세계 상세"><div class="view-heading"><div><h2>협정과 세계 동향</h2></div></div><div id="network-brief"></div><details class="world-panel"><summary>지도에 표시된 협정과 거래 내역</summary><div id="map-network-summary"></div><div id="world-status" class="world-status"></div></details><details class="country-more" open><summary>각국의 목표와 협정 기록</summary><div id="foreign-network"></div></details><div class="country-detail" id="country-detail"></div></section>
-  <section id="records-view" hidden aria-label="운영 기록"><div id="records-content"></div></section>
+  <section id="world-view" hidden aria-label="세계 상세"><div class="view-heading"><div><h2>협정과 세계 동향</h2></div></div><section id="operating-horizon" class="operating-horizon" aria-label="시설과 장기 약속"></section><div id="network-brief"></div><details class="world-panel"><summary>지도에 표시된 협정과 거래 내역</summary><div id="map-network-summary"></div><div id="world-status" class="world-status"></div></details><details class="country-more"><summary>각국의 목표와 협정 기록</summary><div id="foreign-network"></div></details><div class="country-detail" id="country-detail"></div></section>
+  <section id="records-view" hidden aria-label="운영 기록"><button class="text-button" id="review-button">운영 요약 ↗</button><div id="records-content"></div>
   <details class="country-more"><summary>내 나라 자세히 보기 <span>지지도·신뢰·시설·정책</span></summary><p id="governed-challenge"></p><section class="metrics" id="metrics" aria-label="국가 지표"></section><div id="ongoing-strip" class="ongoing-strip"></div><div id="phase-rail" class="phase-rail" aria-label="진행 단계"></div></details>
   <details class="country-more report-section"><summary>선택이 남긴 파문 <span>시민의 하루와 전체 연대기</span></summary><div class="section-label"><h2 id="report-title">숫자 너머의 변화</h2><button class="text-button" id="history-button">전체 연대기 ↗</button></div><div id="report" class="report-grid"></div></details>
-  <div class="save-strip"><span id="save-status"></span><span>여섯 나라 · 끝없이 이어지는 세계</span></div>
-  <footer><span>하나의 행성 <span class="footer-separator">/</span> 모든 나라는 연결되어 있습니다.</span><button class="text-button" id="restart-button">처음부터 다시</button><span class="footer-note">가상 세계 · 게임용 시뮬레이션</span></footer>
+  </section>
+  <footer><button class="text-button" id="restart-button">처음부터 다시</button></footer>
 </main>
 <div class="sr-only" aria-live="polite" id="announcement"></div>
 <dialog id="modal"><div class="modal-top"><span class="eyebrow">ONE PLANET</span><button class="close-button" id="close-modal" aria-label="닫기">×</button></div><div id="modal-content"></div></dialog>

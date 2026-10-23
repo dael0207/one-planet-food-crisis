@@ -5,7 +5,7 @@ import {renderDecision,renderOutcome} from '../dist/experience.mjs';
 import {escape,signed} from '../dist/render.mjs';
 import {getScenario} from '../dist/scenarios.mjs';
 
-test('V21 decision exposes the actionable brief before optional context',()=>{
+test('domestic narrative is disclosed on demand while live diplomatic terms remain visible',()=>{
  // Given: the opening domestic decision and a live diplomatic request.
  const state=createGame();
  const requestId=state.requests[0].id;
@@ -16,9 +16,9 @@ test('V21 decision exposes the actionable brief before optional context',()=>{
  const domesticEvent=getScenario(state);
  const requestEvent=getScenario(state,requestId);
 
- // Then: the brief is visible before the context disclosure and request terms stay expanded.
- assert.ok(domestic.indexOf('class="decision-brief"')<domestic.indexOf('class="decision-context"'));
- assert.ok(domestic.indexOf(escape(domesticEvent.description))<domestic.indexOf('class="decision-context"'));
+ // Then: domestic narrative stays in the closed context and request terms stay expanded.
+ assert.ok(domestic.indexOf('class="decision-brief"')>domestic.indexOf('class="decision-context"'));
+ assert.ok(domestic.indexOf(escape(domesticEvent.description))>domestic.indexOf('class="decision-context"'));
  assert.match(domestic,/<details class="decision-context">[\s\S]*?<p>[^<]+<\/p><\/details>/);
  assert.ok(request.indexOf(escape(requestEvent.description))<request.indexOf('class="decision-context"'));
  assert.match(request,/<details class="decision-context" open>/);

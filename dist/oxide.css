@@ -90,9 +90,9 @@ body.room-game{background:var(--surface-default);color:var(--content-default);fo
 .room-game .country-more{background:transparent;border-radius:0;border-inline:0}
 .room-game>.shell>.country-more,.room-game>.shell>.report-section{background:transparent;border:0;border-bottom:1px solid var(--stroke-default);border-radius:0;margin:0}
 .room-game>.shell>.country-more>summary{padding-inline:var(--s2);font-size:var(--t-xs);min-height:44px}
-.room-game .save-strip{padding:var(--s3) 0;margin:0;color:var(--content-muted);font-size:var(--t-xs)}
-.room-game .shell>footer{margin:0;padding:var(--s1) 0;gap:var(--s4);font-size:var(--t-xs)}
-.room-game .shell>footer .footer-note{display:none}
+.room-game .save-error:not([hidden]){padding:var(--s3);margin:0;border:1px solid var(--intent-error);color:var(--intent-error);font-size:var(--t-sm)}
+.room-game .shell>footer{justify-content:flex-end;margin:0;padding:var(--s1) 0;font-size:var(--t-xs)}
+.room-game #records-view>.country-more{border-block-end:1px solid var(--stroke-default);margin:0}
 .room-game .primary-button{background:var(--intent-accent);color:var(--surface-inset);border:1px solid var(--intent-accent);border-radius:2px;font-weight:500}
 .room-game .primary-button:disabled{background:var(--surface-hover);color:var(--content-secondary);border-color:var(--stroke-default);opacity:1}
 .room-game .secondary-button{background:var(--surface-hover);color:var(--content-raise);border-color:var(--stroke-default);border-radius:2px}
