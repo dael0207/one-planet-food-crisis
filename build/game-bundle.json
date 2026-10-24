@@ -6,8 +6,8 @@
   "sourceEncoding": "utf8-lf",
   "output": {
     "file": "dist/game.bundle.js",
-    "bytes": 657854,
-    "sha256": "b646c2dbee27d52038461d54d2bbb141b3989572104b8e6f6fa87172e8633a03"
+    "bytes": 659861,
+    "sha256": "3cdc86fc5b04d08d1086f8c10b90e9245dbb47a2586d23bc282aa0489afa24a3"
   },
   "inputs": [
     {
@@ -168,7 +168,7 @@
     },
     {
       "file": "dist/map-art.mjs",
-      "sha256": "1c32782e21a2432f38be4adb50598266ed0768dcba40f719061b6623f73b53d6"
+      "sha256": "3fc8abe10499153e19cfee27bb3c663020e218559aee27d5aec876200549fc55"
     },
     {
       "file": "dist/map-attention-ui.mjs",
@@ -187,6 +187,10 @@
       "sha256": "6a3b421f2cb536a6d7a7ca7dd9a356d8c2866ab028723fa5b6773ab81fc3dc07"
     },
     {
+      "file": "dist/map-development.mjs",
+      "sha256": "cc34b135dad294cd9cab2875a2778b2c6eef67b3ec2951fec259608b9abdbcb8"
+    },
+    {
       "file": "dist/map-geometry.mjs",
       "sha256": "9765b7774f4462b0f2e0f029fa87d1695a01e689c47eeb21d60733fd9c105afb"
     },
@@ -200,7 +204,7 @@
     },
     {
       "file": "dist/map-sites.mjs",
-      "sha256": "095fa32b2ca6a05c290729a079c458d7ba1cd82fd72d8e31f787cc1d4c82011f"
+      "sha256": "3602a60ae8d3e568f2b857bfb0a84428c980dcda5f21932464793e5ee1aa96ab"
     },
     {
       "file": "dist/map.mjs",

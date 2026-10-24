@@ -11,13 +11,17 @@
   filter: saturate(.68) brightness(.78) contrast(1.1);
 }
 .map-site-scene[data-level="unknown"] .map-site-raster { opacity: .85; filter: saturate(.42) brightness(.82) contrast(1.04); }
-.map-site-scene[data-level="0"] .map-site-raster { opacity: .9; filter: saturate(.42) brightness(.84) contrast(1.04); }
-.map-site-scene[data-level="1"] .map-site-raster { opacity: .82; }
-.map-site-scene[data-level="2"] .map-site-raster { opacity: .92; filter: saturate(.76) brightness(.82) contrast(1.1); }
-.map-site-scene[data-level="3"] .map-site-raster { opacity: 1; filter: saturate(.84) brightness(.86) contrast(1.12); }
-
-.map-site-scene.is-city .map-site-raster { opacity:.94;filter:saturate(.45) brightness(.88) contrast(1.02); }
-
+.map-site-scene.is-city .map-site-raster { opacity:.96;filter:saturate(.56) brightness(.9) contrast(1.04); }
+.map-site-scene.is-port .map-site-raster { opacity:.96;filter:saturate(.65) brightness(.9) contrast(1.06); }
+.map-development-earthworks {
+  fill: color-mix(in srgb, var(--map-ground-soil) 52%, transparent);
+  stroke: color-mix(in srgb, var(--intent-notice) 65%, var(--map-ground-soil));
+  stroke-width: .75;
+  stroke-dasharray: 2 2;
+  vector-effect: non-scaling-stroke;
+}
+.map-development-crane { fill:none;stroke:var(--intent-notice);stroke-width:1;vector-effect:non-scaling-stroke; }
+.map-development-waterworks { fill:none;stroke:var(--intent-notice);stroke-width:.75;stroke-dasharray:2 2;vector-effect:non-scaling-stroke; }
 .map-settlement-road-bed, .map-settlement-road-line {
   fill: none;
   stroke-linecap: round;
@@ -47,11 +51,7 @@
 .map-site-cargo { fill: color-mix(in srgb, var(--surface-raise) 76%, var(--content-muted)); }
 .map-national-detail { stroke: color-mix(in srgb, var(--content-secondary) 60%, transparent); }
 
-.map-site-scene[data-stage="building"] .map-site-worksite,
-.map-site-scene[data-stage="construction"] .map-site-worksite,
-.map-site-scene[data-stage="started"] .map-site-worksite,
 .map-site-scene[data-national-construction="true"] .map-site-worksite { display: inline; }
-.map-site-scene:is([data-stage="building"], [data-stage="construction"], [data-stage="started"]) .map-site-raster { opacity: .82; filter: saturate(.38) brightness(.8) contrast(1.04); }
 .map-site-workyard { fill: color-mix(in srgb, var(--intent-notice) 15%, transparent) !important; stroke-dasharray: 2 2; }
 .map-site-workcrane { stroke: var(--intent-notice) !important; }
 

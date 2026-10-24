@@ -38,7 +38,7 @@
   }
 
   const script=document.createElement('script');
-  script.src='./game.bundle.js?v=37';
+  script.src='./game.bundle.js?v=38';
   script.onload=ready;
   script.onerror=fail;
   document.head.appendChild(script);

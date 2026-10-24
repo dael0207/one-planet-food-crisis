@@ -8,14 +8,14 @@ import {FARM_LANDSCAPE_ASSETS} from '../dist/farm-map.mjs';
 
 const ACTIVE = Object.freeze([
   'terrain-relief-v35.webp',
-  'map-city-v35.webp',
-  'map-port-v34.webp',
+  'map-city-v36.webp',
+  'map-port-v36.webp',
   'farm-healthy-v35.webp',
   'farm-drought-v35.webp',
   'farm-recovering-v35.webp',
 ]);
 
-const transparent = new Set(['map-port-v34.webp']);
+const transparent = new Set(['map-port-v36.webp']);
 const bytes = (file) => readFile(new URL(`../dist/${file}`, import.meta.url));
 const hash = (buffer) => createHash('sha256').update(buffer).digest('hex');
 
@@ -33,7 +33,7 @@ function vp8xSize(buffer) {
 
 test('V35 activates six grounded materials and cutouts and retires old live references', async () => {
   assert.deepEqual(MAP_SITE_ASSETS, {
-    city: 'map-city-v35.webp', port: 'map-port-v34.webp', farm: 'farm-healthy-v35.webp',
+    city: 'map-city-v36.webp', port: 'map-port-v36.webp', farm: 'farm-healthy-v35.webp',
   });
   assert.deepEqual(FARM_LANDSCAPE_ASSETS, {
     healthy: 'farm-healthy-v35.webp', drought: 'farm-drought-v35.webp',
@@ -54,6 +54,10 @@ test('V34 transparent sprites keep real alpha and enough resolution for phone zo
     const buffer = await bytes(file);
     assert.equal(buffer.subarray(0, 4).toString(), 'RIFF', `${file} is WebP RIFF`);
     assert.equal(buffer.subarray(8, 12).toString(), 'WEBP', `${file} is WebP`);
+    if (file === MAP_SITE_ASSETS.city || file === MAP_SITE_ASSETS.port) {
+      const size=vp8xSize(buffer);
+      assert.ok(size?.width>=1536&&size?.height>=896,`${file} retains detail for 3× zoom and high-density phone displays`);
+    }
     if (!transparent.has(file)) continue;
     assert.notEqual(buffer.indexOf(Buffer.from('ALPH')), -1, `${file} carries an alpha plane`);
     const size = vp8xSize(buffer);

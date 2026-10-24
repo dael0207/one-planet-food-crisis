@@ -47,6 +47,7 @@ class SvgElement {
     }
     return null;
   }
+  querySelectorAll(selector) { return descendants(this).filter(child=>child.matches(selector)); }
 }
 
 const make = (tag, attributes = {}) => new SvgElement(tag, attributes);

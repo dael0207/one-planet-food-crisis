@@ -16,8 +16,8 @@ const make = (tag, attributes = {}) => new Node(tag, attributes);
 const descendants = (root) => root.children.flatMap((child) => [child, ...descendants(child)]);
 
 test('V35 registers correctly scaled orthographic map scene assets', async () => {
-  assert.deepEqual(MAP_SITE_ASSETS, {city: 'map-city-v35.webp', port: 'map-port-v34.webp', farm: 'farm-healthy-v35.webp'});
-  const expectedWidths = {city: 448, port: 42, farm: 80};
+  assert.deepEqual(MAP_SITE_ASSETS, {city: 'map-city-v36.webp', port: 'map-port-v36.webp', farm: 'farm-healthy-v35.webp'});
+  const expectedWidths = {city: 96, port: 72, farm: 80};
   for (const [kind, file] of Object.entries(MAP_SITE_ASSETS)) {
     await access(new URL(`../dist/${file}`, import.meta.url));
     const scene = buildMapSiteScene(make, kind);

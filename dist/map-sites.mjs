@@ -4,6 +4,7 @@ import {SCENE_LAYOUT, countryAppearance} from './atlas-state.mjs?v=31';
 import {siteView} from './site-operations.mjs?v=31';
 import {jointAt,JOINT_STATUS} from './joint-investments-ui.mjs?v=31';
 import {buildMapSiteScene} from './map-art.mjs?v=31';
+import {updateDevelopment} from './map-development.mjs';
 import {farmLandscape} from './farm-landscape.mjs?v=31';
 import {buildFarmScene, updateFarmScene} from './farm-map.mjs?v=31';
 
@@ -178,6 +179,7 @@ function applyVisualState(element, model) {
   element.setAttribute('data-food-status', appearance?.foodStatus ?? 'secure');
   element.setAttribute('data-stage', String(view.stage));
   element.setAttribute('data-selected', String(selected));
+  updateDevelopment(element.querySelector('.map-development'),view);
   return {jointLabel, level};
 }
 

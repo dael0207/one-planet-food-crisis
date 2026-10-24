@@ -47,6 +47,7 @@ class SvgElement {
     }
     return null;
   }
+  querySelectorAll(selector) { return descendants(this).filter(child=>child.matches(selector)); }
 }
 
 function atlasFixture() {

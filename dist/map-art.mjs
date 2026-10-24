@@ -1,14 +1,16 @@
+import {buildDevelopment,DEVELOPMENT} from './map-development.mjs';
+
 export const MAP_SITE_ASSETS = Object.freeze({
-  city: 'map-city-v35.webp',
-  port: 'map-port-v34.webp',
+  city: 'map-city-v36.webp',
+  port: 'map-port-v36.webp',
   farm: 'farm-healthy-v35.webp',
 });
 
 export const PORT_ROTATIONS = Object.freeze({lumen: 131, nord: 153, cera: -68, altia: 15, marin: 11, solis: -62});
 
 const FRAME = Object.freeze({
-  city: {x: -224, y: -152, width: 448, height: 304},
-  port: {x: -21, y: -10.5, width: 42, height: 21},
+  city: DEVELOPMENT.city.frame,
+  port: DEVELOPMENT.port.frame,
   farm: {x: -40, y: -30, width: 80, height: 60},
 });
 
@@ -18,30 +20,13 @@ const path = (node, className, d, tier = null) => node('path', {
   ...(tier === null ? {} : {'data-site-tier': tier}),
 });
 
-function addOperationalDetails(scene, node, kind) {
-  if (kind === 'city') {
-    scene.append(
-      path(node, 'map-site-detail map-site-streetlight', 'M-19 9h4m-2-2v4M13-7h4m-2-2v4', 1),
-      path(node, 'map-site-detail map-site-road-extension', 'M-31 15C-17 12-6 17 6 13S24 8 33 12', 2),
-      path(node, 'map-site-detail map-site-service-light', 'M-10-13h4m8 5h4m9 4h4', 3),
-    );
-    return;
-  }
-  if (kind === 'port') {
-    scene.append(
-      path(node, 'map-site-detail map-site-berth', 'M-25 13H4M-16 9v8M-4 9v8', 1),
-      path(node, 'map-site-detail map-site-cargo', 'M8 10h8v5H8Zm10-2h7v5h-7Z', 2),
-      path(node, 'map-site-detail map-site-vessel-track', 'M-3 22c11-3 22-3 33 0', 3),
-    );
-    return;
-  }
+function addOperationalDetails(scene,node) {
   scene.append(
-    path(node, 'map-site-detail map-site-irrigation', 'M-30 7C-15 1 2 3 27-6', 1),
-    path(node, 'map-site-detail map-site-field-edge', 'M-27-13 30-5M-24 15 31 7', 2),
-    path(node, 'map-site-detail map-site-service-light', 'M19-12h4m-2-2v4', 3),
+    path(node,'map-site-detail map-site-irrigation','M-30 7C-15 1 2 3 27-6',1),
+    path(node,'map-site-detail map-site-field-edge','M-27-13 30-5M-24 15 31 7',2),
+    path(node,'map-site-detail map-site-service-light','M19-12h4m-2-2v4',3),
   );
 }
-
 export function buildMapSiteScene(node, kind, countryId = null) {
   const frame = FRAME[kind];
   if (!frame || !MAP_SITE_ASSETS[kind]) return null;
@@ -54,20 +39,11 @@ export function buildMapSiteScene(node, kind, countryId = null) {
     'aria-hidden': 'true',
   });
   const material = node('g', {class: 'map-site-material', transform: `rotate(${rotation})`});
-  const cityMask=`city-ground-${countryId??'preview'}`;
-  if(kind==='city'){
-    const defs=node('defs'),filter=node('filter',{id:`${cityMask}-feather`,x:'-15%',y:'-15%',width:'130%',height:'130%'});
-    filter.append(node('feGaussianBlur',{stdDeviation:2}));
-    const mask=node('mask',{id:cityMask,maskUnits:'userSpaceOnUse',x:-34,y:-24,width:68,height:48});
-    mask.append(node('path',{d:'M-26-11L-16-11L-16-18L2-18L2-13L16-13L16-8L26-8L26 4L20 4L20 13L9 13L9 17L-7 17L-7 12L-23 12L-23 4L-28 4Z',fill:'white',filter:`url(#${cityMask}-feather)`}));
-    defs.append(filter,mask);material.append(defs);
+  if(kind==='city'||kind==='port') material.append(buildDevelopment(node,kind,countryId));
+  else {
+    material.append(node('image',{class:'map-site-raster',href:MAP_SITE_ASSETS[kind],...frame,preserveAspectRatio:'xMidYMid meet'}));
+    addOperationalDetails(material,node);
   }
-  material.append(node('image', {
-    class: 'map-site-raster', href: MAP_SITE_ASSETS[kind],
-    ...frame, preserveAspectRatio: kind==='city'?'xMidYMid slice':'xMidYMid meet',
-    ...(kind==='city'?{mask:`url(#${cityMask})`}:{}),
-  }));
-  addOperationalDetails(material, node, kind);
   if (kind === 'city') {
     material.append(
       path(node, 'map-national-detail map-national-storage', 'M-31-5h7v9h-7Zm1-3h5v3h-5Z', 1),
